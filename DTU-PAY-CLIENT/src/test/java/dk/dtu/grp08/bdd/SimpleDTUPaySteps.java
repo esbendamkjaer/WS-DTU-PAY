@@ -6,6 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @CucumberOptions(
@@ -15,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SimpleDTUPaySteps {
     String cid, mid;
     SimpleDTUPay dtuPay = new SimpleDTUPay();
+
+    List<Payment> payments;
+
     boolean successful;
 
     @Given("a customer with id {string}")
@@ -35,5 +40,20 @@ public class SimpleDTUPaySteps {
     @Then("the payment is successful")
     public void thePaymentIsSuccessful() {
         assertTrue(successful);;
+    }
+
+    @Given("a successful payment of {int} kr from customer {string} to merchant {string}")
+    public void aSuccessfulPayment(int amount){
+        successful = dtuPay.pay(amount,cid,mid);
+    }
+
+    @When("list of Payments is requested")
+    public void ListOfPaymentsIsRequested(){
+        this.payments = dtuPay.list();
+    }
+
+    @Then("the payment is not successful")
+    public void thePaymentIsNotSuccessful() {
+        assertFalse(successful);;
     }
 }

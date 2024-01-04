@@ -1,10 +1,11 @@
 package dk.dtu.grp08.models;
 
-import java.util.UUID;
-
 public class Account {
-    private final String id;
+    private String id;
     private double balance = 0.00;
+
+    public Account() {
+    }
 
     public Account(String id) {
         this.id = id;
@@ -14,6 +15,10 @@ public class Account {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public double getBalance() {
         return balance;
     }
@@ -21,5 +26,6 @@ public class Account {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
 
 }
