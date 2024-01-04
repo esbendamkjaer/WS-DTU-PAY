@@ -1,6 +1,8 @@
 package dk.dtu.grp08;
 
 import dk.dtu.grp08.contracts.IPaymentResource;
+import dk.dtu.grp08.models.Customer;
+import dk.dtu.grp08.models.Merchant;
 import dk.dtu.grp08.models.Payment;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
@@ -22,13 +24,8 @@ public class PaymentResource implements IPaymentResource {
 
     @Override
     public boolean createPayment(Payment payment) {
-        if (merchantResource.getMerchant(payment.getCreditor()) == null) {
-            throw new NotFoundException(String.format("customer with id %s is unknown", payment.getCreditor()));
-        }
-
-        if (merchantResource.getMerchant(payment.getCreditor()) == null) {
-            throw new NotFoundException(String.format("customer with id %s is unknown", payment.getDebtor()));
-        }
+        Merchant merchant = merchantResource.getMerchant(payment.getCreditor());
+        Customer customer = customerResource.getCustomer(payment.getDebtor());
 
         //TODO
         return listPayments.add(payment);

@@ -5,6 +5,7 @@ import dk.dtu.grp08.models.Merchant;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,9 @@ public class MerchantResource implements IMerchantResource {
     @Override
     public Merchant getMerchant(String id) {
         if (!merchants.containsKey(id)) {
-            throw new NotFoundException();
+           throw new NotFoundException(
+                Response.status(404).entity("merchant with id " + id + " is unknown").build()
+            );
         }
 
         return merchants.get(id);

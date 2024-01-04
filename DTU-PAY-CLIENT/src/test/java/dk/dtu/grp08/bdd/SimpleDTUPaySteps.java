@@ -9,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
+import jakarta.ws.rs.ClientErrorException;
 import org.apache.http.util.Asserts;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class SimpleDTUPaySteps {
 
     private List<Payment> payments;
 
-    String errorMessage;
+    ClientErrorException errorMessage;
     SimpleDTUPay dtuPay = new SimpleDTUPay();
 
 
@@ -50,6 +51,19 @@ public class SimpleDTUPaySteps {
         );
     }
 
+    @When("the merchant with id {string} initiates a payment for {int} kr by the customer")
+    public void theMerchantInitiatesAPaymentForKrByTheCustomer(String mid, int amount) {
+        try {
+            successful = dtuPay.pay(
+                amount,
+                customer.getId(),
+                mid
+            );
+        } catch (ClientErrorException e) {
+            errorMessage = e;
+        }
+    }
+
     @When("the merchant initiates a payment for {int} kr by the customer")
     public void theMerchantInitiatesAPaymentForKrByTheCustomer(int amount) {
         successful = dtuPay.pay(
@@ -61,11 +75,15 @@ public class SimpleDTUPaySteps {
 
     @When("the merchant initiates a payment for {int} kr by the customer with id {string}")
     public void theMerchantInitiatesAPaymentForKrByTheCustomer(int amount, String cid) {
-        successful = dtuPay.pay(
-                amount,
-                cid,
-                merchant.getId()
-        );
+        try {
+            successful = dtuPay.pay(
+                    amount,
+                    cid,
+                    merchant.getId()
+            );
+        } catch (ClientErrorException e) {
+            errorMessage = e;
+        }
     }
 
     @Then("the payment is successful")
@@ -109,7 +127,7 @@ public class SimpleDTUPaySteps {
 
     @And("an error message is returned saying {string}")
     public void anErrorMessageIsReturnedSaying(String message) {
-        assertEquals(message, errorMessage);
+        assertEquals(message, errorMessage.getResponse().readEntity(String.class));
     }
 
 }

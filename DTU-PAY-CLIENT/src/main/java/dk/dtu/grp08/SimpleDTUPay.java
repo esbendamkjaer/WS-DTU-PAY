@@ -4,6 +4,8 @@ import dk.dtu.grp08.contracts.ICustomerResource;
 import dk.dtu.grp08.contracts.IMerchantResource;
 import dk.dtu.grp08.contracts.IPaymentResource;
 import dk.dtu.grp08.models.Payment;
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
@@ -26,9 +28,9 @@ public class SimpleDTUPay {
         this.merchantResource = rtarget.proxy(IMerchantResource.class);
     }
 
-    public boolean pay(int amount, String cid, String mid) {
+    public boolean pay(int amount, String cid, String mid) throws NotFoundException {
         return paymentResource.createPayment(
-                new Payment(cid,mid,amount)
+            new Payment(cid,mid,amount)
         );
     }
 

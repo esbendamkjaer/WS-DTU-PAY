@@ -2,8 +2,10 @@ package dk.dtu.grp08;
 
 import dk.dtu.grp08.contracts.ICustomerResource;
 import dk.dtu.grp08.models.Customer;
+import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,9 @@ public class CustomerResource implements ICustomerResource {
                     customer -> customer.getId().equals(id)
             )
             .findFirst()
-            .orElseThrow(() -> new NotFoundException("Customer with id " + id + " is unknown"));
+            .orElseThrow(() -> new NotFoundException(
+                Response.status(404).entity("customer with id " + id + " is unknown").build()
+            ));
     }
 
     @Override
