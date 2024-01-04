@@ -1,33 +1,28 @@
 package dk.dtu.grp08;
 
+import dk.dtu.grp08.contracts.ICustomerResource;
 import dk.dtu.grp08.models.Customer;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Path;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Path("/customers")
-public class CustomerResource {
+public class CustomerResource implements ICustomerResource {
     public List<Customer> customers = new ArrayList<>();
 
-    @POST
+    @Override
     public void createCustomer(Customer customer) {
         this.customers.add(customer);
     }
 
-    @GET
+    @Override
     public List<Customer> getCustomers() {
         return customers;
     }
 
-    @GET
-    @Path("/{id}")
-    public Customer getCustomer(@PathParam("id") String id) {
+    @Override
+    public Customer getCustomer(String id) {
         return customers.stream()
             .filter(
                     customer -> customer.getId().equals(id)
@@ -36,16 +31,14 @@ public class CustomerResource {
             .orElse(null);
     }
 
-    @PUT
-    @Path("/{id}")
-    public void updateCustomer(@PathParam("id") String id, Customer customer) {
+    @Override
+    public void updateCustomer(String id, Customer customer) {
         // @TODO
         return;
     }
 
-    @DELETE
-    @Path("/{id}")
-    public void deleteCustomer(@PathParam("id") String id) {
+    @Override
+    public void deleteCustomer(String id) {
         customers.removeIf(customer -> customer.getId().equals(id));
     }
 

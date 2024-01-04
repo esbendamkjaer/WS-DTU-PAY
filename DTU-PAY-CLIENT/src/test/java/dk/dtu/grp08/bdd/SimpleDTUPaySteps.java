@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
 
 import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @CucumberOptions(
@@ -18,7 +18,7 @@ public class SimpleDTUPaySteps {
     String cid, mid;
     SimpleDTUPay dtuPay = new SimpleDTUPay();
 
-    List<Payment> payments;
+
 
     boolean successful;
 
@@ -49,7 +49,7 @@ public class SimpleDTUPaySteps {
 
     @When("list of Payments is requested")
     public void ListOfPaymentsIsRequested(){
-        this.payments = dtuPay.list();
+
     }
 
     @Then("the payment is not successful")

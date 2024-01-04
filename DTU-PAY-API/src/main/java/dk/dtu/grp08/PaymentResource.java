@@ -1,45 +1,32 @@
 package dk.dtu.grp08;
 
+import dk.dtu.grp08.contracts.IPaymentResource;
+import dk.dtu.grp08.models.Customer;
 import dk.dtu.grp08.models.Payment;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 
-@Path("/payments")
-public class PaymentResource {
+public class PaymentResource implements IPaymentResource {
     public List<Payment> listPayments;
-    public
+
+    public MerchantResource merchantResource;
+    public CustomerResource customerResource;
 
 
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
+    @Override
     public boolean createPayment(Payment payment) {
 
-        if(payment.getDebtor())
+        if(! (merchantResource.getMerchant(payment.getCreditor()) && customerResource.getCustomer(payment.getCreditor()) )){
+
+            return false;
+        }
+
+
         //TODO
         return false;
     }
 
 
-    public boolean checkIfIdExist(String id){
 
-        boolean isExist = false;
-        for (Payment payment : listPayments) {
-            // code block to be executed
-            if(payment.getCreditor() == id || payment.getDebtor() == id){
-                isExist = true;
-            }
-
-        }
-
-        return  isExist;
-
-
-    }
 }
 
