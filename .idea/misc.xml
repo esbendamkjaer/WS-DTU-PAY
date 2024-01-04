@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/DTU-PAY-API/pom.xml" />
         <option value="$PROJECT_DIR$/DTU-PAY-CLIENT/pom.xml" />
         <option value="$PROJECT_DIR$/DTU-PAY-COMMON/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
