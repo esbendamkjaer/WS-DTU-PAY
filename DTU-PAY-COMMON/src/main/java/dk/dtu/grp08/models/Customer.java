@@ -4,4 +4,9 @@ public class Customer extends Account {
     public Customer() {
         super();
     }
+
+    public Customer(String id) {
+        super(id);
+    }
+
 }

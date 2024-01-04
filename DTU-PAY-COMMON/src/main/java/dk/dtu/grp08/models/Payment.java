@@ -4,15 +4,19 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Payment {
-    private final String id;
+    private String id;
 
-    private final String debtor;
+    private String debtor;
 
-    private final String creditor;
+    private String creditor;
 
-    private final double amount;
+    private double amount;
 
-    private final Date date;
+    private Date date;
+
+    public Payment() {
+
+    }
 
     public Payment(
         String debtor,
@@ -39,4 +43,23 @@ public class Payment {
         return this.amount;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setCreditor(String creditor) {
+        this.creditor = creditor;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setDebtor(String debtor) {
+        this.debtor = debtor;
+    }
 }

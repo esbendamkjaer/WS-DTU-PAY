@@ -10,7 +10,6 @@
 
     <modules>
         <module>dtu-pay-common</module>
-
         <module>dtu-pay-api</module>
         <module>dtu-pay-client</module>
     </modules>
@@ -24,7 +23,7 @@
         <dependencies>
             <dependency>
                 <groupId>dk.dtu.grp08</groupId>
-                <artifactId>DTU-PAY-COMMON</artifactId>
+                <artifactId>dtu-pay-common</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>

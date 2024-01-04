@@ -4,4 +4,8 @@ public class Merchant extends Account {
     public Merchant() {
         super();
     }
+
+    public Merchant(String id) {
+        super(id);
+    }
 }
