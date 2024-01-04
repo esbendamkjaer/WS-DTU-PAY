@@ -3,12 +3,14 @@ package dk.dtu.grp08;
 import dk.dtu.grp08.contracts.IMerchantResource;
 import dk.dtu.grp08.models.Merchant;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Path("/merchants")
 public class MerchantResource implements IMerchantResource {
     private final Map<String, Merchant> merchants = new HashMap<>();
 
