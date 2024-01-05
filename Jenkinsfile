@@ -12,7 +12,7 @@ pipeline {
             steps {
 
                 sh 'mvn -B -DskipTests clean package'
-                sh 'docker build -f DTU-PAY-API/src/main/docker/Dockerfile.jvm -t dtu-pay-api .'
+                sh 'docker build -f DTU-PAY-API/src/main/docker/Dockerfile.jvm -t dtu-pay-api ./DTU-PAY-API'
             }
         }
     }
