@@ -2,17 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+                saveArtifacts '**/target/*.jar' //
+            }
+        }
+
+        stage ('Test') {
             steps {
                 sh 'mvn test'
             }
         }
 
-        stage('Build') {
+        stage ('Deploy') {
             steps {
-
-                sh 'mvn -B -DskipTests clean package'
-                sh 'docker build -f DTU-PAY-API/src/main/docker/Dockerfile.jvm -t dtu-pay-api ./DTU-PAY-API'
+                sh 'docker compose build'
             }
         }
     }
