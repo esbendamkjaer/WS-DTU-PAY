@@ -1,17 +1,14 @@
 package dk.dtu.grp08.models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
 public class Payment {
     private String id;
-
     private String debtor;
-
     private String creditor;
-
-    private double amount;
-
+    private BigDecimal amount;
     private Date date;
 
     public Payment() {
@@ -21,7 +18,7 @@ public class Payment {
     public Payment(
         String debtor,
         String creditor,
-        double amount
+        BigDecimal amount
     ) {
         this.debtor = debtor;
         this.creditor = creditor;
@@ -39,7 +36,7 @@ public class Payment {
         return this.creditor;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return this.amount;
     }
 
@@ -47,7 +44,7 @@ public class Payment {
         this.id = id;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

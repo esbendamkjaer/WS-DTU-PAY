@@ -2,6 +2,9 @@ package dk.dtu.grp08.models;
 
 public class Account {
     private String id;
+
+    String accountId;
+
     private double balance = 0.00;
 
     public Account() {
@@ -27,5 +30,11 @@ public class Account {
         this.balance = balance;
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
 
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 }

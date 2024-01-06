@@ -5,6 +5,11 @@ public class Customer extends Account {
         super();
     }
 
+
+    String firstName;
+    String lastName;
+    String cprNumber;
+
     public Customer(String id) {
         super(id);
     }

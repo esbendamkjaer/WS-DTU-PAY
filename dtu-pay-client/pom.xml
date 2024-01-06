@@ -25,6 +25,7 @@
             <artifactId>resteasy-client</artifactId>
             <version>6.2.4.Final</version>
         </dependency>
+
         <!-- Serializer to and from JSON -->
         <dependency>
             <groupId>io.quarkus</groupId>

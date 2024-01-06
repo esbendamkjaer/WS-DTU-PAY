@@ -1,6 +1,8 @@
 package dk.dtu.grp08;
 
 import dk.dtu.grp08.contracts.IMerchantResource;
+import dk.dtu.grp08.dtupay.bank.BankService;
+import dk.dtu.grp08.dtupay.bank.BankServiceService;
 import dk.dtu.grp08.models.Merchant;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
@@ -17,7 +19,20 @@ public class MerchantResource implements IMerchantResource {
 
     @Override
     public void createMerchant(Merchant merchant) {
-        this.merchants.put(merchant.getId(), merchant);
+
+        try {
+            BankService bank = new BankServiceService().getBankServicePort();
+
+            if(bank.getAccount(merchant.getAccountId()) == null){
+                return;
+
+            }
+            this.merchants.put(merchant.getId(), merchant);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
