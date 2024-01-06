@@ -19,7 +19,7 @@ public interface IPaymentResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    boolean save(Payment payment);
+
     List<Payment> listPayments();
 
 
