@@ -23,7 +23,6 @@ public class MerchantResource implements IMerchantResource {
         try {
             BankService bank = new BankServiceService().getBankServicePort();
 
-            System.out.println("Merchant Account ID " + merchant.getAccountId());
             if(bank.getAccount(merchant.getAccountId()) == null){
                 return;
 

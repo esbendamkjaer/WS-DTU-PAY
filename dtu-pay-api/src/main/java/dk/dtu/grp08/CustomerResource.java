@@ -21,7 +21,6 @@ public class CustomerResource implements ICustomerResource {
         try {
             BankService bank = new BankServiceService().getBankServicePort();
 
-            System.out.println("Customer Account ID: " + customer.getAccountId());
             if(bank.getAccount(customer.getAccountId()) == null){
                 return;
 

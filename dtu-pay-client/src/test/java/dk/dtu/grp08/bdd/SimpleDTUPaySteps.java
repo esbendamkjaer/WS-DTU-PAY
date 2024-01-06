@@ -1,8 +1,6 @@
 package dk.dtu.grp08.bdd;
 
 import dk.dtu.grp08.SimpleDTUPay;
-import dk.dtu.grp08.dtupay.bank.BankService;
-import dk.dtu.grp08.dtupay.bank.BankServiceService;
 import dk.dtu.grp08.models.Customer;
 import dk.dtu.grp08.models.Merchant;
 import dk.dtu.grp08.models.Payment;
@@ -26,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 )
 public class SimpleDTUPaySteps {
 
-    private BankService bank = new BankServiceService().getBankServicePort();
-
     private Merchant merchant;
     private Customer customer;
 
@@ -38,34 +34,59 @@ public class SimpleDTUPaySteps {
 
     boolean successful;
 
-    @Given(("a customer with a bank account with balance {}"))
-    public void aCustomerWithABankAccountWithBalance(){
+    @Given(("a customer with a bank account with balance {int}"))
+    public void aCustomerWithABankAccountWithBalance(Integer balance){
+        String accountId = dtuPay.registerBankAccount(
+            "Customer",
+            "Customer",
+            "7554114334",
+            BigDecimal.valueOf(balance)
+        );
 
-
+        this.customer = new Customer("cid1");
+        this.customer.setAccountId(accountId);
     }
 
     @And("that the customer is registered with DTU Pay")
     public void thatTheCustomerIsRegisteredWithDtuPay() {
-
+        this.dtuPay.getCustomerResource().createCustomer(
+            this.customer
+        );
     }
 
     @Given("a merchant with a bank account with balance {}")
-    public void aMerchantWithABankAccountWithBalance() {}
+    public void aMerchantWithABankAccountWithBalance(Integer balance) {
+        String accountId = dtuPay.registerBankAccount("Merchant",
+                "Merchant",
+                "9554114334",
+                BigDecimal.valueOf(balance)
+        );
 
-
+        this.merchant = new Merchant("mid1");
+        this.merchant.setAccountId(accountId);
+    }
 
     @And("that the merchant is registered with DTU Pay")
     public void thatTheMerchantIsRegisteredWithDtuPay() {
-
+        this.dtuPay.getMerchantResource().createMerchant(
+            this.merchant
+        );
     }
 
-    @And("the balance of the customer at the bank is {} kr")
-    public void theBalanceOfTheCustomerAtTheBankIsKr() {
-
+    @And("the balance of the customer at the bank is {int} kr")
+    public void theBalanceOfTheCustomerAtTheBankIsKr(Integer balance) {
+        assertEquals(
+            this.dtuPay.getBalance(customer.getAccountId()),
+            balance
+        );
     }
 
-    @And("the balance of the merchant at the bank is {} kr")
-    public void theBalanceOfTheMerchantAtTheBankIsKr() {
+    @And("the balance of the merchant at the bank is {int} kr")
+    public void theBalanceOfTheMerchantAtTheBankIsKr(Integer balance) {
+            assertEquals(
+                this.dtuPay.getBalance(merchant.getAccountId()),
+                 balance
+            );
 
     }
 
@@ -77,9 +98,6 @@ public class SimpleDTUPaySteps {
             "7554114334",
             BigDecimal.valueOf(1000)
         );
-
-
-        System.out.println("Account ID: " + accountId);
 
         customer = new Customer(cid);
         customer.setAccountId(accountId);
@@ -120,9 +138,9 @@ public class SimpleDTUPaySteps {
     @When("the merchant initiates a payment for {int} kr by the customer")
     public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
         successful = dtuPay.pay(
-                BigDecimal.valueOf(amount),
-                customer.getId(),
-                merchant.getId()
+            BigDecimal.valueOf(amount),
+            customer.getId(),
+            merchant.getId()
         );
     }
 

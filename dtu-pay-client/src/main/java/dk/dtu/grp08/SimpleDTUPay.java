@@ -62,6 +62,14 @@ public class SimpleDTUPay {
         }
     }
 
+    public int getBalance(String accountID){
+        try {
+                return  bankService.getAccount(accountID).getBalance().intValue();
+        } catch (BankServiceException_Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Payment> list(){
         return paymentResource.listPayments();
 
@@ -77,5 +85,9 @@ public class SimpleDTUPay {
 
     public IMerchantResource getMerchantResource() {
         return merchantResource;
+    }
+
+    public BankService getBankService() {
+        return bankService;
     }
 }
