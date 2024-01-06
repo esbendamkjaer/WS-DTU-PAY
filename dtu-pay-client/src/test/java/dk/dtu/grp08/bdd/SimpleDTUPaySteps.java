@@ -9,19 +9,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import jakarta.ws.rs.ClientErrorException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@CucumberOptions(
-    features = {"classpath:features/Payment.feature"},
-    glue = {"dk.dtu.grp08.bdd"}
-)
 public class SimpleDTUPaySteps {
 
     private Merchant merchant;

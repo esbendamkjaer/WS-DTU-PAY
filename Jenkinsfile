@@ -19,7 +19,13 @@ pipeline {
         stage ('Deploy') {
             steps {
                 sh 'docker-compose up -d'
+                sleep 10s
+            }
+        }
 
+        stage ('Integration Test') {
+            steps {
+                sh 'mvn verify -Pcucumber-test'
             }
         }
     }
