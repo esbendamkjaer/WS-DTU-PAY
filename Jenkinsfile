@@ -13,11 +13,12 @@ pipeline {
         stage ('Deploy') {
             steps {
                 sh 'docker-compose up -d --build'
-                sleep 2s
+                sleep 2
             }
         }
 
         stage ('Test') {
+            // hvorfor test efter deployment?
             steps {
                 sh 'mvn test'
             }
