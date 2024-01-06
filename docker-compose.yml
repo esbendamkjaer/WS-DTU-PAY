@@ -1,0 +1,9 @@
+
+services:
+  api:
+    build:
+      context: ./DTU-PAY-API
+      dockerfile: src/main/docker/Dockerfile
+    container_name: dtu-pay-api
+    ports:
+      - 8080:8080
