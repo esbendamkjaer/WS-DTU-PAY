@@ -9,14 +9,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
 import jakarta.ws.rs.ClientErrorException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +35,7 @@ public class SimpleDTUPaySteps {
         String accountId = dtuPay.registerBankAccount(
             "Customer",
             "Customer",
-            "7554114334",
+            UUID.randomUUID().toString(),
             BigDecimal.valueOf(balance)
         );
 
@@ -56,7 +54,7 @@ public class SimpleDTUPaySteps {
     public void aMerchantWithABankAccountWithBalance(Integer balance) {
         String accountId = dtuPay.registerBankAccount("Merchant",
                 "Merchant",
-                "9554114334",
+                UUID.randomUUID().toString(),
                 BigDecimal.valueOf(balance)
         );
 
@@ -93,7 +91,7 @@ public class SimpleDTUPaySteps {
         String accountId = dtuPay.registerBankAccount(
             "Customer",
             "Customer",
-            "7554114334",
+            UUID.randomUUID().toString(),
             BigDecimal.valueOf(1000)
         );
 
@@ -109,7 +107,7 @@ public class SimpleDTUPaySteps {
         String accountId = dtuPay.registerBankAccount(
             "Merchant",
             "Merchant",
-            "7534004552",
+            UUID.randomUUID().toString(),
             BigDecimal.valueOf(1000)
         );
 
@@ -202,11 +200,14 @@ public class SimpleDTUPaySteps {
     public void cleanUp() {
         if (customer != null) {
             dtuPay.retireAccount(customer.getAccountId());
+            dtuPay.getCustomerResource().deleteCustomer(customer.getId());
         }
 
         if (merchant != null) {
             dtuPay.retireAccount(merchant.getAccountId());
+            dtuPay.getMerchantResource().deleteMerchant(merchant.getId());
         }
+
     }
 
 }

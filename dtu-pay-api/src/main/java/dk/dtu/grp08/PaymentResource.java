@@ -31,6 +31,7 @@ public class PaymentResource implements IPaymentResource {
 
         BankService bank = new BankServiceService().getBankServicePort();
 
+        System.out.println("Transfering money from " + customer.getAccountId() + " to " + merchant.getAccountId());
         try {
             bank.transferMoneyFromTo(customer.getAccountId(), merchant.getAccountId(), payment.getAmount(),"Payment");
         } catch (BankServiceException_Exception e) {
