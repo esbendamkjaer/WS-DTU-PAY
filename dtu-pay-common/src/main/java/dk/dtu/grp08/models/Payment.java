@@ -5,13 +5,9 @@ import java.util.UUID;
 
 public class Payment {
     private String id;
-
     private String debtor;
-
     private String creditor;
-
     private double amount;
-
     private Date date;
 
     public Payment() {
