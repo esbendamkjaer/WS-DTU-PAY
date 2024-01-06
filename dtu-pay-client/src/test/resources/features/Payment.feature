@@ -1,5 +1,4 @@
 Feature:
-
   Scenario: Successful Payment
     Given a customer with id "cid1"
     And a merchant with id "mid1"

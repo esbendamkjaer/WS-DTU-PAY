@@ -22,6 +22,7 @@ public class PaymentResource implements IPaymentResource {
     public CustomerResource customerResource;
 
 
+
     @Override
     public boolean createPayment(Payment payment) {
         Merchant merchant = merchantResource.getMerchant(payment.getCreditor());

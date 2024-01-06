@@ -30,8 +30,6 @@ public class SimpleDTUPaySteps {
     ClientErrorException errorMessage;
     SimpleDTUPay dtuPay = new SimpleDTUPay();
 
-
-
     boolean successful;
 
     @Given(("a customer with a bank account with balance {}"))
@@ -63,10 +61,6 @@ public class SimpleDTUPaySteps {
     public void theBalanceOfTheMerchantAtTheBankIsKr() {
 
     }
-
-
-
-
 
     @Given("a customer with id {string}")
     public void aCustomerWithId(String cid) {
