@@ -2,7 +2,7 @@
 services:
   api:
     build:
-      context: ./DTU-PAY-API
+      context: ./dtu-pay-api
       dockerfile: src/main/docker/Dockerfile
     container_name: dtu-pay-api
     ports:
