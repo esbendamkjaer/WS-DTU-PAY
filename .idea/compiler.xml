@@ -6,9 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DTU-PAY-COMMON" />
-        <module name="dtu-pay-client" />
+      </profile>
+      <profile name="Annotation profile for project" enabled="true">
+        <sourceOutputDir name="../DTU-PAY-API/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../DTU-PAY-API/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
         <module name="dtu-pay-api" />
+      </profile>
+      <profile name="Annotation profile for dtu-pay-client" enabled="true">
+        <sourceOutputDir name="../DTU-PAY-CLIENT/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../DTU-PAY-CLIENT/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dtu-pay-client" />
+      </profile>
+      <profile name="Annotation profile for DTU-PAY-COMMON" enabled="true">
+        <sourceOutputDir name="../DTU-PAY-COMMON/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../DTU-PAY-COMMON/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DTU-PAY-COMMON" />
       </profile>
     </annotationProcessing>
   </component>
