@@ -10,6 +10,7 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SimpleDTUPay {
@@ -27,7 +28,7 @@ public class SimpleDTUPay {
         this.merchantResource = rtarget.proxy(IMerchantResource.class);
     }
 
-    public boolean pay(int amount, String cid, String mid) throws NotFoundException {
+    public boolean pay(BigDecimal amount, String cid, String mid) throws NotFoundException {
         return paymentResource.createPayment(
             new Payment(cid,mid,amount)
         );

@@ -1,6 +1,8 @@
 package dk.dtu.grp08.bdd;
 
 import dk.dtu.grp08.SimpleDTUPay;
+//import dk.dtu.grp08.dtupay.bank.BankService;
+//import dk.dtu.grp08.dtupay.bank.BankServiceService;
 import dk.dtu.grp08.models.Customer;
 import dk.dtu.grp08.models.Merchant;
 import dk.dtu.grp08.models.Payment;
@@ -12,6 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 import jakarta.ws.rs.ClientErrorException;
 import org.junit.jupiter.api.Assertions;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
     glue = {"dk.dtu.grp08.bdd"}
 )
 public class SimpleDTUPaySteps {
+
+    //private BankService bank = new BankServiceService().getBankServicePort();
 
     private Merchant merchant;
     private Customer customer;
@@ -79,10 +84,10 @@ public class SimpleDTUPaySteps {
     }
 
     @When("the merchant with id {string} initiates a payment for {int} kr by the customer")
-    public void theMerchantInitiatesAPaymentForKrByTheCustomer(String mid, int amount) {
+    public void theMerchantInitiatesAPaymentForKrByTheCustomer(String mid, Integer amount) {
         try {
             successful = dtuPay.pay(
-                amount,
+                BigDecimal.valueOf(amount),
                 customer.getId(),
                 mid
             );
@@ -92,19 +97,19 @@ public class SimpleDTUPaySteps {
     }
 
     @When("the merchant initiates a payment for {int} kr by the customer")
-    public void theMerchantInitiatesAPaymentForKrByTheCustomer(int amount) {
+    public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount) {
         successful = dtuPay.pay(
-                amount,
+                BigDecimal.valueOf(amount),
                 customer.getId(),
                 merchant.getId()
         );
     }
 
     @When("the merchant initiates a payment for {int} kr by the customer with id {string}")
-    public void theMerchantInitiatesAPaymentForKrByTheCustomer(int amount, String cid) {
+    public void theMerchantInitiatesAPaymentForKrByTheCustomer(Integer amount, String cid) {
         try {
             successful = dtuPay.pay(
-                    amount,
+                    BigDecimal.valueOf(amount),
                     cid,
                     merchant.getId()
             );
@@ -119,9 +124,9 @@ public class SimpleDTUPaySteps {
     }
 
     @Given("a successful payment of {int} kr from customer {string} to merchant {string}")
-    public void aSuccessfulPayment(int amount, String cid, String mid){
+    public void aSuccessfulPayment(Integer amount, String cid, String mid){
         successful = dtuPay.pay(
-            amount,
+            BigDecimal.valueOf(amount),
             cid,
             mid
         );
@@ -133,13 +138,13 @@ public class SimpleDTUPaySteps {
     }
 
     @Then("the list contains a payments where customer {string} paid {int} kr to merchant {string}")
-    public void theListContainsAPaymentsWhereDebtorPaidKrToCreditor(String cid, int amount, String mid){
+    public void theListContainsAPaymentsWhereDebtorPaidKrToCreditor(String cid, Integer amount, String mid){
         Assertions.assertNotNull(
             payments.stream()
                 .filter(
                     payment -> payment.getDebtor().equals(cid)
                             && payment.getCreditor().equals(mid)
-                            && payment.getAmount() == amount
+                            && payment.getAmount().intValue() == amount
                 ).findFirst()
                     .orElse(null),
     "Payment not found"
