@@ -4,7 +4,6 @@ import dk.dtu.grp08.contracts.ICustomerResource;
 import dk.dtu.grp08.contracts.IMerchantResource;
 import dk.dtu.grp08.contracts.IPaymentResource;
 import dk.dtu.grp08.models.Payment;
-import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;

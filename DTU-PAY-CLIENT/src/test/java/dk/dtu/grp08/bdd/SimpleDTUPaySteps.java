@@ -10,12 +10,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
 import jakarta.ws.rs.ClientErrorException;
-import org.apache.http.util.Asserts;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @CucumberOptions(
     features = {"classpath:features/Payment.feature"},
@@ -35,7 +34,19 @@ public class SimpleDTUPaySteps {
 
     boolean successful;
 
-    @Given("a customer with id {string}")
+    @Given(("a customer with a bank account with balance {}"))
+    public void aCustomerWithABankAccountWithBalance(){
+
+    }
+
+    @And("that the customer is registered with DTU Pay")
+    public void thatTheCustomerIsRegisteredWithDtuPay() {
+        
+    }
+
+
+
+        @Given("a customer with id {string}")
     public void aCustomerWithId(String cid) {
         customer = new Customer(cid);
         this.dtuPay.getCustomerResource().createCustomer(
@@ -107,8 +118,8 @@ public class SimpleDTUPaySteps {
 
     @Then("the list contains a payments where customer {string} paid {int} kr to merchant {string}")
     public void theListContainsAPaymentsWhereDebtorPaidKrToCreditor(String cid, int amount, String mid){
-
-        Asserts.notNull(payments.stream()
+        Assertions.assertNotNull(
+            payments.stream()
                 .filter(
                     payment -> payment.getDebtor().equals(cid)
                             && payment.getCreditor().equals(mid)
@@ -117,7 +128,6 @@ public class SimpleDTUPaySteps {
                     .orElse(null),
     "Payment not found"
         );
-
     }
 
     @Then("the payment is not successful")
