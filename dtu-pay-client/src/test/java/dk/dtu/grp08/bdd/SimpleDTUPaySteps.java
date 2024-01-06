@@ -1,11 +1,12 @@
 package dk.dtu.grp08.bdd;
 
 import dk.dtu.grp08.SimpleDTUPay;
-//import dk.dtu.grp08.dtupay.bank.BankService;
-//import dk.dtu.grp08.dtupay.bank.BankServiceService;
+import dk.dtu.grp08.dtupay.bank.BankService;
+import dk.dtu.grp08.dtupay.bank.BankServiceService;
 import dk.dtu.grp08.models.Customer;
 import dk.dtu.grp08.models.Merchant;
 import dk.dtu.grp08.models.Payment;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 )
 public class SimpleDTUPaySteps {
 
-    //private BankService bank = new BankServiceService().getBankServicePort();
+    private BankService bank = new BankServiceService().getBankServicePort();
 
     private Merchant merchant;
     private Customer customer;
@@ -39,6 +40,7 @@ public class SimpleDTUPaySteps {
 
     @Given(("a customer with a bank account with balance {}"))
     public void aCustomerWithABankAccountWithBalance(){
+
 
     }
 
@@ -69,7 +71,18 @@ public class SimpleDTUPaySteps {
 
     @Given("a customer with id {string}")
     public void aCustomerWithId(String cid) {
+        String accountId = dtuPay.registerBankAccount(
+            "Customer",
+            "Customer",
+            "7554114334",
+            BigDecimal.valueOf(1000)
+        );
+
+
+        System.out.println("Account ID: " + accountId);
+
         customer = new Customer(cid);
+        customer.setAccountId(accountId);
         this.dtuPay.getCustomerResource().createCustomer(
             customer
         );
@@ -77,7 +90,15 @@ public class SimpleDTUPaySteps {
 
     @Given("a merchant with id {string}")
     public void aMerchantWithId(String mid) {
+        String accountId = dtuPay.registerBankAccount(
+            "Merchant",
+            "Merchant",
+            "7534004552",
+            BigDecimal.valueOf(1000)
+        );
+
         this.merchant = new Merchant(mid);
+        this.merchant.setAccountId(accountId);
         this.dtuPay.getMerchantResource().createMerchant(
             this.merchant
         );
@@ -159,6 +180,17 @@ public class SimpleDTUPaySteps {
     @And("an error message is returned saying {string}")
     public void anErrorMessageIsReturnedSaying(String message) {
         assertEquals(message, errorMessage.getResponse().readEntity(String.class));
+    }
+
+    @After
+    public void cleanUp() {
+        if (customer != null) {
+            dtuPay.retireAccount(customer.getAccountId());
+        }
+
+        if (merchant != null) {
+            dtuPay.retireAccount(merchant.getAccountId());
+        }
     }
 
 }

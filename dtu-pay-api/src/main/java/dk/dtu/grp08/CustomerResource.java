@@ -1,6 +1,8 @@
 package dk.dtu.grp08;
 
 import dk.dtu.grp08.contracts.ICustomerResource;
+import dk.dtu.grp08.dtupay.bank.BankService;
+import dk.dtu.grp08.dtupay.bank.BankServiceService;
 import dk.dtu.grp08.models.Customer;
 import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.NotFoundException;
@@ -16,7 +18,23 @@ public class CustomerResource implements ICustomerResource {
 
     @Override
     public void createCustomer(Customer customer) {
-        this.customers.add(customer);
+        try {
+            BankService bank = new BankServiceService().getBankServicePort();
+
+            System.out.println("Customer Account ID: " + customer.getAccountId());
+            if(bank.getAccount(customer.getAccountId()) == null){
+                return;
+
+            }
+            this.customers.add(customer);
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 
     @Override
