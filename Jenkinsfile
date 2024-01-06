@@ -18,6 +18,7 @@ pipeline {
         stage ('Deploy') {
             steps {
                 sh 'docker compose up --build'
+                // hvorfor up i CI? den skal vel bygges, tagges også køres udenfor CI
             }
         }
     }

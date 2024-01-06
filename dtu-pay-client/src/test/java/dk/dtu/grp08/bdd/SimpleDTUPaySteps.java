@@ -41,12 +41,34 @@ public class SimpleDTUPaySteps {
 
     @And("that the customer is registered with DTU Pay")
     public void thatTheCustomerIsRegisteredWithDtuPay() {
-        
+
+    }
+
+    @Given("a merchant with a bank account with balance {}")
+    public void aMerchantWithABankAccountWithBalance() {}
+
+
+
+    @And("that the merchant is registered with DTU Pay")
+    public void thatTheMerchantIsRegisteredWithDtuPay() {
+
+    }
+
+    @And("the balance of the customer at the bank is {} kr")
+    public void theBalanceOfTheCustomerAtTheBankIsKr() {
+
+    }
+
+    @And("the balance of the merchant at the bank is {} kr")
+    public void theBalanceOfTheMerchantAtTheBankIsKr() {
+
     }
 
 
 
-        @Given("a customer with id {string}")
+
+
+    @Given("a customer with id {string}")
     public void aCustomerWithId(String cid) {
         customer = new Customer(cid);
         this.dtuPay.getCustomerResource().createCustomer(
