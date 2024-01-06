@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
-                saveArtifacts '**/target/*.jar' //
+                saveArtifacts '**/target/*.jar' 
             }
         }
 
