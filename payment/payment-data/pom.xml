@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>dk.dtu.grp08</groupId>
-        <artifactId>project</artifactId>
+        <artifactId>payment</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>payment</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>payment-domain</module>
-        <module>payment-api</module>
-        <module>payment-data</module>
-    </modules>
+    <artifactId>payment-data</artifactId>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>

@@ -9,6 +9,7 @@
         <module name="dtu-pay-api" />
         <module name="payment.api" />
         <module name="payment.domain" />
+        <module name="payment.data" />
         <module name="dtu-pay-client" />
       </profile>
     </annotationProcessing>

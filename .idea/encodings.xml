@@ -9,6 +9,8 @@
     <file url="file://$PROJECT_DIR$/dtu-pay-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/payment-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/payment-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment/payment-data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment/payment-data/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/payment-domain/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/payment-domain/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payment/src/main/java" charset="UTF-8" />
