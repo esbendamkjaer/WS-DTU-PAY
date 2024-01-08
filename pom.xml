@@ -12,6 +12,7 @@
         <module>dtu-pay-api</module>
         <module>dtu-pay-client</module>
         <module>payment</module>
+        <module>account</module>
     </modules>
 
     <properties>

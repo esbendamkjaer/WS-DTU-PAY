@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="account.domain" />
+        <module name="payment.data" />
+        <module name="dtu-pay-client" />
+        <module name="account.api" />
         <module name="dtu-pay-api" />
         <module name="payment.api" />
         <module name="payment.domain" />
-        <module name="payment.data" />
-        <module name="dtu-pay-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
