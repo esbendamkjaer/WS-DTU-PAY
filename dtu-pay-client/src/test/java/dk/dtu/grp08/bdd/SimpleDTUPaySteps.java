@@ -1,9 +1,9 @@
 package dk.dtu.grp08.bdd;
 
-import dk.dtu.grp08.SimpleDTUPay;
-import dk.dtu.grp08.models.Customer;
-import dk.dtu.grp08.models.Merchant;
-import dk.dtu.grp08.models.Payment;
+import dk.dtu.grp08.dtupay.SimpleDTUPay;
+import dk.dtu.grp08.dtupay.models.Customer;
+import dk.dtu.grp08.dtupay.models.Merchant;
+import dk.dtu.grp08.dtupay.models.Payment;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
