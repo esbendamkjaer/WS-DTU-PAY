@@ -7,12 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="dtu-pay-api" />
+        <module name="payment.api" />
+        <module name="payment.domain" />
         <module name="dtu-pay-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="DTU-PAY-COMMON" target="21" />
-      <module name="project" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
