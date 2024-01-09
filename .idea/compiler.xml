@@ -10,10 +10,11 @@
         <module name="payment.data" />
         <module name="dtu-pay-client" />
         <module name="account.api" />
+        <module name="token.domain" />
+        <module name="token.api" />
         <module name="dtu-pay-api" />
         <module name="payment.api" />
         <module name="payment.domain" />
-        <module name="token" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
