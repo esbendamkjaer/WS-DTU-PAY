@@ -13,6 +13,7 @@
         <module name="dtu-pay-api" />
         <module name="payment.api" />
         <module name="payment.domain" />
+        <module name="token" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

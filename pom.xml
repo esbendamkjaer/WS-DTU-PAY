@@ -13,6 +13,7 @@
         <module>dtu-pay-client</module>
         <module>payment</module>
         <module>account</module>
+        <module>token</module>
     </modules>
 
     <properties>
