@@ -13,17 +13,19 @@
         <module name="token.domain" />
         <module name="token.api" />
         <module name="dtu-pay-api" />
-        <module name="payment.api" />
         <module name="payment.domain" />
+        <module name="payment-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="DTU-PAY-COMMON" target="21" />
+      <module name="payment.api" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="dtu-pay-api" options="-parameters" />
+      <module name="payment-api" options="-parameters" />
     </option>
   </component>
 </project>
