@@ -7,15 +7,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="account.domain" />
+        <module name="payment-data" />
+        <module name="payment.domain" />
+        <module name="payment-api" />
+        <module name="account-data" />
+        <module name="token-domain" />
+        <module name="payment-domain" />
         <module name="payment.data" />
         <module name="dtu-pay-client" />
         <module name="account.api" />
         <module name="token.domain" />
         <module name="token.api" />
         <module name="dtu-pay-api" />
-        <module name="payment.domain" />
-        <module name="payment-api" />
-        <module name="account-data" />
+        <module name="account-domain" />
+        <module name="token-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +31,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account-data" options="-parameters" />
+      <module name="account-domain" options="-parameters" />
       <module name="account.api" options="-parameters" />
       <module name="account.domain" options="-parameters" />
       <module name="dtu-pay-api" options="-parameters" />

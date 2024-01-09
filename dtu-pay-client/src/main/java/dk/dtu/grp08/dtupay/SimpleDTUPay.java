@@ -35,6 +35,14 @@ public class SimpleDTUPay {
         this.merchantResource = rtarget.proxy(IMerchantResource.class);
     }
 
+
+    public String registerUserAccount(User user, String bankAccountNo){
+
+        User user1 = new User();
+        user.setLastName(bankAccountNo);
+        return null;
+    }
+
     public String registerBankAccount(String lastName, String firstName, String cprNumber, BigDecimal amount) {
         User user = new User();
         user.setLastName(lastName);
