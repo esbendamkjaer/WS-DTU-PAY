@@ -9,7 +9,7 @@
   </parent>
 
   <groupId>dk.dtu.grp08.account.api</groupId>
-  <artifactId>account-api</artifactId>
+  <artifactId>account.api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
