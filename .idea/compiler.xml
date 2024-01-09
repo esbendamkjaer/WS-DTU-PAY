@@ -6,10 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="account.domain" />
         <module name="payment.data" />
         <module name="dtu-pay-client" />
-        <module name="account.api" />
         <module name="token.domain" />
         <module name="token.api" />
         <module name="dtu-pay-api" />
@@ -18,6 +16,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="account.api" target="21" />
+      <module name="account.domain" target="21" />
       <module name="DTU-PAY-COMMON" target="21" />
       <module name="payment.api" target="21" />
     </bytecodeTargetLevel>
