@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="account.domain" />
         <module name="payment.data" />
         <module name="dtu-pay-client" />
         <module name="token.domain" />
@@ -17,13 +18,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="account.api" target="21" />
-      <module name="account.domain" target="21" />
       <module name="DTU-PAY-COMMON" target="21" />
       <module name="payment.api" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account.domain" options="-parameters" />
       <module name="dtu-pay-api" options="-parameters" />
       <module name="payment-api" options="-parameters" />
     </option>
