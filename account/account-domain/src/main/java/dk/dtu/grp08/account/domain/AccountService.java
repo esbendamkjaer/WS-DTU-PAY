@@ -1,7 +1,9 @@
 package dk.dtu.grp08.account.domain;
 
 import dk.dtu.grp08.account.domain.models.UserAccount;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class AccountService {
 
     public UserAccount registerAccount(
