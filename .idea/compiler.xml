@@ -7,9 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="account.domain" />
-        <module name="payment-data" />
         <module name="payment.domain" />
-        <module name="payment-api" />
         <module name="account-data" />
         <module name="token-domain" />
         <module name="payment-domain" />
@@ -27,6 +25,8 @@
       <module name="dtu-pay-api" target="17" />
       <module name="dtu-pay-client" target="21" />
       <module name="DTU-PAY-COMMON" target="21" />
+      <module name="payment-api" target="21" />
+      <module name="payment-data" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

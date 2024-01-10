@@ -38,6 +38,8 @@ public class PaymentResource implements IPaymentResource {
             throw new RuntimeException(e);
         }
 
+
+
         return listPayments.add(payment);
     }
 
