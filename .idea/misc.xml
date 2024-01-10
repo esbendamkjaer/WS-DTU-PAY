@@ -4,23 +4,10 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/DTU-PAY-API/pom.xml" />
-        <option value="$PROJECT_DIR$/DTU-PAY-CLIENT/pom.xml" />
-        <option value="$PROJECT_DIR$/DTU-PAY-COMMON/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/payment/payment-api/pom.xml" />
-        <option value="$PROJECT_DIR$/account/account-domain/pom.xml" />
-        <option value="$PROJECT_DIR$/account/account-api/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/dtu-pay-common/pom.xml" />
-      </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK" />
 </project>
