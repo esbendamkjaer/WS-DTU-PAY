@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/account/account-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-data/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-data/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/account/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/account/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/messaging-utilities-3.4/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/messaging-utilities-3.4/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-data/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-data/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/payment/payment-domain/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/token/token-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/token/token-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/token/token-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/token/token-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/token/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/token/src/main/resources" charset="UTF-8" />
   </component>
 </project>
