@@ -18,6 +18,7 @@
         <module name="account.api" />
         <module name="token.domain" />
         <module name="token.api" />
+        <module name="client" />
         <module name="dtu-pay-api" />
         <module name="account-domain" />
         <module name="token-api" />
