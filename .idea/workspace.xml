@@ -5,21 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3e9313b-9509-4321-a9d1-596a58edf9b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/WS-DTU-PAY.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dtu-pay-client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dtu-pay-client/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/account-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account/account-domain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/payment-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/payment/payment-domain/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/payment-domain/src/test/java/dk/dtu/grp08/payment/domain/PaymentSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/payment-domain/src/test/java/dk/dtu/grp08/payment/domain/PaymentSteps.java" afterDir="false" />
     </list>
+    <list id="51153afc-2e9e-463b-a4c6-4df99570f5fb" name="Changes by fuadh" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,16 +46,37 @@
   "keyToString": {
     "Maven.client [clean].executor": "Run",
     "Maven.client [install].executor": "Run",
+    "Maven.project [clean].executor": "Run",
+    "Maven.project [install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/esben/dev/dtu/01semester/WS/WS-DTU-PAY",
+    "last_directory_selection": "/Users/esben/dev/dtu/01semester/WS/WS-DTU-PAY/payment/payment-domain/src/test/java/dk/dtu/grp08/payment/domain",
+    "last_opened_file_path": "/Users/esben/dev/dtu/01semester/WS/WS-DTU-PAY/payment/payment-domain/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/payment/payment-domain/src" />
+      <recent name="$PROJECT_DIR$/client/src/test/resources" />
+      <recent name="$PROJECT_DIR$/client/src/test/java/dk/dtu/grp08/bdd" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dk.dtu.grp08.payment.domain" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -219,7 +244,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704876927450</updated>
-      <workItem from="1704876928523" duration="193000" />
+      <workItem from="1704876928523" duration="5894000" />
     </task>
     <servers />
   </component>
