@@ -14,6 +14,7 @@
         <module name="token-domain" />
         <module name="payment-domain" />
         <module name="payment.data" />
+        <module name="messaging-utilities" />
         <module name="account.api" />
         <module name="token.domain" />
         <module name="account.data" />
