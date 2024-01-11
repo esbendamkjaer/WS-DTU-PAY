@@ -11,14 +11,12 @@ public class AccountService {
     IAccountRepository accountRepository;
 
     public UserAccount registerAccount(
-        String firstName,
-        String lastName,
+        String name,
         String cpr,
         String bankAccountNo
     ) {
         UserAccount userAccount = new UserAccount(
-            firstName,
-            lastName,
+            name,
             cpr,
             bankAccountNo
         );

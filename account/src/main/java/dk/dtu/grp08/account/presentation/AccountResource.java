@@ -12,8 +12,7 @@ public class AccountResource implements IAccountResource {
     @Override
     public UserAccount createUserAccount(UserAccount userAccount) {
         return accountService.registerAccount(
-            userAccount.getFirstName(),
-            userAccount.getLastName(),
+            userAccount.getName(),
             userAccount.getCpr(),
             userAccount.getBankAccountNo()
         );
