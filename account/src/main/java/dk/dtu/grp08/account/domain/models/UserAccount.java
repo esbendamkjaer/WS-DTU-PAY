@@ -2,8 +2,6 @@ package dk.dtu.grp08.account.domain.models;
 
 import lombok.*;
 
-import java.util.UUID;
-
 /**
  * This class represents a User, e.g. a Customer or a Merchant.
  */
@@ -11,9 +9,8 @@ import java.util.UUID;
 @Getter
 @RequiredArgsConstructor
 public class UserAccount {
-    UUID id = UUID.randomUUID();
-    @NonNull String firstName;
-    @NonNull String lastName;
+    UserAccountId id = UserAccountId.randomId();
+    @NonNull String name;
     @NonNull String cpr;
     @NonNull String bankAccountNo;
 
