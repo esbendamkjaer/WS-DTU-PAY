@@ -10,7 +10,27 @@ public class BankAdapter implements IBankAdapter {
     @Override
     public void makeBankTransfer(Payment payment) {
         BankService bank =  new BankServiceService().getBankServicePort();
+        try {
+            bank.transferMoneyFromTo(
+                payment.getDebtor().getBankAccountNo(),
+                payment.getCreditor().getBankAccountNo(),
+                payment.getAmount(),
+                getPaymentDescription(payment)
+            );
+        } catch (BankServiceException_Exception e) {
+            // TODO: Catch exception and handle it
+            throw new RuntimeException(e);
+        }
+    }
 
+    private String getPaymentDescription(Payment payment) {
+        return "Payment from " +
+                payment.getDebtor() +
+                " to " +
+                payment.getCreditor() +
+                " for " +
+                payment.getAmount() +
+                " DKK";
     }
 
 }

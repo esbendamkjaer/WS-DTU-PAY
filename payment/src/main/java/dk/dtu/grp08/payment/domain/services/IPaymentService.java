@@ -10,6 +10,4 @@ public interface IPaymentService {
 
     Payment requestPayment(final UUID merchantID, final Token token, final BigDecimal amount);
 
-    Payment performPayment(final UUID merchantID, final Token token, final BigDecimal amount);
-
 }
