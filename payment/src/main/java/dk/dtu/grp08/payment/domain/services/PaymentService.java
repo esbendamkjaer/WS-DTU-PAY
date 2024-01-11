@@ -9,6 +9,7 @@ import dk.dtu.grp08.payment.domain.models.CorrelationId;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
 import dk.dtu.grp08.payment.domain.models.Token;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.SneakyThrows;
 import lombok.val;
 import messaging.Event;
@@ -20,8 +21,8 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+@ApplicationScoped
 public class PaymentService {
-
 
     private IBankAdapter bankAdapter;
     private final MessageQueue messageQueue;
