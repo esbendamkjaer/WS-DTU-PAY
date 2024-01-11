@@ -20,13 +20,16 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PaymentService {
-
+public class PaymentService implements IPaymentService {
 
     private IBankAdapter bankAdapter;
     private final MessageQueue messageQueue;
 
+    private final PolicyManager policyManager = new PolicyManager();
+
     private final Map<CorrelationId, CompletableFuture<Payment>> correlations = new ConcurrentHashMap<>();
+
+    private final Map<CorrelationId, Map<EventType, CompletableFuture<Object>>> corr = new ConcurrentHashMap<>();
 
     public PaymentService(MessageQueue messageQueue) {
         this.messageQueue = messageQueue;
@@ -42,15 +45,32 @@ public class PaymentService {
         );
     }
 
-    public void requestPayment(UUID merchantID, Token token, BigDecimal amount) {
+    public Payment requestPayment(
+        final UUID merchantID,
+        final Token token,
+        final BigDecimal amount
+    ) {
         CorrelationId correlationID = CorrelationId.randomId();
 
         val payment = new Payment();
         payment.setAmount(amount);
 
-        CompletableFuture<Payment> paymentFuture = new CompletableFuture<>();
+        CompletableFuture<BankAccountNo> debtorFuture = new CompletableFuture<>();
+        CompletableFuture<BankAccountNo> creditorFuture = new CompletableFuture<>();
 
-        this.correlations.put(correlationID, paymentFuture);
+        CompletableFuture<Payment> paymentFuture = debtorFuture.thenCombine(
+            creditorFuture,
+            (debtor, creditor) -> {
+                payment.setDebtor(debtor);
+                payment.setCreditor(creditor);
+                return payment;
+            }
+        );
+
+        Map<EventType, CompletableFuture<BankAccountNo>> map = new ConcurrentHashMap<>();
+        map.put(EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED, debtorFuture);
+        map.put(EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED, creditorFuture);
+        policyManager.addPolicy(correlationID, map);
 
         messageQueue.publish(
             new Event(
@@ -68,11 +88,27 @@ public class PaymentService {
 
         Payment paymentResult = paymentFuture.join();
 
+        this.corr.remove(correlationID);
+
+
+
+        return paymentResult;
     }
 
     @SneakyThrows
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, MerchantBankAccountAssignedEvent.class);
+
+        Map<EventType, CompletableFuture<BankAccountNo>> map;
+
+        CompletableFuture<BankAccountNo> future = policyManager.getPolicyByCorrelationIdAndEvent(
+            event.getCorrelationId(),
+            EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED,
+            BankAccountNo.class
+        );
+
+        future.complete(event.getBankAccountNo());
+
         CompletableFuture<Payment> paymentFuture = correlations.get(event.getCorrelationId());
         BankAccountNo bankAccountNo = event.getBankAccountNo();
 

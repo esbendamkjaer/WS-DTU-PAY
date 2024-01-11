@@ -1,4 +1,4 @@
-package dk.dtu.grp08.account.domain;
+package dk.dtu.grp08.account.domain.services;
 
 import dk.dtu.grp08.account.domain.models.UserAccount;
 import jakarta.enterprise.context.ApplicationScoped;
