@@ -1,5 +1,5 @@
 
-package dk.dtu.grp08.payment.data.bank;
+package dk.dtu.grp08.payment.data.adapter.bank.stub;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -7,12 +7,12 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getAccounts complex type.
+ * <p>Java class for transferMoneyFromToResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>{@code
- * <complexType name="getAccounts">
+ * <complexType name="transferMoneyFromToResponse">
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
@@ -25,8 +25,8 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getAccounts")
-public class GetAccounts {
+@XmlType(name = "transferMoneyFromToResponse")
+public class TransferMoneyFromToResponse {
 
 
 }
