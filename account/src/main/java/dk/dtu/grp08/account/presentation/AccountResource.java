@@ -7,7 +7,7 @@ import jakarta.inject.Inject;
 
 public class AccountResource implements IAccountResource {
     @Inject
-    private AccountService accountService;
+    AccountService accountService;
 
     @Override
     public UserAccount createUserAccount(UserAccount userAccount) {
