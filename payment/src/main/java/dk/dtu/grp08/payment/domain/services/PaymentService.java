@@ -24,22 +24,11 @@ public class PaymentService {
 
 
     private IBankAdapter bankAdapter;
-    private final MessageQueue messageQueue;
+
 
     private final Map<CorrelationId, CompletableFuture<Payment>> correlations = new ConcurrentHashMap<>();
 
-    public PaymentService(MessageQueue messageQueue) {
-        this.messageQueue = messageQueue;
-
-        this.messageQueue.addHandler(
-            EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
-            this::handleMerchantBankAccountAssigned
-        );
-
-        this.messageQueue.addHandler(
-            EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED.getEventName(),
-            this::handleCustomBankAccountAssigned
-        );
+    public PaymentService() {
     }
 
     public void requestPayment(UUID merchantID, Token token, BigDecimal amount) {
@@ -52,21 +41,9 @@ public class PaymentService {
 
         this.correlations.put(correlationID, paymentFuture);
 
-        messageQueue.publish(
-            new Event(
-                EventType.PAYMENT_REQUESTED.getEventName(),
-                new Object[] {
-                    new PaymentRequestedEvent(
-                        merchantID,
-                        token,
-                        amount,
-                        correlationID
-                    )
-                }
-            )
-        );
 
-        Payment paymentResult = paymentFuture.join();
+
+       // Payment paymentResult = paymentFuture.join();
 
     }
 
@@ -81,20 +58,20 @@ public class PaymentService {
 
         if (payment.getCreditor() != null && payment.getDebtor() != null){
             transferMoney(payment);
+            correlations.remove(event.getCorrelationId());
         }
     }
 
     @SneakyThrows
-    public void handleCustomBankAccountAssigned(Event mqEvent) {
-        val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
-        CompletableFuture<Payment> paymentFuture = correlations.get(event.getCorrelationId());
-        BankAccountNo bankAccountNo = event.getBankAccountNo();
+    public void handleCustomBankAccountAssigned(BankAccountNo bankAccountNo, CorrelationId correlationId) {
+
 
         Payment payment = paymentFuture.get();
         payment.setDebtor(bankAccountNo);
 
         if (payment.getCreditor() != null && payment.getDebtor() != null){
             transferMoney(payment);
+            correlations.remove(event.getCorrelationId());
         }
     }
 
