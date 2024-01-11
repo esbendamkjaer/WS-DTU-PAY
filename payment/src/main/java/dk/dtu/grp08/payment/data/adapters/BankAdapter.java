@@ -11,6 +11,14 @@ public class BankAdapter implements IBankAdapter {
     public void makeBankTransfer(Payment payment) {
         BankService bank =  new BankServiceService().getBankServicePort();
 
+    private String getPaymentDescription(Payment payment) {
+        return "Payment from " +
+                payment.getDebtor() +
+                " to " +
+                payment.getCreditor() +
+                " for " +
+                payment.getAmount() +
+                " DKK";
     }
 
 }
