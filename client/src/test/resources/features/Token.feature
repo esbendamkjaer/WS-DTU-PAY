@@ -1,12 +1,12 @@
 Scenario: Customer requests 5 tokens
-  Given a costumer "Hubert" with bank account balance 5000DK
+  Given a costumer "Hubert" with bank account balance 5000 dkk
   And the customer is registered in DTU Pay
   And the customer has 0 tokens
   When the customer requests 5 tokens
   Then the customer has 5 unused tokens
 
 Scenario: Customer requests additional tokens, surpassing his allowed amount
-  Given a costumer "Hubert" with bank account balance 5000DK
+  Given a customer "Hubert" with bank account balance 5000DK
   And the customer is registered in DTU Pay
   And the customer has 1 tokens
   When the customer requests 6 tokens

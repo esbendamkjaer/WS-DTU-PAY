@@ -1,9 +1,9 @@
 package dk.dtu.grp08.account.presentation;
 
+import dk.dtu.grp08.account.domain.events.EventType;
 import dk.dtu.grp08.account.presentation.contracts.IAccountResource;
 import dk.dtu.grp08.account.domain.services.AccountService;
-import dk.dtu.grp08.account.domain.models.UserAccount;
-import jakarta.inject.Inject;
+import dk.dtu.grp08.account.domain.models.useraccount.UserAccount;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
 
@@ -16,6 +16,10 @@ public class AccountResource implements IAccountResource {
     public AccountResource(AccountService accountService) {
         this.accountService = accountService;
 
+        this.messageQueue.addHandler(
+            EventType.TOKEN_VALIDATED.getEventName(),
+            accountService::handleTokenValidatedEvent
+        );
 
     }
 
@@ -28,7 +32,5 @@ public class AccountResource implements IAccountResource {
             userAccount.getBankAccountNo()
         );
     }
-
-    public void
 
 }
