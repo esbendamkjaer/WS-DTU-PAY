@@ -25,13 +25,13 @@ Scenario: Customer has more than 1 unused token and asks for more
   And the customer is registered in DTU Pay
   And the customer has 3 tokens
   When the customer requests 2 tokens
-  Then the customer receives an exception
+  Then the customer receives an error message
 
 Scenario: Customer requests -1 token
   Given a costumer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   When the customer requests -1 tokens
-  Then the customer receives an exception
+  Then the customer receives an error message
 
 Scenario: Token is used more than once
   Given a token is not in the list

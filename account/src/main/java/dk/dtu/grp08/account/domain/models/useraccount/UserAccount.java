@@ -11,11 +11,10 @@ import java.util.UUID;
 @Getter
 @RequiredArgsConstructor
 public class UserAccount {
-    UUID id = UUID.randomUUID();
-    @NonNull String firstName;
-    @NonNull String lastName;
-    @NonNull String cpr;
-    @NonNull String bankAccountNo;
+    UserId id = UserId.randomId();
+    String name;
+    String cpr;
+    BankAccountNo bankAccountNo;
 
 }
 

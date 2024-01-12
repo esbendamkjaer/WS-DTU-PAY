@@ -1,19 +1,22 @@
 package dk.dtu.grp08.bdd;
 
 import dk.dtu.grp08.bank.*;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
+import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class TokenSteps {
 
-    private User customer;;
-
+    private User customer;
     private BankService bank;
+    private String message;
+    
+
 
     @Given("a customer {string} with bank account balance {int} kr")
     public void aCustomerWithNameAndBankAccountDetails(String firstName, int balance) {
@@ -55,13 +58,13 @@ public class TokenSteps {
 
 
     @Then("the customer receives an exception")
-    public void theCustomerReceivedAnException(){
-        //TODO
+    public void theCustomerHasMoreThanOneTokenErrorMessage(){
+        assertTrue(message.contains("Costumer has more than one token"));
     }
 
     @Then("the token is not validated")
     public void theTokenIsNotValidated(){
-        //TODO
+        assertTrue(message.contains("Token is not validated"));
     }
 
     @Given("a token is not in the list")
