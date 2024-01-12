@@ -15,7 +15,7 @@ public class TokenSteps {
 
     private BankService bank;
 
-    @Given("a customer {string} with bank account balance {int} dkk")
+    @Given("a customer {string} with bank account balance {int} kr")
     public void aCustomerWithNameAndBankAccountDetails(String firstName, int balance) {
         customer = new User();
         customer.setFirstName(firstName);
@@ -35,14 +35,39 @@ public class TokenSteps {
 
     @And("the customer has {int} tokens")
     public void theCustomerHasTokens(int tokens) {
-        //TO DO
+        //TODO
     }
 
-    @When("the customer requests 5 tokens")
-    public void theCustomerRequests5Tokens(int tokens){
-        
+    @When("the customer requests {int} tokens")
+    public void theCustomerRequestsTokens(int tokens) {
+        //TODO
     }
 
+    @Then("the customer has {int} unused tokens")
+    public void theCustomerHasUnusedTokens(int tokens) {
+        //TODO
+    }
+
+    @When("the token has to be validated")
+    public  void theTokenHasToBeValidated(){
+        //TODO
+    }
+
+
+    @Then("the customer receives an exception")
+    public void theCustomerReceivedAnException(){
+        //TODO
+    }
+
+    @Then("the token is not validated")
+    public void theTokenIsNotValidated(){
+        //TODO
+    }
+
+    @Given("a token is not in the list")
+    public void aTokenIsNotInTheList(){
+        //TODO
+    }
 
 }
 
