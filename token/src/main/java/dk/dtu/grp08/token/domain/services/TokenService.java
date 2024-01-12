@@ -46,17 +46,16 @@ public class TokenService implements ITokenService {
     }
 
     @Override
-    public void validateToken(Token token) {
-        UserId userId = tokenRepository.getUserIdByToken(token);
-
-        if (userId == null) {
-            throw new TokenException("Token is invalid");
-        }
+    public UserId validateToken(Token token) throws InvalidTokenException {
+        UserId userId = this.tokenRepository.getUserIdByToken(token)
+                .orElseThrow(InvalidTokenException::new);
 
         Optional<Token> deletedToken = this.tokenRepository
                 .deleteToken(token);
 
         deletedToken.orElseThrow(InvalidTokenException::new);
+
+        return userId;
     }
 
     private Token generateToken() {
