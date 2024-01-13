@@ -6,13 +6,13 @@ import dk.dtu.grp08.account.domain.repository.IAccountRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
 public class AccountRepository implements IAccountRepository {
-    private final Map<UserAccountId, UserAccount> userAccounts = new HashMap<>();
+    private final Map<UserAccountId, UserAccount> userAccounts = new ConcurrentHashMap<>();
 
     @Override
     public UserAccount createUserAccount(UserAccount userAccount) {
@@ -32,12 +32,9 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public UserAccount findById(UserAccountId id) {
-        return userAccounts.get(id);
-    }
-
-    @Override
-    public List<UserAccount> findAll() {
-        return (List<UserAccount>) userAccounts.values();
+    public Optional<UserAccount> getUserAccountById(UserAccountId userId) {
+        return Optional.ofNullable(
+            this.userAccounts.get(userId)
+        );
     }
 }

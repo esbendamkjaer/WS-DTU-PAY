@@ -2,12 +2,15 @@ package dk.dtu.grp08.token.domain.events;
 
 import dk.dtu.grp08.token.domain.models.CorrelationId;
 import dk.dtu.grp08.token.domain.models.Token;
-import dk.dtu.grp08.token.domain.models.UserId;
 import lombok.Value;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 @Value
-public class TokenValidatedEvent {
-    CorrelationId correlationId;
+public class PaymentRequestedEvent {
+    UUID merchantID;
     Token token;
-    UserId userId;
+    BigDecimal amount;
+    CorrelationId correlationId;
 }

@@ -1,6 +1,6 @@
 package dk.dtu.grp08.account.presentation.contracts;
 
-import dk.dtu.grp08.account.domain.models.UserAccount;
+import dk.dtu.grp08.account.domain.models.useraccount.UserAccount;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

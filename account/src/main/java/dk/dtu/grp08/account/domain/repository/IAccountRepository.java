@@ -4,6 +4,7 @@ import dk.dtu.grp08.account.domain.models.UserAccount;
 import dk.dtu.grp08.account.domain.models.UserAccountId;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IAccountRepository {
 
@@ -17,4 +18,6 @@ public interface IAccountRepository {
 
     List<UserAccount> findAll();
 
+
+    public Optional<UserAccount> getUserAccountById(UserId userId);
 }

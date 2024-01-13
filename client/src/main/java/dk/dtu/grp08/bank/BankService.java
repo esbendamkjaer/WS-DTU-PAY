@@ -110,4 +110,5 @@ public interface BankService {
         throws BankServiceException_Exception
     ;
 
+    void registerInDTUPay(User customer);
 }
