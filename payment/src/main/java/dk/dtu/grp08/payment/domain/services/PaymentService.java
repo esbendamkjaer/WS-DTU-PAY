@@ -69,7 +69,7 @@ public class PaymentService implements IPaymentService {
             }
         );
 
-        Map<EventType, CompletableFuture<BankAccountNo>> map = new ConcurrentHashMap<>();
+        Map<EventType, CompletableFuture> map = new ConcurrentHashMap<>();
         map.put(EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED, debtorFuture);
         map.put(EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED, creditorFuture);
         policyManager.addPolicy(correlationID, map);

@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the dk.dtu.grp08.payment.data.bank package. 
+ * generated in the dk.dtu.grp08.payment.data.adapter.bank.stub package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -37,7 +37,7 @@ public class ObjectFactory {
     private static final QName _BankServiceException_QNAME = new QName("http://fastmoney.ws.dtu/", "BankServiceException");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: dk.dtu.grp08.payment.data.bank
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: dk.dtu.grp08.payment.data.adapter.bank.stub
      * 
      */
     public ObjectFactory() {

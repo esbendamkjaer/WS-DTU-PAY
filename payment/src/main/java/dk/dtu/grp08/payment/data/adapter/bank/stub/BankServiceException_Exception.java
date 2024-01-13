@@ -45,7 +45,7 @@ public class BankServiceException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: dk.dtu.grp08.payment.data.bank.BankServiceException
+     *     returns fault bean: dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceException
      */
     public BankServiceException getFaultInfo() {
         return faultInfo;

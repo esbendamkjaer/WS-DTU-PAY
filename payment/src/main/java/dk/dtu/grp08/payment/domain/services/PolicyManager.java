@@ -15,7 +15,7 @@ public class PolicyManager {
         return this.correlation.get(correlationId).get(eventType);
     }
 
-    public <T> void addPolicy(CorrelationId correlationId, Map<EventType, CompletableFuture<T>> policy) {
+    public <T> void addPolicy(CorrelationId correlationId, Map<EventType, CompletableFuture> policy) {
         this.correlation.put(correlationId, policy);
     }
 
