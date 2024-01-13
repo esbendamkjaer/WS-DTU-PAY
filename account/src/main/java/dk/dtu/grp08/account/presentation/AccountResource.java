@@ -4,9 +4,11 @@ import dk.dtu.grp08.account.domain.events.BankAccountNoAssignedEvent;
 import dk.dtu.grp08.account.domain.events.EventType;
 import dk.dtu.grp08.account.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.account.domain.events.TokenValidatedEvent;
+import dk.dtu.grp08.account.domain.models.user.BankAccountNo;
 import dk.dtu.grp08.account.presentation.contracts.IAccountResource;
 import dk.dtu.grp08.account.domain.services.AccountService;
 import dk.dtu.grp08.account.domain.models.user.UserAccount;
+import io.quarkus.logging.Log;
 import messaging.Event;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
@@ -31,11 +33,9 @@ public class AccountResource implements IAccountResource {
 
     @Override
     public UserAccount createUserAccount(UserAccount userAccount) {
-        return accountService.registerAccount(
-            userAccount.getName(),
-            userAccount.getCpr(),
-            userAccount.getBankAccountNo()
-        );
+        Log.debug("Creating user account: " + userAccount.toString());
+
+        return new UserAccount("test", "1234", new BankAccountNo("1234"));
     }
 
     @Override
