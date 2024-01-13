@@ -10,4 +10,6 @@ public class UserAccountId {
     public static UserAccountId randomId() {
         return new UserAccountId(UUID.randomUUID());
     }
+
+    public static UserAccountId fromString(String id) { return new UserAccountId(UUID.fromString(id)); }
 }
