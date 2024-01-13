@@ -1,6 +1,7 @@
 package dk.dtu.grp08.account.domain.services;
 
 import dk.dtu.grp08.account.domain.models.UserAccount;
+import dk.dtu.grp08.account.domain.models.UserAccountId;
 import dk.dtu.grp08.account.domain.repository.IAccountRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -24,7 +25,7 @@ public class AccountService {
         return userAccount;
     }
 
-    public UserAccount getUserAccountById(String id) {
+    public UserAccount getUserAccountById(UserAccountId id) {
         return accountRepository.findById(id);
     }
 
