@@ -1,4 +1,4 @@
-package dk.dtu.grp08.account.domain.models;
+package dk.dtu.grp08.account.domain.models.user;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ public class UserAccount {
     UserAccountId id = UserAccountId.randomId();
     @NonNull String name;
     @NonNull String cpr;
-    @NonNull String bankAccountNo;
+    @NonNull BankAccountNo bankAccountNo;
 
 }
 

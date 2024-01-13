@@ -1,4 +1,4 @@
-package dk.dtu.grp08.account.domain.models.useraccount;
+package dk.dtu.grp08.account.domain.models.user;
 
 import lombok.Value;
 

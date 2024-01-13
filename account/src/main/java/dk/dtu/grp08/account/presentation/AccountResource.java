@@ -6,10 +6,12 @@ import dk.dtu.grp08.account.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.account.domain.events.TokenValidatedEvent;
 import dk.dtu.grp08.account.presentation.contracts.IAccountResource;
 import dk.dtu.grp08.account.domain.services.AccountService;
-import dk.dtu.grp08.account.domain.models.useraccount.UserAccount;
+import dk.dtu.grp08.account.domain.models.user.UserAccount;
 import messaging.Event;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
+
+import java.util.Optional;
 
 public class AccountResource implements IAccountResource {
 
@@ -36,11 +38,21 @@ public class AccountResource implements IAccountResource {
         );
     }
 
+    @Override
+    public Optional<UserAccount> getUserAccount(String id) {
+        return accountService.getUserAccountById(id);
+    }
+
+    @Override
+    public UserAccount[] getAllUserAccounts() {
+        return new UserAccount[0];
+    }
+
     public void handleTokenValidatedEvent(Event event) {
         TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
 
         this.accountService.getUserAccountById(
-            tokenValidatedEvent.getUserId()
+            tokenValidatedEvent.getUserAccountId()
         ).ifPresentOrElse(
             userAccount -> {
                 Event bankAccountNoAssignedEvent = new Event(
