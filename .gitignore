@@ -3,3 +3,4 @@ target
 *.dat
 .idea/workspace.xml
 .idea/uiDesigner.xml
+.idea/httpRequests
