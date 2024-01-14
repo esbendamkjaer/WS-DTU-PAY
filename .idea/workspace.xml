@@ -4,46 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f30e876-5d7c-4886-8926-210886de17c5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/domain/repository/IAccountRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/repositories/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/IPaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/PolicyManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/PaymentRessource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4f30e876-5d7c-4886-8926-210886de17c5" name="Changes" comment="Fixed merge issues">
+      <change afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/IPolicy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/data/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/data/repository/AccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/domain/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/domain/services/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/presentation/AccountResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/presentation/AccountResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/presentation/contracts/IAccountResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/dk/dtu/grp08/account/presentation/contracts/IAccountResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/payment/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapters/BankAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/BankAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/AccountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/AccountInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/BankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/BankService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/BankServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/BankServiceException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/BankServiceException_Exception.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/BankServiceException_Exception.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/BankServiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/BankServiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/CreateAccountWithBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/CreateAccountWithBalance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/CreateAccountWithBalanceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/CreateAccountWithBalanceResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/GetAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/GetAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/GetAccountResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/GetAccountResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/GetAccounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/GetAccounts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/GetAccountsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/GetAccountsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/ObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/RetireAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/RetireAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/RetireAccountResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/RetireAccountResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/TransferMoneyFromTo.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/TransferMoneyFromTo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/TransferMoneyFromToResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/TransferMoneyFromToResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/bank/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/data/adapter/bank/stub/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/PaymentResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/contracts/IPaymentResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/contracts/IPaymentResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/src/test/java/dk/dtu/grp08/payment/domain/PaymentSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/test/java/dk/dtu/grp08/payment/domain/PaymentSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/models/payment/BankAccountNo.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/models/payment/BankAccountNo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/models/payment/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/models/payment/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/PolicyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/domain/services/PolicyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/PaymentRessource.java" beforeDir="false" afterPath="$PROJECT_DIR$/payment/src/main/java/dk/dtu/grp08/payment/presentation/PaymentRessource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/token/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/token/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -98,7 +66,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -123,7 +91,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Quarkus.account">
+  <component name="RunManager" selected="Quarkus.payment">
     <configuration name="account" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="account" />
       <QsMavenRunConfiguration>
@@ -251,6 +219,15 @@
       <workItem from="1704926077241" duration="2390000" />
       <workItem from="1704928479462" duration="5575000" />
     </task>
+    <task id="LOCAL-00001" summary="Fixed merge issues">
+      <option name="closed" value="true" />
+      <created>1705232856838</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705232856838</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +245,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="half removed presentation code in domain layer - payment" />
+    <MESSAGE value="Fixed merge issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed merge issues" />
   </component>
 </project>

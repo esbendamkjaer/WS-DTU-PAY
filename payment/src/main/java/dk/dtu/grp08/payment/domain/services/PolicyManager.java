@@ -11,12 +11,12 @@ public class  PolicyManager {
 
     Map<CorrelationId, Map<EventType, CompletableFuture>> correlation = new ConcurrentHashMap<>();
 
-    public <T> CompletableFuture<T> getPolicyByCorrelationIdAndEvent(CorrelationId correlationId, EventType eventType) {
+    public  CompletableFuture<? extends IPolicy> getPolicyByCorrelationIdAndEvent(CorrelationId correlationId, EventType eventType) {
         return this.correlation.get(correlationId).get(eventType);
     }
 
-    public <T> void addPolicy(CorrelationId correlationId, Map<EventType, CompletableFuture<T>> policy) {
-        this.correlation.put(correlationId, policy);
+    public void addPolicy(CorrelationId correlationId, Map<EventType, CompletableFuture> policy) {
+        this.correlation.put(correlationId,policy);
     }
 
 

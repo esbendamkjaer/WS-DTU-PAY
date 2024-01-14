@@ -69,7 +69,7 @@ public class PaymentRessource implements IPaymentResource {
                 }
         );
 
-        Map<EventType, CompletableFuture<BankAccountNo>> map = new ConcurrentHashMap<>();
+        Map<EventType, CompletableFuture> map = new ConcurrentHashMap<>();
         map.put(EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED, customerBankAccountAssignedFuture);
         map.put(EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED, merchantBankAccountAssignedFuture);
 
@@ -101,7 +101,7 @@ public class PaymentRessource implements IPaymentResource {
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, MerchantBankAccountAssignedEvent.class);
 
-        CompletableFuture<BankAccountNo> merchantBankAccountAssignedFuture = policyManager.getPolicyByCorrelationIdAndEvent(
+        CompletableFuture merchantBankAccountAssignedFuture = policyManager.getPolicyByCorrelationIdAndEvent(
                 event.getCorrelationId(),
                 EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED
         );
@@ -113,7 +113,7 @@ public class PaymentRessource implements IPaymentResource {
     public void handleCustomBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
 
-        CompletableFuture<BankAccountNo> customerBankAccountAssignedFuture = policyManager.getPolicyByCorrelationIdAndEvent(
+        CompletableFuture customerBankAccountAssignedFuture = policyManager.getPolicyByCorrelationIdAndEvent(
                 event.getCorrelationId(),
                 EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED
         );
