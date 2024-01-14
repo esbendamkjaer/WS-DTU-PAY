@@ -1,7 +1,7 @@
 package dk.dtu.grp08.payment.domain;
 
-import dk.dtu.grp08.payment.data.bank.BankService;
-import dk.dtu.grp08.payment.data.bank.BankServiceService;
+import dk.dtu.grp08.payment.data.adapter.bank.stub.BankService;
+import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceService;
 import dk.dtu.grp08.payment.domain.models.user.UserAccount;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

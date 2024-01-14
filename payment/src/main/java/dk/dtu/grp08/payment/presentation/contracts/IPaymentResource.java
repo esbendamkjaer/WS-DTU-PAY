@@ -10,9 +10,7 @@ public interface IPaymentResource {
 
     void requestPayment(UUID merchantID, Token token, BigDecimal amount);
 
-    void handleMerchantBankAccountAssigned(Event mqEvent);
 
 
-    void handleCustomBankAccountAssigned(Event mqEvent);
 }
 

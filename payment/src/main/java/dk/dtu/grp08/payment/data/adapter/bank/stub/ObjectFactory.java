@@ -1,5 +1,5 @@
 
-package dk.dtu.grp08.payment.data.bank;
+package dk.dtu.grp08.payment.data.adapter.bank.stub;
 
 import javax.xml.namespace.QName;
 import jakarta.xml.bind.JAXBElement;

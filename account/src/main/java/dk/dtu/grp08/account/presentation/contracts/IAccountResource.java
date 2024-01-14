@@ -14,7 +14,6 @@ public interface IAccountResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @POST
-
-    public UserAccount createUserAccount(UserAccount userAccount);
+    UserAccount createUserAccount(UserAccount userAccount);
 
 }
