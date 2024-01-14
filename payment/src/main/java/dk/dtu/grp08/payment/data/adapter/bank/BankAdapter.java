@@ -1,6 +1,7 @@
 package dk.dtu.grp08.payment.data.adapter.bank;
 
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankService;
+import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceException_Exception;
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceService;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
