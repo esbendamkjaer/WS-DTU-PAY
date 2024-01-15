@@ -1,6 +1,6 @@
 package dk.dtu.grp08.dtupay.customer;
 
-import dk.dtu.grp08.dtupay.ICustomerAPI;
+import dk.dtu.grp08.dtupay.api.ICustomerAPI;
 import dk.dtu.grp08.dtupay.Stub;
 import dk.dtu.grp08.dtupay.models.BankAccountNo;
 import dk.dtu.grp08.dtupay.models.Token;

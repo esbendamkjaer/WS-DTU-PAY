@@ -1,4 +1,4 @@
-package dk.dtu.grp08.dtupay;
+package dk.dtu.grp08.dtupay.api;
 
 import dk.dtu.grp08.dtupay.models.Payment;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;

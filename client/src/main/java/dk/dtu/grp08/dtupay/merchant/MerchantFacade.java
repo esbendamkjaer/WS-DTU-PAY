@@ -1,15 +1,12 @@
 package dk.dtu.grp08.dtupay.merchant;
 
-import dk.dtu.grp08.dtupay.IMerchantAPI;
+import dk.dtu.grp08.dtupay.api.IMerchantAPI;
 import dk.dtu.grp08.dtupay.Stub;
 import dk.dtu.grp08.dtupay.models.BankAccountNo;
 import dk.dtu.grp08.dtupay.models.UserAccount;
 import dk.dtu.grp08.dtupay.models.UserId;
 import dk.dtu.grp08.dtupay.models.Payment;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;
-import dk.dtu.grp08.dtupay.models.Token;
-
-import java.math.BigDecimal;
 
 public class MerchantFacade implements IMerchantFacade {
 
