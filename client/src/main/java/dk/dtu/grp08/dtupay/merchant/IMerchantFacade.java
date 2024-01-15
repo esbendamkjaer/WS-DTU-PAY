@@ -1,10 +1,10 @@
 package dk.dtu.grp08.dtupay.merchant;
 
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
-import dk.dtu.grp08.stubs.account.models.user.UserId;
-import dk.dtu.grp08.stubs.payment.models.Payment;
-import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.UserAccount;
+import dk.dtu.grp08.dtupay.models.UserId;
+import dk.dtu.grp08.dtupay.models.Payment;
+import dk.dtu.grp08.dtupay.models.PaymentRequest;
 
 public interface IMerchantFacade {
 

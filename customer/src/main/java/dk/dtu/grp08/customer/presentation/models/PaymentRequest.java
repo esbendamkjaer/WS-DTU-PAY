@@ -1,6 +1,5 @@
-package dk.dtu.grp08.stubs.payment.models;
+package dk.dtu.grp08.customer.presentation.models;
 
-import dk.dtu.grp08.stubs.token.models.Token;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

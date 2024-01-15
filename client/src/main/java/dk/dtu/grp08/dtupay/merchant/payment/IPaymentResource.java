@@ -1,16 +1,12 @@
-package dk.dtu.grp08.stubs.payment;
+package dk.dtu.grp08.dtupay.merchant.payment;
 
-import dk.dtu.grp08.stubs.payment.models.Payment;
-import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.dtupay.models.Payment;
+import dk.dtu.grp08.dtupay.models.PaymentRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
-import java.math.BigDecimal;
-import java.util.UUID;
 
 @Path("/payments")
 public interface IPaymentResource {

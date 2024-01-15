@@ -1,7 +1,6 @@
-package dk.dtu.grp08.stubs.account;
+package dk.dtu.grp08.customer.presentation.contracts;
 
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
+import dk.dtu.grp08.customer.presentation.models.UserAccount;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -21,7 +20,9 @@ public interface IAccountResource {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    Optional<UserAccount> getUserAccount(@PathParam("id") UUID id);
+    Optional<UserAccount> getUserAccount(
+        @PathParam("id") UUID id
+    );
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
