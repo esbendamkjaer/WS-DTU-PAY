@@ -4,9 +4,11 @@ public enum EventType {
 
     TOKEN_VALIDATED("TokenValidated"),
     TOKEN_INVALIDATED("TokenInvalidated"),
-    CUSTOMER_BANK_ACCOUNT_NO_ASSIGNED("CustomerBankAccountNoAssigned");
+    CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),
+    MERCHANT_BANK_ACCOUNT_ASSIGNED("MerchantBankAccountAssigned"),
+    PAYMENT_REQUESTED("PaymentRequested");
 
-    private String eventName;
+    private final String eventName;
 
     EventType(String eventName) {
         this.eventName = eventName;

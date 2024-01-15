@@ -1,16 +1,22 @@
 package dk.dtu.grp08.payment.presentation.contracts;
 
-import dk.dtu.grp08.payment.domain.models.Token;
-import messaging.Event;
+import dk.dtu.grp08.payment.domain.models.payment.Payment;
+import dk.dtu.grp08.payment.domain.models.PaymentRequest;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
+@Path("/payments")
 public interface IPaymentResource {
 
-    void requestPayment(UUID merchantID, Token token, BigDecimal amount);
-
-
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    Payment createPayment(
+        PaymentRequest paymentRequest
+    );
 
 }
 

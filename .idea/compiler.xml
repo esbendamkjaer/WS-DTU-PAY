@@ -13,22 +13,10 @@
         <module name="merchant" />
         <module name="payment" />
         <module name="account" />
-        <module name="token" />
         <module name="customer" />
+        <module name="token" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="account.api" target="20" />
-      <module name="account.data" target="20" />
-      <module name="account.domain" target="20" />
-      <module name="dtu-pay-api" target="17" />
-      <module name="dtu-pay-client" target="20" />
-      <module name="payment-api" target="20" />
-      <module name="payment-data" target="20" />
-      <module name="payment-domain" target="20" />
-      <module name="token-api" target="20" />
-      <module name="token-domain" target="20" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

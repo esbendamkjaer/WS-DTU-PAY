@@ -16,4 +16,5 @@ public interface IAccountRepository {
 
     List<UserAccount> findAll();
 
+    void deleteUserAccount(UserAccountId id);
 }
