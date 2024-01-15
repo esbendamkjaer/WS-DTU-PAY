@@ -1,8 +1,8 @@
 package dk.dtu.grp08.customer.presentation;
 
-import dk.dtu.grp08.customer.presentation.contracts.IAccountResource;
+import dk.dtu.grp08.customer.presentation.contracts.IAccountAPI;
 import dk.dtu.grp08.customer.presentation.contracts.ICustomerResource;
-import dk.dtu.grp08.customer.presentation.contracts.ITokenResource;
+import dk.dtu.grp08.customer.presentation.contracts.ITokenAPI;
 import dk.dtu.grp08.customer.presentation.models.Token;
 import dk.dtu.grp08.customer.presentation.models.UserAccount;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -13,12 +13,12 @@ import java.util.UUID;
 @ApplicationScoped
 public class CustomerResource implements ICustomerResource {
 
-    private final ITokenResource tokenResource;
-    private final IAccountResource accountResource;
+    private final ITokenAPI tokenResource;
+    private final IAccountAPI accountResource;
 
     public CustomerResource() {
-        tokenResource = Stub.get(ITokenResource.class, "http://localhost:8082");
-        accountResource = Stub.get(IAccountResource.class, "http://localhost:8081");
+        tokenResource = Stub.get(ITokenAPI.class, "http://localhost:8082");
+        accountResource = Stub.get(IAccountAPI.class, "http://localhost:8081");
     }
 
     @Override

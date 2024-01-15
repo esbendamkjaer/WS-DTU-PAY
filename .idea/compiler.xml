@@ -22,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account" options="-parameters" />
       <module name="customer" options="-parameters" />
+      <module name="merchant" options="-parameters" />
       <module name="payment" options="-parameters" />
       <module name="token" options="-parameters" />
     </option>

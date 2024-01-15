@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path("/tokens")
-public interface ITokenResource {
+public interface ITokenAPI {
 
     @GET
     @Path("/{userId}")

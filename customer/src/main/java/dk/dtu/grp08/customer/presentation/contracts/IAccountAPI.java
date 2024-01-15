@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Path("/accounts")
-public interface IAccountResource {
+public interface IAccountAPI {
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
