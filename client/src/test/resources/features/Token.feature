@@ -1,4 +1,6 @@
-Scenario: Customer requests 5 tokens
+Feature: Token
+
+  Scenario: Customer requests 5 tokens
   Given a costumer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   And the customer has 0 tokens

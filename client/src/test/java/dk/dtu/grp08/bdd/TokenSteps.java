@@ -33,7 +33,6 @@ public class TokenSteps {
 
     @And("the customer is registered in DTU Pay")
     public void theCustomerIsRegisteredInDTUPay() {
-        bank.registerInDTUPay(customer);
     }
 
     @And("the customer has {int} tokens")
