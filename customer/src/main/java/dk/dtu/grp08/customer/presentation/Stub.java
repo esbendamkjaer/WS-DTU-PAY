@@ -1,4 +1,4 @@
-package dk.dtu.grp08.stubs;
+package dk.dtu.grp08.customer.presentation;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;

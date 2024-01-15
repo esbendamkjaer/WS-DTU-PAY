@@ -1,6 +1,6 @@
-package dk.dtu.grp08.stubs.token;
+package dk.dtu.grp08.customer.presentation.contracts;
 
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.customer.presentation.models.Token;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;

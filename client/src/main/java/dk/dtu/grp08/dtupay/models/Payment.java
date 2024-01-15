@@ -1,6 +1,5 @@
-package dk.dtu.grp08.stubs.payment.models;
+package dk.dtu.grp08.dtupay.models;
 
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package dk.dtu.grp08.dtupay.contracts;
+package dk.dtu.grp08.dtupay.api;
 
 import dk.dtu.grp08.dtupay.models.Merchant;
 import jakarta.ws.rs.*;

@@ -1,25 +1,19 @@
 package dk.dtu.grp08.dtupay.merchant;
 
-import dk.dtu.grp08.stubs.Stub;
-import dk.dtu.grp08.stubs.account.IAccountResource;
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
-import dk.dtu.grp08.stubs.account.models.user.UserId;
-import dk.dtu.grp08.stubs.payment.IPaymentResource;
-import dk.dtu.grp08.stubs.payment.models.Payment;
-import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
-import dk.dtu.grp08.stubs.token.models.Token;
-
-import java.math.BigDecimal;
+import dk.dtu.grp08.dtupay.api.IMerchantAPI;
+import dk.dtu.grp08.dtupay.Stub;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.UserAccount;
+import dk.dtu.grp08.dtupay.models.UserId;
+import dk.dtu.grp08.dtupay.models.Payment;
+import dk.dtu.grp08.dtupay.models.PaymentRequest;
 
 public class MerchantFacade implements IMerchantFacade {
 
-    private final IAccountResource accountResource;
-    private final IPaymentResource paymentResource;
+    private final IMerchantAPI merchantAPI;
 
     public MerchantFacade() {
-        this.accountResource = Stub.get(IAccountResource.class, "http://localhost:8081");
-        this.paymentResource = Stub.get(IPaymentResource.class, "http://localhost:8080");
+        this.merchantAPI = Stub.get(IMerchantAPI.class, "http://localhost:8084");
     }
 
     @Override
@@ -29,32 +23,22 @@ public class MerchantFacade implements IMerchantFacade {
         userAccount.setCpr(cpr);
         userAccount.setBankAccountNo(bankAccountNo);
 
-        return accountResource.createUserAccount(
+        return merchantAPI.createMerchant(
             userAccount
         );
     }
 
     @Override
     public void deregister(UserId user) {
-        accountResource.deleteUserAccount(
+        merchantAPI.deleteMerchant(
             user.getId()
         );
     }
 
     @Override
     public Payment pay(PaymentRequest paymentRequest) {
-        return this.paymentResource.createPayment(
+        return this.merchantAPI.createPayment(
             paymentRequest
-        );
-    }
-
-    public Payment pay(Token token, UserId merchantId, BigDecimal amount) {
-        return paymentResource.createPayment(
-            new PaymentRequest(
-                token,
-                merchantId.getId(),
-                amount
-            )
         );
     }
 }

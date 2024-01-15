@@ -1,9 +1,8 @@
-package dk.dtu.grp08.stubs.account.models.user;
+package dk.dtu.grp08.customer.presentation.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.util.UUID;
 

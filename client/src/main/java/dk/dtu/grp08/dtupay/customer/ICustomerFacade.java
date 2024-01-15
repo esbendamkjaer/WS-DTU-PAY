@@ -1,9 +1,9 @@
 package dk.dtu.grp08.dtupay.customer;
 
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
-import dk.dtu.grp08.stubs.account.models.user.UserId;
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.UserAccount;
+import dk.dtu.grp08.dtupay.models.UserId;
+import dk.dtu.grp08.dtupay.models.Token;
 
 import java.util.List;
 
