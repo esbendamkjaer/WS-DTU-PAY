@@ -6,15 +6,13 @@ import lombok.*;
 /**
  * This class represents a User, e.g. a Customer or a Merchant.
  */
-@Setter
-@Getter
-@Value
+@Data
 @ToString
 @RegisterForReflection
 public class UserAccount {
-    UserAccountId id = UserAccountId.randomId();
-    @NonNull String name;
-    @NonNull String cpr;
-    @NonNull BankAccountNo bankAccountNo;
+    UserAccountId id;
+    String name;
+    String cpr;
+    BankAccountNo bankAccountNo;
 }
 

@@ -10,11 +10,12 @@ import java.util.UUID;
 
 public interface IPaymentService {
 
-
-    void assignMerchant(Payment payment, BankAccountNo bankAccountNo);
-
-    void assignCustomer(Payment payment, BankAccountNo bankAccountNo);
-
     void transferMoney(Payment payment);
+
+    Payment requestPayment(
+        final UUID merchantID,
+        final Token token,
+        final BigDecimal amount
+    );
 
 }

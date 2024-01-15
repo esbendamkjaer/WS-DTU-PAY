@@ -1,5 +1,6 @@
 package dk.dtu.grp08.account.domain.services;
 
+import dk.dtu.grp08.account.domain.exceptions.NoSuchUserAccountException;
 import dk.dtu.grp08.account.domain.models.user.UserAccount;
 import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import dk.dtu.grp08.account.domain.repository.IAccountRepository;
@@ -10,7 +11,7 @@ import lombok.val;
 import java.util.Optional;
 
 @ApplicationScoped
-public class AccountService {
+public class AccountService implements IAccountService {
 
     private final IAccountRepository accountRepository;
 
@@ -18,23 +19,41 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    @Override
     public UserAccount registerAccount(
         String name,
         String cpr,
         BankAccountNo bankAccountNo
     ) {
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(
+            UserAccountId.randomId()
+        );
+        userAccount.setName(name);
+        userAccount.setCpr(cpr);
+        userAccount.setBankAccountNo(bankAccountNo);
+
         return accountRepository.createUserAccount(
-            new UserAccount(name, cpr, bankAccountNo)
+            userAccount
         );
     }
 
-    public Optional<UserAccount> getUserAccountById(String id) {
-        val userAccountId = UserAccountId.fromString(id);
-        return accountRepository.findById(userAccountId);
-    }
-
+    @Override
     public Optional<UserAccount> getUserAccountById(UserAccountId id) {
         return accountRepository.findById(id);
+    }
+
+    @Override
+    public void deleteUserAccount(UserAccountId userAccountId) {
+        val userAccount = accountRepository.findById(userAccountId).orElseThrow(
+            () -> new NoSuchUserAccountException(
+                "No user account with id " + userAccountId.getId()
+            )
+        );
+
+        accountRepository.deleteUserAccount(
+            userAccount.getId()
+        );
     }
 
 }

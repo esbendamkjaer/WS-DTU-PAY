@@ -9,5 +9,5 @@ import lombok.Value;
 public class TokenValidatedEvent {
     CorrelationId correlationId;
     Token token;
-    UserId userId;
+    UserId userAccountId;
 }

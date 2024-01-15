@@ -1,4 +1,17 @@
 Feature:
+  Scenario: Perform a payment
+    Given a customer named "Hubert"
+      And a merchant named "Baumeister"
+      And the customer has a bank account with balance 1000.0
+      And the merchant has a bank account with balance 0.0
+      And the customer is registered with DTU Pay
+      And the merchant is registered with DTU Pay
+    When the customer gets 1 tokens
+      And the merchant requests a payment of 10 kr
+      And the customer grants the payment with a token
+    Then the customer has balance 990.0
+      And the merchant has balance 10.0
+
   Scenario: Merchant has been assigned
     Given a merchant
       And a token

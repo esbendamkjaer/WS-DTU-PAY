@@ -9,29 +9,33 @@ chmod +x build.sh
 popd
 
 pushd client
+chmod +x build.sh
 ./build.sh
 popd
 
 pushd messaging-utilities-3.4
+chmod +x build.sh
 ./build.sh
 popd
 
 pushd payment
+chmod +x build.sh
 ./build.sh
 popd
 
 pushd token
+chmod +x build.sh
 ./build.sh
 popd
 
 # Build and start Docker containers
-docker-compose up -d --build
-
-# Wait for a few seconds to ensure services are up
-sleep 5
+# -d is detached mode, allows the service to continue even after the shell process is complete
+# --build is to build images before starting containers
+# --wait makes the command return/exit only after all containers have been started
+docker-compose up -d --build --wait
 
 #run test for all microservices
-mvn test
+#mvn test
 
 # Clean up unused Docker images and resources
 docker system prune -a -f

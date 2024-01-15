@@ -1,19 +1,17 @@
 package dk.dtu.grp08.account.presentation;
 
-import dk.dtu.grp08.account.domain.events.BankAccountNoAssignedEvent;
-import dk.dtu.grp08.account.domain.events.EventType;
-import dk.dtu.grp08.account.domain.events.TokenInvalidatedEvent;
-import dk.dtu.grp08.account.domain.events.TokenValidatedEvent;
+import dk.dtu.grp08.account.domain.events.*;
 import dk.dtu.grp08.account.domain.models.user.BankAccountNo;
+import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import dk.dtu.grp08.account.presentation.contracts.IAccountResource;
 import dk.dtu.grp08.account.domain.services.AccountService;
 import dk.dtu.grp08.account.domain.models.user.UserAccount;
-import io.quarkus.logging.Log;
 import messaging.Event;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class AccountResource implements IAccountResource {
 
@@ -29,18 +27,28 @@ public class AccountResource implements IAccountResource {
             this::handleTokenValidatedEvent
         );
 
+        this.messageQueue.addHandler(
+            EventType.PAYMENT_REQUESTED.getEventName(),
+            this::handlePaymentRequestedEvent
+        );
     }
 
     @Override
-    public UserAccount createUserAccount(UserAccount userAccount) {
-        Log.debug("Creating user account: " + userAccount.toString());
-
-        return new UserAccount("test", "1234", new BankAccountNo("1234"));
+    public UserAccount createUserAccount(
+        UserAccount userAccount
+    ) {
+        return this.accountService.registerAccount(
+            userAccount.getName(),
+            userAccount.getCpr(),
+            userAccount.getBankAccountNo()
+        );
     }
 
     @Override
-    public Optional<UserAccount> getUserAccount(String id) {
-        return accountService.getUserAccountById(id);
+    public Optional<UserAccount> getUserAccount(UUID id) {
+        return accountService.getUserAccountById(
+            new UserAccountId(id)
+        );
     }
 
     @Override
@@ -48,15 +56,49 @@ public class AccountResource implements IAccountResource {
         return new UserAccount[0];
     }
 
+    @Override
+    public void deleteUserAccount(UUID id) {
+        this.accountService.deleteUserAccount(
+            new UserAccountId(id)
+        );
+    }
+
+    public void handlePaymentRequestedEvent(Event event) {
+        PaymentRequestedEvent paymentRequestedEvent = event.getArgument(0, PaymentRequestedEvent.class);
+
+        System.out.println("payment requested event received");
+
+        UserAccount merchant = this.accountService.getUserAccountById(
+            new UserAccountId(paymentRequestedEvent.getMerchantID())
+        ).get();
+
+        BankAccountNo creditorBankAccountNo = merchant.getBankAccountNo();
+
+        Event bankAccountNoAssignedEvent = new Event(
+            EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
+            new Object[]{
+                new BankAccountNoAssignedEvent(
+                    creditorBankAccountNo,
+                    paymentRequestedEvent.getCorrelationId()
+                )
+            }
+        );
+
+        this.messageQueue.publish(
+            bankAccountNoAssignedEvent
+        );
+    }
+
     public void handleTokenValidatedEvent(Event event) {
         TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
 
+        System.out.println("token validated event received");
         this.accountService.getUserAccountById(
             tokenValidatedEvent.getUserAccountId()
         ).ifPresentOrElse(
             userAccount -> {
                 Event bankAccountNoAssignedEvent = new Event(
-                    EventType.CUSTOMER_BANK_ACCOUNT_NO_ASSIGNED.getEventName(),
+                    EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED.getEventName(),
                     new Object[]{
                         new BankAccountNoAssignedEvent(
                             userAccount.getBankAccountNo(),

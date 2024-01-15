@@ -25,6 +25,10 @@ public class TokenService implements ITokenService {
     public List<Token> getTokens(int count, UserId userId) {
         List<Token> currentTokens = tokenRepository.getTokensByUserId(userId);
 
+        if (count < 1) {
+            throw new TokenException("Illegal number of tokens requested");
+        }
+
         if (
             currentTokens.size() > 1
         ) {
@@ -32,7 +36,7 @@ public class TokenService implements ITokenService {
         }
 
         if (currentTokens.size() + count > MAX_TOKENS_PER_USER) {
-            throw new TokenException("User has too many unused tokens");
+            throw new TokenException("Token amount exceeds allowed limit");
         }
 
         List<Token> tokens = new ArrayList<>();

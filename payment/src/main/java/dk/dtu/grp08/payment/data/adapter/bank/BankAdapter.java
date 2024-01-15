@@ -19,7 +19,7 @@ public class BankAdapter implements IBankAdapter {
                 getPaymentDescription(payment)
             );
         } catch (BankServiceException_Exception e) {
-            // TODO: Catch exception and handle it
+            // @TODO: Catch exception and handle it
             throw new RuntimeException(e);
         }
     }
