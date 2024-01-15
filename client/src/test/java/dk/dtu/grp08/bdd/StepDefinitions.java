@@ -33,7 +33,7 @@ public class StepDefinitions {
     private final ICustomerFacade customerFacade = new CustomerFacade();
 
 
-    private List<Token> customerTokens = new ArrayList<>();
+    private final List<Token> customerTokens = new ArrayList<>();
     private UserAccount customer;
     private UserAccount merchant;
     private ClientErrorException exception;
@@ -128,7 +128,7 @@ public class StepDefinitions {
     @And("the customer grants the payment with a token")
     public void theCustomerGrantsThePaymentWithAToken() {
         this.paymentRequest.setToken(
-            this.customerTokens.removeFirst()
+            this.customerTokens.removeLast()
         );
 
         this.merchantFacade.pay(
