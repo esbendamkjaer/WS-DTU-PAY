@@ -14,11 +14,14 @@
         <module>token</module>
         <module>client</module>
         <module>messaging-utilities-3.4</module>
+        <module>customer</module>
+        <module>merchant</module>
+        <module>manager</module>
     </modules>
 
     <properties>
-        <maven.compiler.target>21</maven.compiler.target>
-        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <maven.compiler.source>20</maven.compiler.source>
     </properties>
 
     <packaging>pom</packaging>

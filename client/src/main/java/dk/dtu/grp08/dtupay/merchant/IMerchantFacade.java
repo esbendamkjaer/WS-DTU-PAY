@@ -5,9 +5,6 @@ import dk.dtu.grp08.stubs.account.models.user.UserAccount;
 import dk.dtu.grp08.stubs.account.models.user.UserId;
 import dk.dtu.grp08.stubs.payment.models.Payment;
 import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
-import dk.dtu.grp08.stubs.token.models.Token;
-
-import java.math.BigDecimal;
 
 public interface IMerchantFacade {
 

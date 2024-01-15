@@ -12,7 +12,6 @@ import dk.dtu.grp08.payment.domain.models.payment.Payment;
 import dk.dtu.grp08.payment.domain.models.Token;
 import dk.dtu.grp08.payment.domain.repositories.IPaymentRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import lombok.SneakyThrows;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
@@ -50,6 +49,7 @@ public class PaymentService implements IPaymentService {
         );
     }
 
+    @Override
     public Payment requestPayment(
         final UUID merchantID,
         final Token token,
@@ -130,9 +130,10 @@ public class PaymentService implements IPaymentService {
         future.complete(event.getBankAccountNo());
     }
 
+
     public void transferMoney(Payment payment) {
         bankAdapter.makeBankTransfer(payment);
+        paymentRepository.savePayment(payment);
     }
-
 
 }
