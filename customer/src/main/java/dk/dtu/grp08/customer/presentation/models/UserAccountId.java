@@ -11,6 +11,6 @@ import java.util.UUID;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserId {
+public class UserAccountId {
     UUID id;
 }

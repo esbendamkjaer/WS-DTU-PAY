@@ -7,26 +7,20 @@ import dk.dtu.grp08.merchant.presentation.models.Payment;
 import dk.dtu.grp08.merchant.presentation.models.PaymentRequest;
 import dk.dtu.grp08.merchant.presentation.models.UserAccount;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.UUID;
 
 @ApplicationScoped
 public class MerchantResource implements IMerchantResource {
 
-    private final IAccountAPI accountResource;
-    private final IPaymentAPI paymentResource;
+    @RestClient
+    private IAccountAPI accountResource;
 
+    @RestClient
+    private IPaymentAPI paymentResource;
 
     public MerchantResource() {
-        this.accountResource = Stub.get(
-            IAccountAPI.class,
-                "http://localhost:8081"
-        );
-
-        this.paymentResource = Stub.get(
-            IPaymentAPI.class,
-                "http://localhost:8080"
-        );
     }
 
     @Override

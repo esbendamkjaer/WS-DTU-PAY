@@ -5,11 +5,13 @@ import dk.dtu.grp08.customer.presentation.contracts.ICustomerResource;
 import dk.dtu.grp08.customer.presentation.contracts.ITokenAPI;
 import dk.dtu.grp08.customer.presentation.models.Token;
 import dk.dtu.grp08.customer.presentation.models.UserAccount;
+import dk.dtu.grp08.customer.presentation.models.UserAccountId;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
-import org.jboss.resteasy.client.exception.ResteasyBadRequestException;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.reactive.ClientWebApplicationException;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,12 +19,13 @@ import java.util.UUID;
 @ApplicationScoped
 public class CustomerResource implements ICustomerResource {
 
-    private final ITokenAPI tokenResource;
-    private final IAccountAPI accountResource;
+    @RestClient
+    private ITokenAPI tokenResource;
+
+    @RestClient
+    private IAccountAPI accountResource;
 
     public CustomerResource() {
-        tokenResource = Stub.get(ITokenAPI.class, "http://localhost:8082");
-        accountResource = Stub.get(IAccountAPI.class, "http://localhost:8081");
     }
 
     @Override
@@ -30,20 +33,10 @@ public class CustomerResource implements ICustomerResource {
         UUID userId,
         int count
     ) {
-        try {
-            return tokenResource.getTokens(
-                count,
-                userId
-            );
-        } catch (ClientErrorException e) {
-            System.out.println("The entity: " + e.getResponse().readEntity(String.class));
-            throw new WebApplicationException(
-                Response
-                    .status(e.getResponse().getStatus())
-                    .entity(e.getResponse().getEntity())
-                    .build()
-            );
-        }
+        return tokenResource.getTokens(
+            count,
+            userId
+        );
     }
 
     @Override

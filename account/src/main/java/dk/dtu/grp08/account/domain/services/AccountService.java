@@ -8,6 +8,7 @@ import dk.dtu.grp08.account.domain.models.user.BankAccountNo;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 
+import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -54,6 +55,11 @@ public class AccountService implements IAccountService {
         accountRepository.deleteUserAccount(
             userAccount.getId()
         );
+    }
+
+    @Override
+    public List<UserAccount> getUserAccounts() {
+        return this.accountRepository.findAll();
     }
 
 }

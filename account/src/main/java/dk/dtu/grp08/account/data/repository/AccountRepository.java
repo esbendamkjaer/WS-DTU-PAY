@@ -41,7 +41,7 @@ public class AccountRepository implements IAccountRepository {
 
     @Override
     public List<UserAccount> findAll() {
-        return (List<UserAccount>) this.userAccounts.values();
+        return List.copyOf(userAccounts.values());
     }
 
     @Override

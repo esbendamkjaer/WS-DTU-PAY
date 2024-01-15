@@ -3,11 +3,13 @@ package dk.dtu.grp08.merchant.presentation.contracts;
 import dk.dtu.grp08.merchant.presentation.models.UserAccount;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Path("/accounts")
+@RegisterRestClient(baseUri = "http://localhost:8081")
 public interface IAccountAPI {
 
     @POST
