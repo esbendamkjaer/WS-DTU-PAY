@@ -60,7 +60,6 @@ public class ReportSteps {
     @Then("the customer should see a report with the following transaction details")
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
         //TODO
-        TransactionResult transactionResult = new TransactionResult();
     }
 
     @When("the merchant requests a report")

@@ -20,7 +20,9 @@ public interface IAccountAPI {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    Optional<UserAccount> getUserAccount(@PathParam("id") UUID id);
+    Optional<UserAccount> getUserAccount(
+        @PathParam("id") UUID id
+    );
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})

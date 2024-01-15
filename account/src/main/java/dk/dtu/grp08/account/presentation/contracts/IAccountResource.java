@@ -31,7 +31,9 @@ public interface IAccountResource {
     @APIResponse(responseCode = "200", description = "User account retrieved successfully")
     @APIResponse(responseCode = "404", description = "User account not found")
     @APIResponse(responseCode = "500", description = "Internal server error")
-    Optional<UserAccount> getUserAccount(@PathParam("id") UUID id);
+    Optional<UserAccount> getUserAccount(
+        @PathParam("id") UUID id
+    );
 
     @Produces({MediaType.APPLICATION_JSON})
     @GET
