@@ -11,3 +11,10 @@ Feature:
     And the merchant has a bank account with balance 1000.0
     And the merchant is registered with DTU Pay
     Then the merchant is assigned an id
+
+  Scenario: Deregister customer
+    Given a customer named "Alice"
+    And the customer has a bank account with balance 1000.0
+    And the customer is registered with DTU Pay
+    When the customer deregisters
+    Then the customer is no longer registered with DTU Pay
