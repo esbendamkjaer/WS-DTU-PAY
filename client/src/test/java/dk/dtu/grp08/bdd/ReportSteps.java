@@ -15,8 +15,8 @@ public class ReportSteps {
     User customer = new User();
     User merchant = new User();
 
-    @Given("a customer with name {string} with CPR number {String} and bank account balance {int} kr")
-    public void aCustomerWithNameAndBankAccountDetails(String firstName, String cpr, int balance) {
+    @Given("a customer with name {string} with CPR number {string} and bank account balance {int} kr")
+    public void aCustomerWithNameAndBankAccountDetails(String firstName, String cpr, double balance) {
       
         customer.setFirstName(firstName);
         customer.setCprNumber(cpr);
@@ -50,10 +50,7 @@ public class ReportSteps {
         
     }
 
-    @And("a merchant requests a payment of {int} kr from the customer")
-    public void aMerchantRequestsAPaymentOfKrFromTheCustomer(int arg0) {
-        //TODO
-    }
+
 
     @When("the customer requests a report")
     public void theCustomerRequestsAReport() {
@@ -63,6 +60,7 @@ public class ReportSteps {
     @Then("the customer should see a report with the following transaction details")
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
         //TODO
+        TransactionResult transactionResult = new TransactionResult();
     }
 
     @When("the merchant requests a report")
@@ -74,4 +72,7 @@ public class ReportSteps {
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
         //TODO
     }
+
+
+
 }
