@@ -58,7 +58,7 @@ public class TokenSteps {
 
     @Then("the customer receives an exception")
     public void theCustomerHasMoreThanOneTokenErrorMessage(){
-        assertTrue(message.contains("Costumer has more than one token"));
+        assertTrue(message.contains("customer has more than one token"));
     }
 
     @Then("the token is not validated")

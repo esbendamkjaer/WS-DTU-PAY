@@ -1,7 +1,7 @@
 Feature: Token
 
   Scenario: Customer requests 5 tokens
-  Given a costumer "Hubert" with bank account balance 5000 kr
+  Given a customer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   And the customer has 0 tokens
   When the customer requests 5 tokens
@@ -15,7 +15,7 @@ Scenario: Customer requests additional tokens, surpassing his allowed amount
   Then the customer receives an exception
 
 Scenario: Customer requests additional tokens
-  Given a costumer "Hubert" with bank account balance 5000 kr
+  Given a customer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   And the customer has 1 tokens
   When the customer requests 5 tokens
@@ -23,14 +23,14 @@ Scenario: Customer requests additional tokens
 
 
 Scenario: Customer has more than 1 unused token and asks for more
-  Given a costumer "Hubert" with bank account balance 5000 kr
+  Given a customer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   And the customer has 3 tokens
   When the customer requests 2 tokens
   Then the customer receives an error message
 
 Scenario: Customer requests -1 token
-  Given a costumer "Hubert" with bank account balance 5000 kr
+  Given a customer "Hubert" with bank account balance 5000 kr
   And the customer is registered in DTU Pay
   When the customer requests -1 tokens
   Then the customer receives an error message
