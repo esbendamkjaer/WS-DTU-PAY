@@ -19,4 +19,7 @@ public class PolicyManager {
         this.correlation.put(correlationId, policy);
     }
 
+    public void removePolicy(CorrelationId correlationID) {
+        this.correlation.remove(correlationID);
+    }
 }

@@ -1,5 +1,6 @@
 package dk.dtu.grp08.payment.domain.services;
 
+import dk.dtu.grp08.payment.data.adapter.bank.BankAdapter;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
 import dk.dtu.grp08.payment.domain.events.CustomerBankAccountAssignedEvent;
 import dk.dtu.grp08.payment.domain.events.EventType;
@@ -9,11 +10,13 @@ import dk.dtu.grp08.payment.domain.models.CorrelationId;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
 import dk.dtu.grp08.payment.domain.models.Token;
+import dk.dtu.grp08.payment.domain.repositories.IPaymentRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.SneakyThrows;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
+import messaging.implementations.RabbitMqQueue;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -24,17 +27,17 @@ import java.util.concurrent.ConcurrentHashMap;
 @ApplicationScoped
 public class PaymentService implements IPaymentService {
 
-    private IBankAdapter bankAdapter;
+    private final IBankAdapter bankAdapter = new BankAdapter();
     private final MessageQueue messageQueue;
+
+    private final IPaymentRepository paymentRepository;
 
     private final PolicyManager policyManager = new PolicyManager();
 
-    private final Map<CorrelationId, CompletableFuture<Payment>> correlations = new ConcurrentHashMap<>();
 
-    private final Map<CorrelationId, Map<EventType, CompletableFuture<Object>>> corr = new ConcurrentHashMap<>();
-
-    public PaymentService(MessageQueue messageQueue) {
-        this.messageQueue = messageQueue;
+    public PaymentService(IPaymentRepository paymentRepository) {
+        this.paymentRepository = paymentRepository;
+        this.messageQueue = new RabbitMqQueue("localhost");
 
         this.messageQueue.addHandler(
             EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
@@ -65,6 +68,9 @@ public class PaymentService implements IPaymentService {
             (debtor, creditor) -> {
                 payment.setDebtor(debtor);
                 payment.setCreditor(creditor);
+
+                this.transferMoney(payment);
+
                 return payment;
             }
         );
@@ -90,18 +96,16 @@ public class PaymentService implements IPaymentService {
 
         Payment paymentResult = paymentFuture.join();
 
-        this.corr.remove(correlationID);
-
-
+        this.policyManager.removePolicy(correlationID);
 
         return paymentResult;
     }
 
-    @SneakyThrows
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, MerchantBankAccountAssignedEvent.class);
 
-        Map<EventType, CompletableFuture<BankAccountNo>> map;
+        System.out.println("MerchantBankAccountAssignedEvent");
+        System.out.println(event.getCorrelationId().getId());
 
         CompletableFuture<BankAccountNo> future = policyManager.getPolicyByCorrelationIdAndEvent(
             event.getCorrelationId(),
@@ -110,30 +114,20 @@ public class PaymentService implements IPaymentService {
         );
 
         future.complete(event.getBankAccountNo());
-
-        CompletableFuture<Payment> paymentFuture = correlations.get(event.getCorrelationId());
-        BankAccountNo bankAccountNo = event.getBankAccountNo();
-
-        Payment payment = paymentFuture.get();
-        payment.setCreditor(bankAccountNo);
-
-        if (payment.getCreditor() != null && payment.getDebtor() != null){
-            transferMoney(payment);
-        }
     }
 
-    @SneakyThrows
     public void handleCustomBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
-        CompletableFuture<Payment> paymentFuture = correlations.get(event.getCorrelationId());
-        BankAccountNo bankAccountNo = event.getBankAccountNo();
 
-        Payment payment = paymentFuture.get();
-        payment.setDebtor(bankAccountNo);
+        System.out.println("CustomerBankAccountAssignedEvent");
 
-        if (payment.getCreditor() != null && payment.getDebtor() != null){
-            transferMoney(payment);
-        }
+        CompletableFuture<BankAccountNo> future = policyManager.getPolicyByCorrelationIdAndEvent(
+            event.getCorrelationId(),
+            EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED,
+            BankAccountNo.class
+        );
+
+        future.complete(event.getBankAccountNo());
     }
 
     public void transferMoney(Payment payment) {

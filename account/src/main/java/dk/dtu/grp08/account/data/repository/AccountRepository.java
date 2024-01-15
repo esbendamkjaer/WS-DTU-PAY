@@ -44,4 +44,9 @@ public class AccountRepository implements IAccountRepository {
         return (List<UserAccount>) this.userAccounts.values();
     }
 
+    @Override
+    public void deleteUserAccount(UserAccountId id) {
+        userAccounts.remove(id);
+    }
+
 }
