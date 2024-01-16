@@ -32,4 +32,9 @@ public interface ICustomerResource {
         @PathParam("userId") UUID userId
     );
 
+    @GET
+    @Path("/{userId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    UserAccount getCustomer(@PathParam("userId") UUID userId);
+
 }

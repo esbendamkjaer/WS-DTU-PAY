@@ -210,11 +210,20 @@ public class StepDefinitions {
 
     @When("the customer deregisters")
     public void theCustomerDeregisters() {
-
+        this.customerFacade.deregister(
+            this.customer.getId()
+        );
     }
 
     @Then("the customer is no longer registered with DTU Pay")
     public void theCustomerIsNoLongerRegisteredWithDTUPay() {
+        this.customerFacade.getCustomer(
+           this.customer.getId()
+        ).ifPresent(
+            userAccount -> Assert.fail(
+                "Customer is still registered"
+            )
+        );
     }
 
     @After

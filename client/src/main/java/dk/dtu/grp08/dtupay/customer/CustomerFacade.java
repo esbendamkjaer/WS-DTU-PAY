@@ -8,6 +8,7 @@ import dk.dtu.grp08.dtupay.models.UserAccount;
 import dk.dtu.grp08.dtupay.models.UserId;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerFacade implements ICustomerFacade {
 
@@ -52,6 +53,13 @@ public class CustomerFacade implements ICustomerFacade {
         UserId userId
     ) {
         this.customerAPI.deleteCustomer(
+            userId.getId()
+        );
+    }
+
+    @Override
+    public Optional<UserAccount> getCustomer(UserId userId) {
+        return this.customerAPI.getCustomer(
             userId.getId()
         );
     }

@@ -6,6 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Path("/customers")
@@ -31,5 +32,10 @@ public interface ICustomerAPI {
     void deleteCustomer(
         @PathParam("userId") UUID userId
     );
+
+    @GET
+    @Path("/{userId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    Optional<UserAccount> getCustomer(UUID userId);
 
 }
