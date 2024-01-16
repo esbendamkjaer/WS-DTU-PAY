@@ -7,12 +7,13 @@ import lombok.SneakyThrows;
 
 import java.math.BigDecimal;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public interface IPaymentService {
 
     void transferMoney(Payment payment, UUID merchantID, Token token);
 
-    Payment requestPayment(
+    CompletableFuture<Payment> requestPayment(
         final UUID merchantID,
         final Token token,
         final BigDecimal amount

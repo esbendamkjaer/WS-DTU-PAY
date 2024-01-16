@@ -3,6 +3,7 @@ package dk.dtu.grp08.payment.domain.services;
 import dk.dtu.grp08.payment.data.adapter.bank.BankAdapter;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
 import dk.dtu.grp08.payment.domain.events.*;
+import dk.dtu.grp08.payment.domain.exceptions.InvalidTokenException;
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
@@ -15,10 +16,8 @@ import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
 
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
 public class PaymentService implements IPaymentService {
@@ -44,10 +43,15 @@ public class PaymentService implements IPaymentService {
             EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED.getEventName(),
             this::handleCustomBankAccountAssigned
         );
+
+        this.messageQueue.addHandler(
+            EventType.TOKEN_INVALIDATED.getEventName(),
+            this::handleTokenInvalidatedEvent
+        );
     }
 
     @Override
-    public Payment requestPayment(
+    public CompletableFuture<Payment> requestPayment(
         final UUID merchantID,
         final Token token,
         final BigDecimal amount
@@ -57,25 +61,35 @@ public class PaymentService implements IPaymentService {
         val payment = new Payment();
         payment.setAmount(amount);
 
-        CompletableFuture<BankAccountNo> debtorFuture = new CompletableFuture<>();
-        CompletableFuture<BankAccountNo> creditorFuture = new CompletableFuture<>();
+        Policy<Payment> policy = new PolicyBuilder<Payment>()
+                .addPart(CustomerBankAccountAssignedEvent.class)
+                .addPart(MerchantBankAccountAssignedEvent.class)
+                .setPolicyFunction(
+                    (p) -> {
+                        payment.setDebtor(
+                            p.getDependency(
+                                CustomerBankAccountAssignedEvent.class,
+                                BankAccountNo.class
+                            )
+                        );
+                        payment.setCreditor(
+                            p.getDependency(
+                                MerchantBankAccountAssignedEvent.class,
+                                BankAccountNo.class
+                            )
+                        );
 
-        CompletableFuture<Payment> paymentFuture = debtorFuture.thenCombine(
-            creditorFuture,
-            (debtor, creditor) -> {
-                payment.setDebtor(debtor);
-                payment.setCreditor(creditor);
+                        this.transferMoney(
+                            payment,
+                            merchantID,
+                            token
+                        );
 
-                this.transferMoney(payment, merchantID,token);
+                        return payment;
+                    }
+                ).build();
 
-                return payment;
-            }
-        );
-
-        Map<EventType, CompletableFuture> map = new ConcurrentHashMap<>();
-        map.put(EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED, debtorFuture);
-        map.put(EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED, creditorFuture);
-        policyManager.addPolicy(correlationID, map);
+        policyManager.addPolicy(correlationID, policy);
 
         messageQueue.publish(
             new Event(
@@ -91,11 +105,7 @@ public class PaymentService implements IPaymentService {
             )
         );
 
-        Payment paymentResult = paymentFuture.join();
-
-        this.policyManager.removePolicy(correlationID);
-
-        return paymentResult;
+        return policy.getCombinedFuture();
     }
 
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
@@ -104,10 +114,10 @@ public class PaymentService implements IPaymentService {
         System.out.println("MerchantBankAccountAssignedEvent");
         System.out.println(event.getCorrelationId().getId());
 
-        CompletableFuture<BankAccountNo> future = policyManager.getPolicyByCorrelationIdAndEvent(
-            event.getCorrelationId(),
-            EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED,
-            BankAccountNo.class
+        CompletableFuture<BankAccountNo> future = policyManager.getPolicy(
+            event.getCorrelationId()
+        ).getDependency(
+            MerchantBankAccountAssignedEvent.class
         );
 
         future.complete(event.getBankAccountNo());
@@ -118,20 +128,36 @@ public class PaymentService implements IPaymentService {
 
         System.out.println("CustomerBankAccountAssignedEvent");
 
-        CompletableFuture<BankAccountNo> future = policyManager.getPolicyByCorrelationIdAndEvent(
-            event.getCorrelationId(),
-            EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED,
-            BankAccountNo.class
+        CompletableFuture<BankAccountNo> future = policyManager.getPolicy(
+            event.getCorrelationId()
+        ).getDependency(
+            CustomerBankAccountAssignedEvent.class
         );
 
         future.complete(event.getBankAccountNo());
+    }
+
+    public void handleTokenInvalidatedEvent(Event mqEvent) {
+        val event = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
+
+        System.out.println("TokenInvalidatedEvent");
+
+        CompletableFuture<?> future = policyManager.getPolicy(
+            event.getCorrelationId()
+        ).getCombinedFuture();
+
+        future.completeExceptionally(
+            new InvalidTokenException()
+        );
     }
 
 
     public void transferMoney(Payment payment, UUID merchantID, Token token ) {
         //Transfer money event
         bankAdapter.makeBankTransfer(payment);
+
         paymentRepository.savePayment(payment);
+
         messageQueue.publish(
                 new Event(
                         EventType.PAYMENT_TRANSFERRED.getEventName(),

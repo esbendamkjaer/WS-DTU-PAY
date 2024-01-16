@@ -6,6 +6,8 @@ import dk.dtu.grp08.payment.presentation.contracts.IPaymentResource;
 import dk.dtu.grp08.payment.domain.models.PaymentRequest;
 import jakarta.ws.rs.Path;
 
+import java.util.concurrent.CompletableFuture;
+
 public class PaymentResource implements IPaymentResource {
 
     private final IPaymentService paymentService;
@@ -15,7 +17,7 @@ public class PaymentResource implements IPaymentResource {
     }
 
     @Override
-    public Payment createPayment(PaymentRequest paymentRequest) {
+    public CompletableFuture<Payment> createPayment(PaymentRequest paymentRequest) {
         return paymentService.requestPayment(
             paymentRequest.getMerchantId(),
             paymentRequest.getToken(),

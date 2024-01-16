@@ -2,6 +2,7 @@ package dk.dtu.grp08.bdd;
 
 import dk.dtu.grp08.adapter.BankAdapter;
 import dk.dtu.grp08.adapter.IBankAdapter;
+import dk.dtu.grp08.bank.BankServiceException_Exception;
 import dk.dtu.grp08.dtupay.customer.CustomerFacade;
 import dk.dtu.grp08.dtupay.customer.ICustomerFacade;
 import dk.dtu.grp08.dtupay.merchant.IMerchantFacade;
@@ -76,6 +77,15 @@ public class StepDefinitions {
         );
     }
 
+    @And("the customer has an invalid token")
+    public void theCustomerHasAnInvalidToken() {
+        Token token = new Token();
+        token.setId(
+            UUID.randomUUID()
+        );
+        this.customerTokens.add(token);
+    }
+
     @And("the customer has a bank account with balance {double}")
     public void theCustomerHasABankAccount(double balance) {
         BankAccountNo bankAccountNo = this.bankAdapter.createBankAccount(
@@ -98,6 +108,26 @@ public class StepDefinitions {
         );
 
         this.merchant.setBankAccountNo(bankAccountNo);
+    }
+
+    @And("the merchant has a bank account, that does not exist")
+    public void theMerchantHasABankAccountThatDoesNotExist() {
+        BankAccountNo bankAccountNo = new BankAccountNo();
+        bankAccountNo.setBankAccountNo(
+            UUID.randomUUID().toString()
+        );
+
+        this.merchant.setBankAccountNo(bankAccountNo);
+    }
+
+    @And("the customer has a bank account, that does not exist")
+    public void theCustomerHasABankAccountThatDoesNotExist() {
+        BankAccountNo bankAccountNo = new BankAccountNo();
+        bankAccountNo.setBankAccountNo(
+            UUID.randomUUID().toString()
+        );
+
+        this.customer.setBankAccountNo(bankAccountNo);
     }
 
     @When("the customer gets {int} tokens")
@@ -131,9 +161,13 @@ public class StepDefinitions {
             this.customerTokens.removeLast()
         );
 
-        this.merchantFacade.pay(
-            this.paymentRequest
-        );
+        try {
+            this.merchantFacade.pay(
+                this.paymentRequest
+            );
+        } catch (ClientErrorException e) {
+            this.exception = e;
+        }
     }
 
     @Then("the customer has {int} unused tokens")
@@ -229,9 +263,12 @@ public class StepDefinitions {
     @After
     public void cleanUp() {
         if (this.customer != null) {
-            this.bankAdapter.retireBankAccount(
-                this.customer.getBankAccountNo()
-            );
+            try {
+                this.bankAdapter.retireBankAccount(
+                    this.customer.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
 
             this.customerFacade.deregister(
                 this.customer.getId()
@@ -239,9 +276,12 @@ public class StepDefinitions {
         }
 
         if (this.merchant != null) {
-            this.bankAdapter.retireBankAccount(
-                this.merchant.getBankAccountNo()
-            );
+            try {
+                this.bankAdapter.retireBankAccount(
+                    this.merchant.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
 
             this.merchantFacade.deregister(
                 this.merchant.getId()

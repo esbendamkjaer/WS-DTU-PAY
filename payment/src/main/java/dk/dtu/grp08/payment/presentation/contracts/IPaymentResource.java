@@ -8,13 +8,15 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.concurrent.CompletableFuture;
+
 @Path("/payments")
 public interface IPaymentResource {
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    Payment createPayment(
+    CompletableFuture<Payment> createPayment(
         PaymentRequest paymentRequest
     );
 

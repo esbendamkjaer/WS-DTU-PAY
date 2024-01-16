@@ -1,29 +1,28 @@
 package dk.dtu.grp08.payment.domain.services;
 
-import dk.dtu.grp08.payment.domain.events.EventType;
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
 
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class  PolicyManager {
 
-    Map<CorrelationId, Map<EventType, CompletableFuture>> correlation = new ConcurrentHashMap<>();
+    Map<CorrelationId, Policy<?>> correlations = new ConcurrentHashMap<>();
 
-    public <T> CompletableFuture<T> getPolicyByCorrelationIdAndEvent(
-            CorrelationId correlationId,
-            EventType eventType,
-            Class<T> type
+    public Policy<?> getPolicy(
+            CorrelationId correlationId
     ) {
-        return this.correlation.get(correlationId).get(eventType);
+        return this.correlations.get(correlationId);
     }
 
-    public void addPolicy(CorrelationId correlationId, Map<EventType, CompletableFuture> policy) {
-        this.correlation.put(correlationId,policy);
+    public void addPolicy(CorrelationId correlationId, Policy<?> policy) {
+        this.correlations.put(correlationId, policy);
+        policy.getCombinedFuture().thenAccept((p) -> {
+            this.correlations.remove(correlationId);
+        });
     }
 
     public void removePolicy(CorrelationId correlationID) {
-        this.correlation.remove(correlationID);
+        this.correlations.remove(correlationID);
     }
 }

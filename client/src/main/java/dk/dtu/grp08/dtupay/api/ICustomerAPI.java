@@ -36,6 +36,8 @@ public interface ICustomerAPI {
     @GET
     @Path("/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
-    Optional<UserAccount> getCustomer(UUID userId);
+    Optional<UserAccount> getCustomer(
+        @PathParam("userId") UUID userId
+    );
 
 }

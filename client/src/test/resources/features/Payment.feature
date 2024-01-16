@@ -21,31 +21,53 @@ Feature:
       And the customers should have deducted the correct amount of money
       And the merchant should have received the correct amount of money
 
-  Scenario: Successful payment
-  Given a customer "String name" with cpr no "String cpr"
-    And customer balance "int" kr is registered in a bank
-    And a merchant "String name" with cpr no "String cpr"
-    And merchant balance "int" kr is registered in a bank
-    And customer and merchant is registered in DTU pay
-  When the merchant requests a payment for 10 kr
-  Then payment transaction is succesful
-    And the customer balance is "int" kr
-    And the merchant balance is "int" kr
+  Scenario: Insufficient customer balance
+    Given a customer named "Hubert"
+      And a merchant named "Baumeister"
+      And the customer has a bank account with balance 0.0
+      And the merchant has a bank account with balance 0.0
+      And the customer is registered with DTU Pay
+      And the merchant is registered with DTU Pay
+    When the customer gets 1 tokens
+      And the merchant requests a payment of 10 kr
+      And the customer grants the payment with a token
+    Then the error with message "Insufficient account balance" is received
 
-#  Scenario: insuffcient customer balance
-#    Given a customer "String name" with cpr no "String cpr"
-#    And customer balance "int" kr is registered in a bank
-#    And a merchant "String name" with cpr no "String cpr"
-#    And merchant balance "int" kr is registered in a bank
-#    And customer and merchant is registered in DTU pay
-#    When the merchant requests a payment for 10 kr
-#    Then payment transaction is unsuccesful
-#    And the customer balance is "int" kr
-#    And the merchant balance is "int" kr
+  Scenario: Customer bank account does not exist
+    Given a customer named "Hubert"
+      And a merchant named "Baumeister"
+      And the customer has a bank account, that does not exist
+      And the merchant has a bank account with balance 0.0
+      And the customer is registered with DTU Pay
+      And the merchant is registered with DTU Pay
+    When the customer gets 1 tokens
+      And the merchant requests a payment of 10 kr
+      And the customer grants the payment with a token
+    Then the error with message "No such debtor account" is received
 
+  Scenario: Merchant bank account does not exist
+    Given a customer named "Hubert"
+      And a merchant named "Baumeister"
+    And the customer has a bank account with balance 1000.0
+      And the merchant has a bank account, that does not exist
+      And the customer is registered with DTU Pay
+      And the merchant is registered with DTU Pay
+    When the customer gets 1 tokens
+      And the merchant requests a payment of 10 kr
+      And the customer grants the payment with a token
+    Then the error with message "No such creditor account" is received
 
-
-
+  Scenario: Payment granted with invalid token
+    Given a customer named "Hubert"
+      And a merchant named "Baumeister"
+      And the customer has a bank account with balance 1000.0
+      And the merchant has a bank account, that does not exist
+      And the customer is registered with DTU Pay
+      And the merchant is registered with DTU Pay
+      And the customer has an invalid token
+    When the merchant requests a payment of 10 kr
+      And the customer grants the payment with a token
+    Then the error with message "Invalid token" is received
 
 #  Scenario: List of payments
 #    Given a customer with id "cid1"
