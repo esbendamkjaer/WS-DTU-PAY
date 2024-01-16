@@ -1,4 +1,4 @@
-package dk.dtu.grp08.payment.domain.services;
+package dk.dtu.grp08.payment.domain.util.policy;
 
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
 

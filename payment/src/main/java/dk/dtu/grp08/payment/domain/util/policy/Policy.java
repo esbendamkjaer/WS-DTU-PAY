@@ -1,4 +1,4 @@
-package dk.dtu.grp08.payment.domain.services;
+package dk.dtu.grp08.payment.domain.util.policy;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -6,14 +6,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public class Policy<R> {
-    private final Map<Class, CompletableFuture> dependencies;
+    private final Map<Class<?>, CompletableFuture<?>> dependencies;
     private final CompletableFuture<R> policy;
 
     private final Function<Policy<R>, R> policyFunction;
 
-    Policy(
-            ConcurrentHashMap<Class, CompletableFuture> dependencies,
-            Function<Policy<R>, R> policyFunction
+    protected Policy(
+        ConcurrentHashMap<Class<?>, CompletableFuture<?>> dependencies,
+        Function<Policy<R>, R> policyFunction
     ) {
         this.dependencies = dependencies;
         this.policyFunction = policyFunction;
@@ -34,13 +34,13 @@ public class Policy<R> {
                     );
     }
 
-    public <T> T getDependency(Class eventType, Class<T> valueType) {
-        return ((CompletableFuture<T>) this.dependencies.get(
+    public <T> T getDependency(Class<?> eventType, Class<T> valueType) {
+        return valueType.cast(this.dependencies.get(
             eventType
-        )).join();
+        ).join());
     }
 
-    public <T> CompletableFuture<T> getDependency(Class eventType) {
+    public CompletableFuture getDependency(Class<?> eventType) {
         return this.dependencies.get(eventType);
     }
 
