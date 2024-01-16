@@ -21,6 +21,7 @@ public class BankAdapter implements IBankAdapter {
                 getPaymentDescription(payment)
             );
         } catch (BankServiceException_Exception e) {
+            // @TODO map exceptions to domain exceptions
             switch (e.getMessage()) {
                 case "Debtor account does not exist":
                     throw new NoSuchDebtorAccountException();

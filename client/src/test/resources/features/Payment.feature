@@ -1,5 +1,5 @@
 Feature:
-  Scenario: Perform a payment
+  Scenario: Perform a successful payment
     Given a customer named "Hubert"
       And a merchant named "Baumeister"
       And the customer has a bank account with balance 1000.0
@@ -12,23 +12,14 @@ Feature:
     Then the customer has balance 990.0
       And the merchant has balance 10.0
 
-  Scenario: Merchant has been assigned
-    Given a merchant
-      And a token
-    When the merchant requests a payment for 10 kr
-    Then the "MerchantAccountNoIsAssigned" event is sent
-
-  Scenario: Customer has been assigned
-    Given a payment request
-    When token is in the list of tokens
-    Then the "CustomerIsAssigned" event is sent
-
-  Scenario: Customer Bank Account Assigned
-    Given a customer "String name" with cpr no "String cpr"
-    And an unassigned bank account with account no "String accountNo"
-    When the customer is assigned to the bank account "String accountNo"
-    Then the customer's bank account is assigned
-    And the customer's account no is "String accountNo"
+  Scenario: Perform concurrent payments
+    Given a registered merchant with a balance of 0.0
+      And 10 registered customers with a balance of 1000.0 kr
+      And each customer has 1 unused tokens
+    When the merchant initiates a payment between 10.0 kr and 500.0 kr for each customer
+    Then the payments should have been assigned the correct bank account numbers
+      And the customers should have deducted the correct amount of money
+      And the merchant should have received the correct amount of money
 
   Scenario: Successful payment
   Given a customer "String name" with cpr no "String cpr"

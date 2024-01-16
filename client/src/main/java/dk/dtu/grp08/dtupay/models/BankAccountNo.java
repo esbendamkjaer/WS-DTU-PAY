@@ -9,4 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BankAccountNo {
     String bankAccountNo;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BankAccountNo) {
+            BankAccountNo other = (BankAccountNo) obj;
+            return bankAccountNo.equals(other.bankAccountNo);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return bankAccountNo.hashCode();
+    }
 }
