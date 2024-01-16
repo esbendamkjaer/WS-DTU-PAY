@@ -1,23 +1,23 @@
 package dk.dtu.grp08.dtupay.customer;
 
-import dk.dtu.grp08.stubs.Stub;
-import dk.dtu.grp08.stubs.account.IAccountResource;
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
-import dk.dtu.grp08.stubs.account.models.user.UserId;
-import dk.dtu.grp08.stubs.token.ITokenResource;
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.dtupay.api.ICustomerAPI;
+import dk.dtu.grp08.dtupay.Stub;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.Token;
+import dk.dtu.grp08.dtupay.models.UserAccount;
+import dk.dtu.grp08.dtupay.models.UserId;
 
 import java.util.List;
 
 public class CustomerFacade implements ICustomerFacade {
 
-    private final ITokenResource tokenResource;
-    private final IAccountResource accountResource;
+    private final ICustomerAPI customerAPI;
 
     public CustomerFacade() {
-        tokenResource = Stub.get(ITokenResource.class, "http://localhost:8082");
-        accountResource = Stub.get(IAccountResource.class, "http://localhost:8081");
+        customerAPI = Stub.get(
+            ICustomerAPI.class,
+            "http://localhost:8083"
+        );
     }
 
     @Override
@@ -25,9 +25,9 @@ public class CustomerFacade implements ICustomerFacade {
         UserId userId,
         int count
     ) {
-        return tokenResource.getTokens(
-            count,
-            userId.getId()
+        return customerAPI.getTokens(
+            userId.getId(),
+            count
         );
     }
 
@@ -42,15 +42,17 @@ public class CustomerFacade implements ICustomerFacade {
         userAccount.setCpr(cpr);
         userAccount.setBankAccountNo(bankAccountNo);
 
-        return this.accountResource.createUserAccount(
+        return this.customerAPI.createCustomer(
             userAccount
         );
     }
 
     @Override
-    public void deregister(UserId user) {
-        this.accountResource.deleteUserAccount(
-            user.getId()
+    public void deregister(
+        UserId userId
+    ) {
+        this.customerAPI.deleteCustomer(
+            userId.getId()
         );
     }
 

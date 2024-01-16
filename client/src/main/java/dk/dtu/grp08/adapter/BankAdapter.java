@@ -4,7 +4,7 @@ import dk.dtu.grp08.bank.BankService;
 import dk.dtu.grp08.bank.BankServiceException_Exception;
 import dk.dtu.grp08.bank.BankServiceService;
 import dk.dtu.grp08.bank.User;
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
 
 import java.math.BigDecimal;
 

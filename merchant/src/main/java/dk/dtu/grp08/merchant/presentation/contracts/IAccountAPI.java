@@ -1,15 +1,16 @@
-package dk.dtu.grp08.stubs.account;
+package dk.dtu.grp08.merchant.presentation.contracts;
 
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
+import dk.dtu.grp08.merchant.presentation.models.UserAccount;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Path("/accounts")
-public interface IAccountResource {
+@RegisterRestClient(baseUri = "http://localhost:8081")
+public interface IAccountAPI {
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -21,7 +22,9 @@ public interface IAccountResource {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    Optional<UserAccount> getUserAccount(@PathParam("id") UUID id);
+    Optional<UserAccount> getUserAccount(
+        @PathParam("id") UUID id
+    );
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})

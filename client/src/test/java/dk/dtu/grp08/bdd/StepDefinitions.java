@@ -6,10 +6,10 @@ import dk.dtu.grp08.dtupay.customer.CustomerFacade;
 import dk.dtu.grp08.dtupay.customer.ICustomerFacade;
 import dk.dtu.grp08.dtupay.merchant.IMerchantFacade;
 import dk.dtu.grp08.dtupay.merchant.MerchantFacade;
-import dk.dtu.grp08.stubs.account.models.user.BankAccountNo;
-import dk.dtu.grp08.stubs.account.models.user.UserAccount;
-import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.dtupay.models.BankAccountNo;
+import dk.dtu.grp08.dtupay.models.UserAccount;
+import dk.dtu.grp08.dtupay.models.PaymentRequest;
+import dk.dtu.grp08.dtupay.models.Token;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -229,6 +229,7 @@ public class StepDefinitions {
             );
         }
     }
+
 
 }
 

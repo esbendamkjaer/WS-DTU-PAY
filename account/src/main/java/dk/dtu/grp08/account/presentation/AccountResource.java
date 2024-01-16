@@ -6,13 +6,16 @@ import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import dk.dtu.grp08.account.presentation.contracts.IAccountResource;
 import dk.dtu.grp08.account.domain.services.AccountService;
 import dk.dtu.grp08.account.domain.models.user.UserAccount;
+import jakarta.enterprise.context.ApplicationScoped;
 import messaging.Event;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@ApplicationScoped
 public class AccountResource implements IAccountResource {
 
     private final AccountService accountService;
@@ -52,8 +55,8 @@ public class AccountResource implements IAccountResource {
     }
 
     @Override
-    public UserAccount[] getAllUserAccounts() {
-        return new UserAccount[0];
+    public List<UserAccount> getAllUserAccounts() {
+        return accountService.getUserAccounts();
     }
 
     @Override

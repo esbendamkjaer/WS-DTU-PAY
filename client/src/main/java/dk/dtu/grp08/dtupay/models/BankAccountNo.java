@@ -1,4 +1,4 @@
-package dk.dtu.grp08.account.domain.models.user;
+package dk.dtu.grp08.dtupay.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

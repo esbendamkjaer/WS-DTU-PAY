@@ -1,19 +1,17 @@
-package dk.dtu.grp08.stubs.payment;
+package dk.dtu.grp08.merchant.presentation.contracts;
 
-import dk.dtu.grp08.stubs.payment.models.Payment;
-import dk.dtu.grp08.stubs.payment.models.PaymentRequest;
-import dk.dtu.grp08.stubs.token.models.Token;
+import dk.dtu.grp08.merchant.presentation.models.Payment;
+import dk.dtu.grp08.merchant.presentation.models.PaymentRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-
-import java.math.BigDecimal;
-import java.util.UUID;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/payments")
-public interface IPaymentResource {
+@RegisterRestClient(baseUri = "http://localhost:8080")
+public interface IPaymentAPI {
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})

@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,14 +32,16 @@ public interface IAccountResource {
     @APIResponse(responseCode = "200", description = "User account retrieved successfully")
     @APIResponse(responseCode = "404", description = "User account not found")
     @APIResponse(responseCode = "500", description = "Internal server error")
-    Optional<UserAccount> getUserAccount(@PathParam("id") UUID id);
+    Optional<UserAccount> getUserAccount(
+        @PathParam("id") UUID id
+    );
 
     @Produces({MediaType.APPLICATION_JSON})
     @GET
     @Operation(summary = "Get all user accounts", description = "Get all user accounts")
     @APIResponse(responseCode = "200", description = "User accounts retrieved successfully")
     @APIResponse(responseCode = "500", description = "Internal server error")
-    UserAccount[] getAllUserAccounts();
+    List<UserAccount> getAllUserAccounts();
 
     @DELETE
     @Path("/{id}")
