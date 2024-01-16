@@ -35,8 +35,3 @@ Feature:
       And the customer is registered with DTU Pay
     When the customer gets -1 tokens
     Then the error with message "Illegal number of tokens requested" is received
-
-#  Scenario: Token is used more than once
-#    Given a token is not in the list
-#    When the token has to be validated
-#    Then the token is not validated

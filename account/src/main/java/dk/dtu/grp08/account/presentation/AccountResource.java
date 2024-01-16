@@ -20,20 +20,8 @@ public class AccountResource implements IAccountResource {
 
     private final AccountService accountService;
 
-    private final MessageQueue messageQueue = new RabbitMqQueue("localhost");
-
     public AccountResource(AccountService accountService) {
         this.accountService = accountService;
-
-        this.messageQueue.addHandler(
-            EventType.TOKEN_VALIDATED.getEventName(),
-            this::handleTokenValidatedEvent
-        );
-
-        this.messageQueue.addHandler(
-            EventType.PAYMENT_REQUESTED.getEventName(),
-            this::handlePaymentRequestedEvent
-        );
     }
 
     @Override
@@ -65,71 +53,4 @@ public class AccountResource implements IAccountResource {
             new UserAccountId(id)
         );
     }
-
-    public void handlePaymentRequestedEvent(Event event) {
-        PaymentRequestedEvent paymentRequestedEvent = event.getArgument(0, PaymentRequestedEvent.class);
-
-        System.out.println("payment requested event received");
-
-        UserAccount merchant = this.accountService.getUserAccountById(
-            new UserAccountId(paymentRequestedEvent.getMerchantID())
-        ).get();
-
-        BankAccountNo creditorBankAccountNo = merchant.getBankAccountNo();
-
-        Event bankAccountNoAssignedEvent = new Event(
-            EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
-            new Object[]{
-                new BankAccountNoAssignedEvent(
-                    creditorBankAccountNo,
-                    paymentRequestedEvent.getCorrelationId()
-                )
-            }
-        );
-
-        this.messageQueue.publish(
-            bankAccountNoAssignedEvent
-        );
-    }
-
-    public void handleTokenValidatedEvent(Event event) {
-        TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
-
-        System.out.println("token validated event received");
-        this.accountService.getUserAccountById(
-            tokenValidatedEvent.getUserAccountId()
-        ).ifPresentOrElse(
-            userAccount -> {
-                Event bankAccountNoAssignedEvent = new Event(
-                    EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED.getEventName(),
-                    new Object[]{
-                        new BankAccountNoAssignedEvent(
-                            userAccount.getBankAccountNo(),
-                            tokenValidatedEvent.getCorrelationId()
-                        )
-                    }
-                );
-
-                this.messageQueue.publish(
-                    bankAccountNoAssignedEvent
-                );
-            },
-            () -> {
-                Event tokenInvalidatedEvent = new Event(
-                    EventType.TOKEN_INVALIDATED.getEventName(),
-                    new Object[]{
-                        new TokenInvalidatedEvent(
-                            tokenValidatedEvent.getToken(),
-                            tokenValidatedEvent.getCorrelationId()
-                        )
-                    }
-                );
-
-                this.messageQueue.publish(
-                    tokenInvalidatedEvent
-                );
-            }
-        );
-    }
-
 }

@@ -308,5 +308,20 @@ public class StepDefinitions {
     @Then("the merchant should see a report with the following transaction details")
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
     }
+
+    @And("the customer grants the payment with a token without discarding it")
+    public void theCustomerGrantsThePaymentWithATokenWithoutDiscardingIt() {
+        this.paymentRequest.setToken(
+            this.customerTokens.getLast()
+        );
+
+        try {
+            this.merchantFacade.pay(
+                this.paymentRequest
+            );
+        } catch (ClientErrorException e) {
+            this.exception = e;
+        }
+    }
 }
 

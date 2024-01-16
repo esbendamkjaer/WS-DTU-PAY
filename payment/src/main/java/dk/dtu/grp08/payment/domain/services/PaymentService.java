@@ -33,9 +33,12 @@ public class PaymentService implements IPaymentService {
     private final PolicyManager policyManager = new PolicyManager();
 
 
-    public PaymentService(IPaymentRepository paymentRepository) {
+    public PaymentService(
+        IPaymentRepository paymentRepository,
+        MessageQueue messageQueue
+    ) {
         this.paymentRepository = paymentRepository;
-        this.messageQueue = new RabbitMqQueue("localhost");
+        this.messageQueue = messageQueue;
 
         this.messageQueue.addHandler(
             EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
