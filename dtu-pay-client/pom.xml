@@ -68,7 +68,7 @@
         <!-- Serializer to and from XML -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jaxb</artifactId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
             <version>3.6.4</version>
         </dependency>
 
