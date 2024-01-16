@@ -50,4 +50,11 @@ public class CustomerResource implements ICustomerResource {
         );
     }
 
+    @Override
+    public UserAccount getCustomer(UUID userId) {
+        return this.accountResource.getUserAccount(userId)
+            .orElse(null);
+    }
+
+
 }

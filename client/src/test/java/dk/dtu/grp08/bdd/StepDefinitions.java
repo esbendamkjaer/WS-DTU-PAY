@@ -210,11 +210,20 @@ public class StepDefinitions {
 
     @When("the customer deregisters")
     public void theCustomerDeregisters() {
-
+        this.customerFacade.deregister(
+            this.customer.getId()
+        );
     }
 
     @Then("the customer is no longer registered with DTU Pay")
     public void theCustomerIsNoLongerRegisteredWithDTUPay() {
+        this.customerFacade.getCustomer(
+           this.customer.getId()
+        ).ifPresent(
+            userAccount -> Assert.fail(
+                "Customer is still registered"
+            )
+        );
     }
 
     @After
@@ -240,5 +249,24 @@ public class StepDefinitions {
         }
     }
 
+    @When("the customer requests a report")
+    public void theCustomerRequestsAReport() {
+ 
+    }
+
+
+    @Then("the customer should see a report with the following transaction details")
+    public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
+        
+    }
+
+    @When("the merchant requests a report")
+    public void theMerchantRequestsAReport() {
+        
+    }
+
+    @Then("the merchant should see a report with the following transaction details")
+    public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
+    }
 }
 
