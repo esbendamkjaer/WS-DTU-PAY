@@ -4,6 +4,7 @@ import dk.dtu.grp08.payment.data.adapter.bank.stub.BankService;
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceException_Exception;
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceService;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
+import dk.dtu.grp08.payment.domain.exceptions.NoSuchCreditorAccountException;
 import dk.dtu.grp08.payment.domain.exceptions.NoSuchDebtorAccountException;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
 
@@ -20,10 +21,14 @@ public class BankAdapter implements IBankAdapter {
                 getPaymentDescription(payment)
             );
         } catch (BankServiceException_Exception e) {
-            if (e.getMessage().equals("Debtor account does not exist")) {
-                throw new NoSuchDebtorAccountException();
+            switch (e.getMessage()) {
+                case "Debtor account does not exist":
+                    throw new NoSuchDebtorAccountException();
+                case "Creditor account does not exist":
+                    throw new NoSuchCreditorAccountException();
+                default:
+                    throw new RuntimeException(e);
             }
-            throw new RuntimeException(e);
         }
     }
 
