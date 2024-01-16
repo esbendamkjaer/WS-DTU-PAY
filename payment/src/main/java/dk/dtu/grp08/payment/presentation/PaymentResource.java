@@ -6,7 +6,6 @@ import dk.dtu.grp08.payment.presentation.contracts.IPaymentResource;
 import dk.dtu.grp08.payment.domain.models.PaymentRequest;
 import jakarta.ws.rs.Path;
 
-@Path("/payments")
 public class PaymentResource implements IPaymentResource {
 
     private final IPaymentService paymentService;

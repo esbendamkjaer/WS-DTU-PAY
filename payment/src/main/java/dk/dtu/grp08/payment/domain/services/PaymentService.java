@@ -2,10 +2,7 @@ package dk.dtu.grp08.payment.domain.services;
 
 import dk.dtu.grp08.payment.data.adapter.bank.BankAdapter;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
-import dk.dtu.grp08.payment.domain.events.CustomerBankAccountAssignedEvent;
-import dk.dtu.grp08.payment.domain.events.EventType;
-import dk.dtu.grp08.payment.domain.events.MerchantBankAccountAssignedEvent;
-import dk.dtu.grp08.payment.domain.events.PaymentRequestedEvent;
+import dk.dtu.grp08.payment.domain.events.*;
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
@@ -69,7 +66,7 @@ public class PaymentService implements IPaymentService {
                 payment.setDebtor(debtor);
                 payment.setCreditor(creditor);
 
-                this.transferMoney(payment);
+                this.transferMoney(payment, merchantID,token);
 
                 return payment;
             }
@@ -131,9 +128,22 @@ public class PaymentService implements IPaymentService {
     }
 
 
-    public void transferMoney(Payment payment) {
+    public void transferMoney(Payment payment, UUID merchantID, Token token ) {
+        //Transfer money event
         bankAdapter.makeBankTransfer(payment);
         paymentRepository.savePayment(payment);
+        messageQueue.publish(
+                new Event(
+                        EventType.PAYMENT_TRANSFERRED.getEventName(),
+                        new Object[] {
+                                new PaymentTransferEvent(
+                                        merchantID,
+                                        token,
+                                        payment.getAmount()
+                                )
+                        }
+                )
+        );
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface IPaymentService {
 
-    void transferMoney(Payment payment);
+    void transferMoney(Payment payment, UUID merchantID, Token token);
 
     Payment requestPayment(
         final UUID merchantID,

@@ -13,6 +13,7 @@
         <module name="merchant" />
         <module name="payment" />
         <module name="account" />
+        <module name="reporting" />
         <module name="customer" />
         <module name="token" />
       </profile>
@@ -23,6 +24,7 @@
       <module name="account" options="-parameters" />
       <module name="customer" options="-parameters" />
       <module name="payment" options="-parameters" />
+      <module name="reporting" options="-parameters" />
       <module name="token" options="-parameters" />
     </option>
   </component>

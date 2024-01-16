@@ -1,15 +1,15 @@
-package dk.dtu.grp08.merchant.presentation;
+package dk.dtu.grp08.customer.presentation;
 
-import dk.dtu.grp08.merchant.presentation.contracts.IMerchantFacade;
+import dk.dtu.grp08.customer.presentation.contracts.ICustomerFacade;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-public class MerchantFacade implements IMerchantFacade {
+public class CustomerFacade implements ICustomerFacade {
 
 
     @Override
     public void register() {
-        
+
     }
 
     @Override
@@ -18,15 +18,12 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     @Override
-    public void pay() {
+    public void getTokens() {
 
     }
 
     @Override
-    public void getReports() {
+    public void getReport() {
 
     }
-
-
-
 }

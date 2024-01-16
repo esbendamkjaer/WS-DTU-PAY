@@ -36,3 +36,11 @@ services:
       - "8084:8080"
     depends_on:
       - rabbitmq
+  reporting:
+    build:
+      context: ./reporting
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+    depends_on:
+      - rabbitmq

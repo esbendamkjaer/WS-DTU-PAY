@@ -17,6 +17,7 @@
         <module>customer</module>
         <module>merchant</module>
         <module>manager</module>
+        <module>reporting</module>
     </modules>
 
     <properties>
