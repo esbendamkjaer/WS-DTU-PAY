@@ -251,8 +251,9 @@ public class StepDefinitions {
 
     @When("the customer requests a report")
     public void theCustomerRequestsAReport() {
-        
+ 
     }
+
 
     @Then("the customer should see a report with the following transaction details")
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
