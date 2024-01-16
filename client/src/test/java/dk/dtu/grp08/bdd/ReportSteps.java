@@ -4,22 +4,37 @@ import dk.dtu.grp08.bank.BankService;
 import dk.dtu.grp08.bank.BankServiceException_Exception;
 import dk.dtu.grp08.bank.BankServiceService;
 import dk.dtu.grp08.bank.User;
+import dk.dtu.grp08.dtupay.customer.CustomerFacade;
+import dk.dtu.grp08.dtupay.customer.ICustomerFacade;
+import dk.dtu.grp08.dtupay.models.Token;
+import dk.dtu.grp08.dtupay.models.UserAccount;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import jakarta.ws.rs.ClientErrorException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class ReportSteps {
-    User customer = new User();
-    User merchant = new User();
+
+    private final List<Token> customerTokens = new ArrayList<>();
+
+    private ClientErrorException exception;
+
+    private final ICustomerFacade customerFacade = new CustomerFacade();
+    UserAccount customer = new UserAccount();
+    UserAccount merchant = new UserAccount();
 
     @Given("a customer with name {string} with CPR number {string} and bank account balance {int} kr")
     public void aCustomerWithNameAndBankAccountDetails(String firstName, String cpr, double balance) {
       
-        customer.setFirstName(firstName);
-        customer.setCprNumber(cpr);
+        customer.setName(firstName);
+        customer.setCpr(cpr);
 
         BankService bank = new BankServiceService().getBankServicePort();
         try {
@@ -32,8 +47,8 @@ public class ReportSteps {
     @And("a merchant with name {string} with CPR number {string} and account balance {int} kr")
     public void aMerchantWithNameWithCPRNumberAndAccountBalanceKr(String firstName, String cpr, int balance) {
 
-        merchant.setFirstName(firstName);
-        merchant.setCprNumber(cpr);
+        merchant.setName(firstName);
+        merchant.setCpr(cpr);
 
         BankService bank = new BankServiceService().getBankServicePort();
         try {
@@ -45,11 +60,18 @@ public class ReportSteps {
 
 
     @And("a customer requests {int} tokens")
-    public void aCustomerRequestsTokens(int arg0) {
-        //TODO
-        
+    public void aCustomerRequestsTokens(int count) {
+            try {
+                this.customerTokens.addAll(
+                        this.customerFacade.getTokens(
+                                this.customer.getId(),
+                                count
+                        )
+                );
+            } catch (ClientErrorException e) {
+                this.exception = e;
+            }
     }
-
 
 
     @When("the customer requests a report")
@@ -71,7 +93,5 @@ public class ReportSteps {
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
         //TODO
     }
-
-
 
 }
