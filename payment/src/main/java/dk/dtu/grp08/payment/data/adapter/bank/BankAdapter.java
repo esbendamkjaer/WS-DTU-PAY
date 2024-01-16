@@ -4,6 +4,7 @@ import dk.dtu.grp08.payment.data.adapter.bank.stub.BankService;
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceException_Exception;
 import dk.dtu.grp08.payment.data.adapter.bank.stub.BankServiceService;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
+import dk.dtu.grp08.payment.domain.exceptions.NoSuchDebtorAccountException;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
 
 public class BankAdapter implements IBankAdapter {
@@ -19,7 +20,9 @@ public class BankAdapter implements IBankAdapter {
                 getPaymentDescription(payment)
             );
         } catch (BankServiceException_Exception e) {
-            // @TODO: Catch exception and handle it
+            if (e.getMessage().equals("Debtor account does not exist")) {
+                throw new NoSuchDebtorAccountException();
+            }
             throw new RuntimeException(e);
         }
     }
