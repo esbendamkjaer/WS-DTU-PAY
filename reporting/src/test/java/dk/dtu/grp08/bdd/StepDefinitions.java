@@ -8,6 +8,8 @@ import dk.dtu.grp08.dtupay.merchant.IMerchantFacade;
 import dk.dtu.grp08.dtupay.merchant.MerchantFacade;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;
 import dk.dtu.grp08.dtupay.models.Token;
+import dk.dtu.grp08.reporting.domain.events.EventType;
+import dk.dtu.grp08.reporting.domain.events.PaymentTransferEvent;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccount;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -34,30 +36,17 @@ public class StepDefinitions {
 
     private PaymentRequest paymentRequest;
 
-    @Given("A \"PAYMENT_TRANSFERRED\" event")
+    EventType eventType = EventType.PAYMENT_TRANSFERRED;
+
+    @When("A \"PAYMENT_TRANSFERRED\" event")
     public void aPaymentTransferredEvent(double amount) {
 
-        customer = new UserAccount();
-        customer.setFirstName("Hubert Jens");
-        merchant = new UserAccount();
-        merchant.setFirstName("Hans Peter");
+        PaymentTransferEvent paymentTransferEvent = new PaymentTransferEvent();
+        paymentTransferEvent.setMerchantID(merchant.getUserId()
+        paymentTransferEvent.setToken(customerTokens.get(0));
+        paymentTransferEvent.setAmount(BigDecimal.valueOf(amount));
 
-        this.paymentRequest = new PaymentRequest();
-        paymentRequest.setAmount(
-                BigDecimal.valueOf(amount)
-        );
-        paymentRequest.setMerchantId(
-                this.merchant.getId().getId()
-        );
-
-        this.paymentRequest.setToken(
-                this.customerTokens.removeLast()
-        );
-
-        this.merchantFacade.pay(
-                this.paymentRequest
-        );
-
+        eventType.PAYMENT_TRANSFERRED(new Event(paymentTransferEvent));
     }
 
     @When("the customer requests a report")
