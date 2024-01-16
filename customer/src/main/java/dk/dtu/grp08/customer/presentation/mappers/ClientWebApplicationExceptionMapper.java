@@ -1,4 +1,4 @@
-package dk.dtu.grp08.customer.presentation;
+package dk.dtu.grp08.customer.presentation.mappers;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
