@@ -207,6 +207,16 @@ public class StepDefinitions {
         );
     }
 
+
+    @When("the customer deregisters")
+    public void theCustomerDeregisters() {
+
+    }
+
+    @Then("the customer is no longer registered with DTU Pay")
+    public void theCustomerIsNoLongerRegisteredWithDTUPay() {
+    }
+
     @After
     public void cleanUp() {
         if (this.customer != null) {
@@ -229,7 +239,6 @@ public class StepDefinitions {
             );
         }
     }
-
 
 }
 
