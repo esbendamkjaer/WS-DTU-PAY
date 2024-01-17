@@ -1,13 +1,12 @@
 package dk.dtu.grp08.payment.domain.services;
 
-import dk.dtu.grp08.payment.data.adapter.bank.BankAdapter;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
 import dk.dtu.grp08.payment.domain.events.*;
 import dk.dtu.grp08.payment.domain.exceptions.InvalidTokenException;
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
+import dk.dtu.grp08.payment.domain.models.Token;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
-import dk.dtu.grp08.payment.domain.models.Token;
 import dk.dtu.grp08.payment.domain.repositories.IPaymentRepository;
 import dk.dtu.grp08.payment.domain.util.policy.Policy;
 import dk.dtu.grp08.payment.domain.util.policy.PolicyBuilder;
@@ -16,7 +15,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
-import messaging.implementations.RabbitMqQueue;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -25,9 +23,8 @@ import java.util.concurrent.CompletableFuture;
 @ApplicationScoped
 public class PaymentService implements IPaymentService {
 
-    private final IBankAdapter bankAdapter = new BankAdapter();
+    private final IBankAdapter bankAdapter;
     private final MessageQueue messageQueue;
-
     private final IPaymentRepository paymentRepository;
 
     private final PolicyManager policyManager = new PolicyManager();
@@ -35,10 +32,12 @@ public class PaymentService implements IPaymentService {
 
     public PaymentService(
         IPaymentRepository paymentRepository,
-        MessageQueue messageQueue
+        MessageQueue messageQueue,
+        IBankAdapter bankAdapter
     ) {
         this.paymentRepository = paymentRepository;
         this.messageQueue = messageQueue;
+        this.bankAdapter = bankAdapter;
 
         this.messageQueue.addHandler(
             EventType.MERCHANT_BANK_ACCOUNT_ASSIGNED.getEventName(),
@@ -47,7 +46,7 @@ public class PaymentService implements IPaymentService {
 
         this.messageQueue.addHandler(
             EventType.CUSTOMER_BANK_ACCOUNT_ASSIGNED.getEventName(),
-            this::handleCustomBankAccountAssigned
+            this::handleCustomerBankAccountAssigned
         );
 
         this.messageQueue.addHandler(
@@ -129,7 +128,7 @@ public class PaymentService implements IPaymentService {
         future.complete(event.getBankAccountNo());
     }
 
-    public void handleCustomBankAccountAssigned(Event mqEvent) {
+    public void handleCustomerBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
 
         System.out.println("CustomerBankAccountAssignedEvent");
@@ -144,16 +143,29 @@ public class PaymentService implements IPaymentService {
     }
 
     public void handleTokenInvalidatedEvent(Event mqEvent) {
-        val event = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
+        val tokenInvalidatedEvent = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
 
         System.out.println("TokenInvalidatedEvent");
 
         CompletableFuture<?> future = policyManager.getPolicy(
-            event.getCorrelationId()
+            tokenInvalidatedEvent.getCorrelationId()
         ).getCombinedFuture();
 
         future.completeExceptionally(
             new InvalidTokenException()
+        );
+
+        Event paymentCanceledEvent = new Event(
+            EventType.PAYMENT_CANCELED.getEventName(),
+            new Object[] {
+                new PaymentCanceledEvent(
+                    tokenInvalidatedEvent.getCorrelationId()
+                )
+            }
+        );
+
+        messageQueue.publish(
+            paymentCanceledEvent
         );
     }
 
@@ -168,7 +180,7 @@ public class PaymentService implements IPaymentService {
                 new Event(
                         EventType.PAYMENT_TRANSFERRED.getEventName(),
                         new Object[] {
-                                new PaymentTransferEvent(
+                                new PaymentTransferredEvent(
                                         merchantID,
                                         token,
                                         payment.getAmount()

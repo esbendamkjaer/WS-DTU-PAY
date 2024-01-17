@@ -14,7 +14,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
 import java.util.UUID;

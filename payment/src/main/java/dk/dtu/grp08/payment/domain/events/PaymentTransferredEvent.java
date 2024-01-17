@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentTransferEvent {
+public class PaymentTransferredEvent {
     UUID merchantID;
     Token token;
     BigDecimal amount;

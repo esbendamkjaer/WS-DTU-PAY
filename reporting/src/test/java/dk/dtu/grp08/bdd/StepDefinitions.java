@@ -42,7 +42,7 @@ public class StepDefinitions {
     public void aPaymentTransferredEvent(double amount) {
 
         PaymentTransferEvent paymentTransferEvent = new PaymentTransferEvent();
-        paymentTransferEvent.setMerchantID(merchant.getUserId()
+        paymentTransferEvent.setMerchantID(merchant.getId().getId());
         paymentTransferEvent.setToken(customerTokens.get(0));
         paymentTransferEvent.setAmount(BigDecimal.valueOf(amount));
 
