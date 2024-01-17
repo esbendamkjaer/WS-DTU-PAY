@@ -4,7 +4,8 @@ set -e # Stops the execution if an error occurs
 
 # Build MQ wrapper dependency
 pushd messaging-utilities-3.4
-mvn clean install -DskipTests
+chmod +x build.sh
+./build.sh
 popd
 
 # Build and run each microservice
