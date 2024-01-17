@@ -6,6 +6,7 @@ import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.services.IReportService;
 import dk.dtu.grp08.reporting.presentation.contracts.IReportResource;
+import jakarta.enterprise.context.ApplicationScoped;
 import messaging.Event;
 import messaging.MessageQueue;
 import messaging.implementations.RabbitMqQueue;
@@ -13,16 +14,20 @@ import messaging.implementations.RabbitMqQueue;
 import java.util.List;
 import java.util.UUID;
 
-class ReportRessource implements IReportResource {
+@ApplicationScoped
+public class ReportRessource implements IReportResource {
 
     IReportService reportService;
 
     private final MessageQueue messageQueue;
 
-    public ReportRessource(IReportService reportService) {
+    public ReportRessource(
+        IReportService reportService,
+        MessageQueue messageQueue
+    ) {
         this.reportService = reportService;
 
-        this.messageQueue = new RabbitMqQueue("localhost");
+        this.messageQueue = messageQueue;
 
         this.messageQueue.addHandler(
                 EventType.PAYMENT_TRANSFERRED.getEventName(),
