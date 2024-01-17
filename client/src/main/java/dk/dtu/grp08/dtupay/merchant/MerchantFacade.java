@@ -8,12 +8,19 @@ import dk.dtu.grp08.dtupay.models.UserId;
 import dk.dtu.grp08.dtupay.models.Payment;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;
 
+import java.util.Optional;
+
 public class MerchantFacade implements IMerchantFacade {
 
     private final IMerchantAPI merchantAPI;
 
     public MerchantFacade() {
-        this.merchantAPI = Stub.get(IMerchantAPI.class, "http://localhost:8084");
+        this.merchantAPI = Stub.get(
+            IMerchantAPI.class,
+            Optional
+                .ofNullable(System.getenv("MERCHANT_API"))
+                .orElse("http://localhost:8086")
+        );
     }
 
     @Override
