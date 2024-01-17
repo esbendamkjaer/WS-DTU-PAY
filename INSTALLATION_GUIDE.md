@@ -12,11 +12,12 @@ Use the following commands to install the project:
 ```
 
 ## Services
-| Service   | Port      |
-|-----------|-----------|
-| account   | 8081      |
-| customer  | 8082      |
-| payment   | 8083      |
-| token     | 8084      |
-| reporting | 8085      |
-
+| Service   | Port |
+|-----------|------|
+| account   | 8081 |
+| customer  | 8082 |
+| payment   | 8083 |
+| token     | 8084 |
+| reporting | 8085 |
+| manager   | 8086 |
+| merchant  | 8087 |
