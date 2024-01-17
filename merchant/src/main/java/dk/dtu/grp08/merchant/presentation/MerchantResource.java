@@ -1,39 +1,41 @@
 package dk.dtu.grp08.merchant.presentation;
 
-import dk.dtu.grp08.merchant.presentation.contracts.IAccountAPI;
+import dk.dtu.grp08.merchant.domain.models.UserId;
+import dk.dtu.grp08.merchant.domain.services.contracts.IAccountService;
 import dk.dtu.grp08.merchant.presentation.contracts.IMerchantResource;
 import dk.dtu.grp08.merchant.presentation.contracts.IPaymentAPI;
-import dk.dtu.grp08.merchant.presentation.models.Payment;
-import dk.dtu.grp08.merchant.presentation.models.PaymentRequest;
-import dk.dtu.grp08.merchant.presentation.models.UserAccount;
+import dk.dtu.grp08.merchant.domain.models.Payment;
+import dk.dtu.grp08.merchant.domain.models.PaymentRequest;
+import dk.dtu.grp08.merchant.domain.models.UserAccount;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 @ApplicationScoped
 public class MerchantResource implements IMerchantResource {
 
     @RestClient
-    private IAccountAPI accountResource;
-
-    @RestClient
     private IPaymentAPI paymentResource;
 
-    public MerchantResource() {
+    private final IAccountService accountService;
+
+    public MerchantResource(IAccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Override
-    public UserAccount createMerchant(UserAccount userAccount) {
-        return this.accountResource.createUserAccount(
+    public CompletableFuture<UserAccount> createMerchant(UserAccount userAccount) {
+        return this.accountService.createUserAccount(
             userAccount
         );
     }
 
     @Override
-    public void deleteMerchant(UUID userId) {
-        this.accountResource.deleteUserAccount(
-            userId
+    public CompletableFuture<Void> deleteMerchant(UUID userId) {
+        return this.accountService.deleteUserAccount(
+            new UserId(userId)
         );
     }
 
@@ -42,5 +44,10 @@ public class MerchantResource implements IMerchantResource {
         return this.paymentResource.createPayment(
             paymentRequest
         );
+    }
+
+    @Override
+    public void getReport(UUID id) {
+
     }
 }

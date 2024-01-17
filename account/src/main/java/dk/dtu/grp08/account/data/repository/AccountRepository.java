@@ -1,11 +1,10 @@
 package dk.dtu.grp08.account.data.repository;
 
+import dk.dtu.grp08.account.domain.exceptions.NoSuchUserAccountException;
 import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import dk.dtu.grp08.account.domain.models.user.UserAccount;
 import dk.dtu.grp08.account.domain.repository.IAccountRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.NotFoundException;
-import jakarta.ws.rs.core.Response;
 import lombok.val;
 
 import java.util.List;
@@ -22,16 +21,6 @@ public class AccountRepository implements IAccountRepository {
         val id = userAccount.getId();
         userAccounts.put(id, userAccount);
         return userAccount;
-    }
-
-    @Override
-    public void delete(UserAccountId userAccountId) {
-        if (!userAccounts.containsKey(userAccountId)) {
-            throw new NotFoundException(
-                Response.status(404).entity("user account with id " + userAccountId + " is unknown").build()
-            );
-        }
-        userAccounts.remove(userAccountId);
     }
 
     @Override

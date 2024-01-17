@@ -6,6 +6,7 @@ import dk.dtu.grp08.account.domain.models.user.UserAccount;
 import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import dk.dtu.grp08.account.domain.repository.IAccountRepository;
 import dk.dtu.grp08.account.domain.models.user.BankAccountNo;
+import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
@@ -14,6 +15,7 @@ import messaging.MessageQueue;
 import java.util.List;
 import java.util.Optional;
 
+@Startup
 @ApplicationScoped
 public class AccountService implements IAccountService {
 
@@ -35,6 +37,16 @@ public class AccountService implements IAccountService {
         this.messageQueue.addHandler(
             EventType.PAYMENT_REQUESTED.getEventName(),
             this::handlePaymentRequestedEvent
+        );
+
+        this.messageQueue.addHandler(
+            EventType.ACCOUNT_REGISTRATION_REQUESTED.getEventName(),
+            this::handleAccountRegistrationRequestedEvent
+        );
+
+        this.messageQueue.addHandler(
+            EventType.ACCOUNT_DEREGISTRATION_REQUESTED.getEventName(),
+            this::handleAccountDeregistrationRequestedEvent
         );
     }
 
@@ -63,7 +75,7 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public void deleteUserAccount(UserAccountId userAccountId) {
+    public void deleteUserAccount(UserAccountId userAccountId) throws NoSuchUserAccountException {
         val userAccount = accountRepository.findById(userAccountId).orElseThrow(
             () -> new NoSuchUserAccountException(
                 "No user account with id " + userAccountId.getId()
@@ -144,6 +156,55 @@ public class AccountService implements IAccountService {
                             tokenInvalidatedEvent
                     );
                 }
+        );
+    }
+
+    public void handleAccountRegistrationRequestedEvent(Event event) {
+        AccountRegistrationRequestedEvent accountRegistrationRequestedEvent = event.getArgument(0, AccountRegistrationRequestedEvent.class);
+
+        UserAccount userAccount = accountRegistrationRequestedEvent.getUserAccount();
+
+        userAccount = this.registerAccount(
+            userAccount.getName(),
+            userAccount.getCpr(),
+            userAccount.getBankAccountNo()
+        );
+
+        Event accountRegisteredEvent = new Event(
+            EventType.ACCOUNT_REGISTERED.getEventName(),
+            new Object[]{
+                new AccountRegisteredEvent(
+                    accountRegistrationRequestedEvent.getCorrelationId(),
+                    userAccount
+                )
+            }
+        );
+
+        this.messageQueue.publish(
+            accountRegisteredEvent
+        );
+    }
+
+    public void handleAccountDeregistrationRequestedEvent(Event event) {
+        AccountDeregistrationRequestedEvent accountDeregistrationRequestedEvent = event.getArgument(0, AccountDeregistrationRequestedEvent.class);
+
+        UserAccountId userAccountId = accountDeregistrationRequestedEvent.getUserId();
+
+        this.deleteUserAccount(
+            userAccountId
+        );
+
+        Event accountDeregisteredEvent = new Event(
+            EventType.ACCOUNT_DEREGISTERED.getEventName(),
+            new Object[]{
+                new AccountDeregisteredEvent(
+                    accountDeregistrationRequestedEvent.getCorrelationId()
+                )
+            }
+        );
+
+        this.messageQueue.publish(
+            accountDeregisteredEvent
         );
     }
 

@@ -1,4 +1,4 @@
-package dk.dtu.grp08.account.domain.events;
+package dk.dtu.grp08.customer.domain.events;
 
 public enum EventType {
 
@@ -12,7 +12,6 @@ public enum EventType {
     ACCOUNT_REGISTERED("AccountRegistered"),
     ACCOUNT_DEREGISTRATION_REQUESTED("AccountDeregistrationRequested"),
     ACCOUNT_DEREGISTERED("AccountDeregistered"),
-    TOKEN_VALIDATED("TokenValidated"),
     ;
 
     private final String eventName;
