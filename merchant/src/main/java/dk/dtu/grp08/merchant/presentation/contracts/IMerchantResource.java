@@ -32,4 +32,9 @@ public interface IMerchantResource {
         PaymentRequest paymentRequest
     );
 
+    @POST
+    @Path("/report")
+    @Consumes({MediaType.APPLICATION_JSON})
+    void getReport(UUID id);
+
 }

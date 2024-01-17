@@ -9,28 +9,8 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.UUID;
 
-@Path("/report")
 public interface IReportResource {
 
-    @POST
-    @Path("/customer")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    List<Payment> getReportCustomer(Token token);
-
-
-    @POST
-    @Path("/merchant")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    List<Payment> getReportMerchant(UUID merchantID);
-
-
-    @GET
-    @Path("/manager")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    List<Payment> getReportManager();
 
 }
 
