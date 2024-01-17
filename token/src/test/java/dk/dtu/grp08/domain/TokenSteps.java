@@ -3,6 +3,7 @@ package dk.dtu.grp08.domain;
 import dk.dtu.grp08.token.data.repository.TokenRepository;
 import dk.dtu.grp08.token.domain.events.EventType;
 import dk.dtu.grp08.token.domain.events.PaymentRequestedEvent;
+import dk.dtu.grp08.token.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenValidatedEvent;
 import dk.dtu.grp08.token.domain.models.CorrelationId;
 import dk.dtu.grp08.token.domain.models.Token;
@@ -13,7 +14,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -34,8 +34,8 @@ public class TokenSteps {
     private CorrelationId correlationId;
 
 
-    @Given("a token")
-    public void tokensStoredInTheService() {
+    @Given("a valid token")
+    public void aToken() {
         this.userId = new UserId(
             UUID.randomUUID()
         );
@@ -45,7 +45,14 @@ public class TokenSteps {
             .removeLast();
     }
 
-    @When("the PaymentRequestedEvent is received")
+    @Given("an invalid token")
+    public void anInvalidToken() {
+        this.token = new Token(
+            UUID.randomUUID()
+        );
+    }
+
+    @When("a PaymentRequestedEvent is received")
     public void thePaymentRequestedEventIsReceived() {
         this.correlationId = CorrelationId.randomId();
 
@@ -64,7 +71,7 @@ public class TokenSteps {
         );
     }
 
-    @Then("the TokenValidatedEvent is sent")
+    @Then("a corresponding TokenValidatedEvent is sent")
     public void theTokenValidatedEventIsSent() {
 
         Event event = new Event(
@@ -74,6 +81,22 @@ public class TokenSteps {
                     this.correlationId,
                     this.token,
                     this.userId
+                )
+            }
+        );
+
+        verify(this.messageQueue).publish(event);
+    }
+
+    @Then("a corresponding TokenInvalidatedEvent is sent")
+    public void theTokenInvalidatedEventIsSent() {
+
+        Event event = new Event(
+            EventType.TOKEN_INVALIDATED.getEventName(),
+            new Object[] {
+                new TokenInvalidatedEvent(
+                    this.correlationId,
+                    this.token
                 )
             }
         );
