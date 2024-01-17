@@ -6,7 +6,6 @@ import dk.dtu.grp08.dtupay.models.UserId;
 import dk.dtu.grp08.dtupay.models.Token;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ICustomerFacade {
 
@@ -20,6 +19,6 @@ public interface ICustomerFacade {
 
     void deregister(UserId user);
 
-    Optional<UserAccount> getCustomer(UserId userId);
+    UserAccount getCustomer(UserId userId);
 
 }

@@ -1,6 +1,7 @@
 package dk.dtu.grp08.customer.domain.services;
 
 import dk.dtu.grp08.customer.domain.events.*;
+import dk.dtu.grp08.customer.domain.exceptions.NoSuchUserAccountException;
 import dk.dtu.grp08.customer.domain.models.CorrelationId;
 import dk.dtu.grp08.customer.domain.models.UserAccount;
 import dk.dtu.grp08.customer.domain.models.UserAccountId;
@@ -41,6 +42,11 @@ public class AccountService implements IAccountService {
             EventType.ACCOUNT_RETURNED.getEventName(),
             this::handleAccountReturnedEvent
         );
+
+        this.messageQueue.addHandler(
+            EventType.USER_NOT_FOUND.getEventName(),
+            this::handleUserNotFoundEvent
+        );
     }
 
     @Override
@@ -66,6 +72,9 @@ public class AccountService implements IAccountService {
                 )
             }
         );
+
+        System.out.println("AccountDeregistrationRequestedEvent " + correlationId);
+
         this.messageQueue.publish(deregistrationRequestedEvent);
 
         return policy.getCombinedFuture();
@@ -100,6 +109,8 @@ public class AccountService implements IAccountService {
                 )
             }
         );
+
+        System.out.println("AccountRegistrationRequestedEvent " + correlationId);
         this.messageQueue.publish(registrationRequestedEvent);
 
         return policy.getCombinedFuture();
@@ -114,16 +125,10 @@ public class AccountService implements IAccountService {
                     AccountReturnedEvent.class
                 )
                 .setPolicyFunction(
-                    (p) -> {
-                        UserAccount u = p.getDependency(
-                                AccountReturnedEvent.class,
-                                UserAccount.class
-                        );
-                        System.out.println("HEj");
-                        System.out.println(u);
-
-                        return u;
-                    }
+                    (p) -> p.getDependency(
+                        AccountReturnedEvent.class,
+                        UserAccount.class
+                    )
                 ).build();
 
         this.policyManager.addPolicy(
@@ -148,7 +153,12 @@ public class AccountService implements IAccountService {
     public void handleAccountReturnedEvent(Event event) {
         AccountReturnedEvent accountReturnedEvent = event.getArgument(0, AccountReturnedEvent.class);
 
-        System.out.println(accountReturnedEvent.getUserAccount());
+        if (!this.policyManager.hasPolicy(accountReturnedEvent.getCorrelationId())) {
+            return;
+        }
+
+        System.out.println("Account Returned " + accountReturnedEvent.getUserAccount());
+
         this.policyManager.getPolicy(
             accountReturnedEvent.getCorrelationId()
         ).getDependency(
@@ -160,6 +170,12 @@ public class AccountService implements IAccountService {
 
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
+
+        System.out.println("Account Registered " + accountRegisteredEvent.getCorrelationId());
+
+        if (!this.policyManager.hasPolicy(accountRegisteredEvent.getCorrelationId())) {
+            return;
+        }
 
         this.policyManager.getPolicy(
             accountRegisteredEvent.getCorrelationId()
@@ -173,10 +189,33 @@ public class AccountService implements IAccountService {
     public void handleAccountDeregisteredEvent(Event event) {
         AccountDeregisteredEvent accountDeregisteredEvent = event.getArgument(0, AccountDeregisteredEvent.class);
 
+        System.out.println("Account Deregistered " + accountDeregisteredEvent.getCorrelationId());
+
+        if (!this.policyManager.hasPolicy(accountDeregisteredEvent.getCorrelationId())) {
+            return;
+        }
+
         this.policyManager.getPolicy(
             accountDeregisteredEvent.getCorrelationId()
         ).getDependency(
             AccountDeregisteredEvent.class
         ).complete(null);
+    }
+
+    private void handleUserNotFoundEvent(Event event) {
+        UserNotFoundEvent userNotFoundEvent = event.getArgument(0, UserNotFoundEvent.class);
+
+        if (!this.policyManager.hasPolicy(userNotFoundEvent.getCorrelationId())) {
+            return;
+        }
+
+        System.out.println("User not found " + userNotFoundEvent.getCorrelationId());
+
+        this.policyManager.getPolicy(
+            userNotFoundEvent.getCorrelationId()
+        ).getCombinedFuture()
+            .completeExceptionally(
+                new NoSuchUserAccountException()
+            );
     }
 }

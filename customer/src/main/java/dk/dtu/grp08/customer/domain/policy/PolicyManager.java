@@ -24,6 +24,10 @@ public class PolicyManager {
         });
     }
 
+    public boolean hasPolicy(CorrelationId correlationId) {
+        return this.correlations.containsKey(correlationId);
+    }
+
     public void removePolicy(CorrelationId correlationID) {
         this.correlations.remove(correlationID);
     }

@@ -1,6 +1,7 @@
 package dk.dtu.grp08.merchant.domain.services;
 
 import dk.dtu.grp08.merchant.domain.events.*;
+import dk.dtu.grp08.merchant.domain.exceptions.NoSuchUserAccountException;
 import dk.dtu.grp08.merchant.domain.models.CorrelationId;
 import dk.dtu.grp08.merchant.domain.models.UserAccount;
 import dk.dtu.grp08.merchant.domain.models.UserId;
@@ -36,6 +37,11 @@ public class AccountService implements IAccountService {
         this.messageQueue.addHandler(
             EventType.ACCOUNT_DEREGISTERED.getEventName(),
             this::handleAccountDeregisteredEvent
+        );
+
+        this.messageQueue.addHandler(
+            EventType.USER_NOT_FOUND.getEventName(),
+            this::handleUserNotFoundEvent
         );
     }
 
@@ -104,6 +110,10 @@ public class AccountService implements IAccountService {
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
 
+        if (!this.policyManager.hasPolicy(accountRegisteredEvent.getCorrelationId())) {
+            return;
+        }
+
         this.policyManager.getPolicy(
             accountRegisteredEvent.getCorrelationId()
         ).getDependency(
@@ -116,10 +126,31 @@ public class AccountService implements IAccountService {
     public void handleAccountDeregisteredEvent(Event event) {
         AccountDeregisteredEvent accountDeregisteredEvent = event.getArgument(0, AccountDeregisteredEvent.class);
 
+        if (!this.policyManager.hasPolicy(accountDeregisteredEvent.getCorrelationId())) {
+            return;
+        }
+
         this.policyManager.getPolicy(
             accountDeregisteredEvent.getCorrelationId()
         ).getDependency(
             AccountDeregisteredEvent.class
         ).complete(null);
+    }
+
+    private void handleUserNotFoundEvent(Event event) {
+        UserNotFoundEvent userNotFoundEvent = event.getArgument(0, UserNotFoundEvent.class);
+
+        if (!this.policyManager.hasPolicy(userNotFoundEvent.getCorrelationId())) {
+            return;
+        }
+
+        System.out.println("User not found " + userNotFoundEvent.getCorrelationId());
+
+        this.policyManager.getPolicy(
+                        userNotFoundEvent.getCorrelationId()
+                ).getCombinedFuture()
+                .completeExceptionally(
+                        new NoSuchUserAccountException()
+                );
     }
 }

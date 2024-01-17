@@ -253,42 +253,17 @@ public class StepDefinitions {
 
     @Then("the customer is no longer registered with DTU Pay")
     public void theCustomerIsNoLongerRegisteredWithDTUPay() {
-        this.customerFacade.getCustomer(
-           this.customer.getId()
-        ).ifPresent(
-            userAccount -> Assert.fail(
-                "Customer is still registered"
+        ClientErrorException e = Assertions.assertThrows(
+            ClientErrorException.class,
+            () -> this.customerFacade.getCustomer(
+                this.customer.getId()
             )
         );
-    }
 
-    @After
-    public void cleanUp() {
-        if (this.customer != null) {
-            try {
-                this.bankAdapter.retireBankAccount(
-                    this.customer.getBankAccountNo()
-                );
-            } catch (Exception ignored) {
-            }
-
-            this.customerFacade.deregister(
-                this.customer.getId()
-            );
-        }
-
-        if (this.merchant != null) {
-            try {
-                this.bankAdapter.retireBankAccount(
-                    this.merchant.getBankAccountNo()
-                );
-            } catch (Exception ignored) {
-            }
-
-            this.merchantFacade.deregister(
-                this.merchant.getId()
-            );
-        }
+        Assert.assertEquals(
+            404,
+            e.getResponse().getStatus()
+        );
     }
 
     @When("the customer requests a report")
@@ -330,7 +305,7 @@ public class StepDefinitions {
     public void theCustomerIsRetrievedById() {
         this.retrievedCustomer = this.customerFacade.getCustomer(
             this.customer.getId()
-        ).orElse(null);
+        );
     }
 
     @Then("expect the same customer")
@@ -339,6 +314,41 @@ public class StepDefinitions {
             this.customer,
             this.retrievedCustomer
         );
+    }
+
+    @After
+    public void cleanUp() {
+        if (this.customer != null) {
+            try {
+                this.bankAdapter.retireBankAccount(
+                        this.customer.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
+
+            try {
+                this.customerFacade.deregister(
+                        this.customer.getId()
+                );
+            } catch (Exception ignored) {
+            }
+        }
+
+        if (this.merchant != null) {
+            try {
+                this.bankAdapter.retireBankAccount(
+                        this.merchant.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
+
+            try {
+                this.merchantFacade.deregister(
+                        this.merchant.getId()
+                );
+            } catch (Exception ignored) {
+            }
+        }
     }
 }
 

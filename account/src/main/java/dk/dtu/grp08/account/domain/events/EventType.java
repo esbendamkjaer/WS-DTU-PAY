@@ -15,7 +15,7 @@ public enum EventType {
     TOKEN_VALIDATED("TokenValidated"),
     ACCOUNT_REQUESTED("AccountRequested"),
     ACCOUNT_RETURNED("AccountReturned"),
-    ;
+    USER_NOT_FOUND("UserNotFound");
 
     private final String eventName;
 

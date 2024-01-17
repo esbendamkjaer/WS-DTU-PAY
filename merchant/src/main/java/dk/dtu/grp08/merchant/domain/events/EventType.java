@@ -12,6 +12,7 @@ public enum EventType {
     ACCOUNT_REGISTERED("AccountRegistered"),
     ACCOUNT_DEREGISTRATION_REQUESTED("AccountDeregistrationRequested"),
     ACCOUNT_DEREGISTERED("AccountDeregistered"),
+    USER_NOT_FOUND("UserNotFound"),
     ;
 
     private final String eventName;

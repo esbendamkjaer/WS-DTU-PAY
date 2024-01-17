@@ -195,9 +195,29 @@ public class AccountService implements IAccountService {
 
         UserAccountId userAccountId = accountDeregistrationRequestedEvent.getUserId();
 
-        this.deleteUserAccount(
-            userAccountId
-        );
+        System.out.println("Account deregistration requested for " + userAccountId.getId());
+
+        try {
+            this.deleteUserAccount(
+                userAccountId
+            );
+        } catch (NoSuchUserAccountException e) {
+            Event userNotFoundEvent = new Event(
+                EventType.USER_NOT_FOUND.getEventName(),
+                new Object[]{
+                    new UserNotFoundEvent(
+                        accountDeregistrationRequestedEvent.getCorrelationId(),
+                        userAccountId
+                    )
+                }
+            );
+
+            this.messageQueue.publish(
+                userNotFoundEvent
+            );
+
+            return;
+        }
 
         Event accountDeregisteredEvent = new Event(
             EventType.ACCOUNT_DEREGISTERED.getEventName(),
@@ -218,19 +238,41 @@ public class AccountService implements IAccountService {
 
         UserAccountId userAccountId = accountRequestedEvent.getUserId();
 
-        Event accountReturnedEvent = new Event(
-                EventType.ACCOUNT_RETURNED.getEventName(),
-                new Object[]{
-                        new AccountReturnedEvent(
-                                accountRequestedEvent.getCorrelationId(),
-                                this.getUserAccountById(userAccountId).orElse(null)
-                        )
-                }
+        Optional<UserAccount> userAccount = this.getUserAccountById(
+            userAccountId
         );
 
-        this.messageQueue.publish(
-            accountReturnedEvent
-        );
+        if (userAccount.isEmpty()) {
+            Event userNotFoundEvent = new Event(
+                EventType.USER_NOT_FOUND.getEventName(),
+                new Object[]{
+                    new UserNotFoundEvent(
+                        accountRequestedEvent.getCorrelationId(),
+                        userAccountId
+                    )
+                }
+            );
+
+            this.messageQueue.publish(
+                userNotFoundEvent
+            );
+
+        } else {
+            Event accountReturnedEvent = new Event(
+                    EventType.ACCOUNT_RETURNED.getEventName(),
+                    new Object[]{
+                            new AccountReturnedEvent(
+                                    accountRequestedEvent.getCorrelationId(),
+                                    this.getUserAccountById(userAccountId).orElse(null)
+                            )
+                    }
+            );
+
+            this.messageQueue.publish(
+                accountReturnedEvent
+            );
+        }
+
     }
 
 }
