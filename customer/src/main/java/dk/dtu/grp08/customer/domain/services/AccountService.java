@@ -36,6 +36,11 @@ public class AccountService implements IAccountService {
             EventType.ACCOUNT_DEREGISTERED.getEventName(),
             this::handleAccountDeregisteredEvent
         );
+
+        this.messageQueue.addHandler(
+            EventType.ACCOUNT_RETURNED.getEventName(),
+            this::handleAccountReturnedEvent
+        );
     }
 
     @Override
@@ -98,6 +103,59 @@ public class AccountService implements IAccountService {
         this.messageQueue.publish(registrationRequestedEvent);
 
         return policy.getCombinedFuture();
+    }
+
+    @Override
+    public CompletableFuture<UserAccount> getUserAccount(UserAccountId userAccountId) {
+        CorrelationId correlationId = CorrelationId.randomId();
+
+        Policy<UserAccount> policy = new PolicyBuilder<UserAccount>()
+                .addPart(
+                    AccountReturnedEvent.class
+                )
+                .setPolicyFunction(
+                    (p) -> {
+                        UserAccount u = p.getDependency(
+                                AccountReturnedEvent.class,
+                                UserAccount.class
+                        );
+                        System.out.println("HEj");
+                        System.out.println(u);
+
+                        return u;
+                    }
+                ).build();
+
+        this.policyManager.addPolicy(
+            correlationId,
+            policy
+        );
+
+        Event accountRequestedEvent = new Event(
+            EventType.ACCOUNT_REQUESTED.getEventName(),
+            new Object[] {
+                new AccountRequestedEvent(
+                    correlationId,
+                    userAccountId
+                )
+            }
+        );
+        this.messageQueue.publish(accountRequestedEvent);
+
+        return policy.getCombinedFuture();
+    }
+
+    public void handleAccountReturnedEvent(Event event) {
+        AccountReturnedEvent accountReturnedEvent = event.getArgument(0, AccountReturnedEvent.class);
+
+        System.out.println(accountReturnedEvent.getUserAccount());
+        this.policyManager.getPolicy(
+            accountReturnedEvent.getCorrelationId()
+        ).getDependency(
+            AccountReturnedEvent.class
+        ).complete(
+            accountReturnedEvent.getUserAccount()
+        );
     }
 
     public void handleAccountRegisteredEvent(Event event) {

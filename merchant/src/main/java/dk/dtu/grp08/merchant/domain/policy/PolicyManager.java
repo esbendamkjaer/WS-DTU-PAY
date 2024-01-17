@@ -20,7 +20,7 @@ public class PolicyManager {
     public void addPolicy(CorrelationId correlationId, Policy<?> policy) {
         this.correlations.put(correlationId, policy);
         policy.getCombinedFuture().thenAccept((p) -> {
-            this.correlations.remove(correlationId);
+            this.removePolicy(correlationId);
         });
     }
 

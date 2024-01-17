@@ -40,6 +40,8 @@ public class StepDefinitions {
     private ClientErrorException exception;
     private PaymentRequest paymentRequest;
 
+    private UserAccount retrievedCustomer;
+
 
     @Given("a merchant named {string}")
     public void aMerchantWithName(String name) {
@@ -322,6 +324,21 @@ public class StepDefinitions {
         } catch (ClientErrorException e) {
             this.exception = e;
         }
+    }
+
+    @When("the customer is retrieved by id")
+    public void theCustomerIsRetrievedById() {
+        this.retrievedCustomer = this.customerFacade.getCustomer(
+            this.customer.getId()
+        ).orElse(null);
+    }
+
+    @Then("expect the same customer")
+    public void expectTheSameCustomer() {
+        Assert.assertEquals(
+            this.customer,
+            this.retrievedCustomer
+        );
     }
 }
 

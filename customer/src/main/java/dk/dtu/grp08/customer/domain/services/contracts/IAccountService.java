@@ -9,4 +9,6 @@ public interface IAccountService {
     CompletableFuture<Void> deleteUserAccount(UserAccountId userId);
 
     CompletableFuture<UserAccount> createUserAccount(UserAccount userAccount);
+
+    CompletableFuture<UserAccount> getUserAccount(UserAccountId userAccountId);
 }

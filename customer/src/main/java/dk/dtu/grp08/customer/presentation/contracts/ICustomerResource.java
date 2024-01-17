@@ -36,6 +36,6 @@ public interface ICustomerResource {
     @GET
     @Path("/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
-    UserAccount getCustomer(@PathParam("userId") UUID userId);
+    CompletableFuture<UserAccount> getCustomer(@PathParam("userId") UUID userId);
 
 }

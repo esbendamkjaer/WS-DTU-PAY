@@ -48,6 +48,11 @@ public class AccountService implements IAccountService {
             EventType.ACCOUNT_DEREGISTRATION_REQUESTED.getEventName(),
             this::handleAccountDeregistrationRequestedEvent
         );
+
+        this.messageQueue.addHandler(
+            EventType.ACCOUNT_REQUESTED.getEventName(),
+            this::handleAccountRequestedEvent
+        );
     }
 
     @Override
@@ -205,6 +210,26 @@ public class AccountService implements IAccountService {
 
         this.messageQueue.publish(
             accountDeregisteredEvent
+        );
+    }
+
+    public void handleAccountRequestedEvent(Event event) {
+        AccountRequestedEvent accountRequestedEvent = event.getArgument(0, AccountRequestedEvent.class);
+
+        UserAccountId userAccountId = accountRequestedEvent.getUserId();
+
+        Event accountReturnedEvent = new Event(
+                EventType.ACCOUNT_RETURNED.getEventName(),
+                new Object[]{
+                        new AccountReturnedEvent(
+                                accountRequestedEvent.getCorrelationId(),
+                                this.getUserAccountById(userAccountId).orElse(null)
+                        )
+                }
+        );
+
+        this.messageQueue.publish(
+            accountReturnedEvent
         );
     }
 

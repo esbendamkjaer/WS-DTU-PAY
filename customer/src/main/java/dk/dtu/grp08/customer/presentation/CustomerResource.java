@@ -55,8 +55,10 @@ public class CustomerResource implements ICustomerResource {
     }
 
     @Override
-    public UserAccount getCustomer(UUID userId) {
-        return null;
+    public CompletableFuture<UserAccount> getCustomer(UUID userId) {
+        return this.accountService.getUserAccount(
+            new UserAccountId(userId)
+        );
     }
 
 
