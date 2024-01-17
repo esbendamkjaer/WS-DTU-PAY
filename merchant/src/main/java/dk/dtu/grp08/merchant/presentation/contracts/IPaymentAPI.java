@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("/payments")
-@RegisterRestClient(baseUri = "http://localhost:8080")
+@RegisterRestClient(configKey = "ms.payment")
 public interface IPaymentAPI {
 
     @POST

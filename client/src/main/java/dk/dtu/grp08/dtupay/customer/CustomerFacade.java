@@ -17,7 +17,9 @@ public class CustomerFacade implements ICustomerFacade {
     public CustomerFacade() {
         customerAPI = Stub.get(
             ICustomerAPI.class,
-            "http://localhost:8083"
+            Optional
+                .ofNullable(System.getenv("CUSTOMER_API"))
+                .orElse("http://localhost:8082")
         );
     }
 
