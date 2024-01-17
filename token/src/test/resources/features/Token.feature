@@ -8,3 +8,4 @@ Feature:
     Given an invalid token
     When a PaymentRequestedEvent is received
     Then a corresponding TokenInvalidatedEvent is sent
+    

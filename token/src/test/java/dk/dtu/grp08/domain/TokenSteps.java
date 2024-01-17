@@ -14,6 +14,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import messaging.Event;
 import messaging.MessageQueue;
+import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -90,7 +91,6 @@ public class TokenSteps {
 
     @Then("a corresponding TokenInvalidatedEvent is sent")
     public void theTokenInvalidatedEventIsSent() {
-
         Event event = new Event(
             EventType.TOKEN_INVALIDATED.getEventName(),
             new Object[] {
