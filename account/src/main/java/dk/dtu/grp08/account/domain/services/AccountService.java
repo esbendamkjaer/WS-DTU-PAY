@@ -28,13 +28,13 @@ public class AccountService implements IAccountService {
         this.messageQueue = messageQueue;
 
         this.messageQueue.addHandler(
-                EventType.TOKEN_VALIDATED.getEventName(),
-                this::handleTokenValidatedEvent
+            EventType.TOKEN_VALIDATED.getEventName(),
+            this::handleTokenValidatedEvent
         );
 
         this.messageQueue.addHandler(
-                EventType.PAYMENT_REQUESTED.getEventName(),
-                this::handlePaymentRequestedEvent
+            EventType.PAYMENT_REQUESTED.getEventName(),
+            this::handlePaymentRequestedEvent
         );
     }
 
