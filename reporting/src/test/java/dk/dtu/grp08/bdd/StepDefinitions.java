@@ -1,15 +1,9 @@
 package dk.dtu.grp08.bdd;
 
-import dk.dtu.grp08.adapter.BankAdapter;
-import dk.dtu.grp08.adapter.IBankAdapter;
-import dk.dtu.grp08.dtupay.customer.CustomerFacade;
-import dk.dtu.grp08.dtupay.customer.ICustomerFacade;
-import dk.dtu.grp08.dtupay.merchant.IMerchantFacade;
-import dk.dtu.grp08.dtupay.merchant.MerchantFacade;
-import dk.dtu.grp08.dtupay.models.PaymentRequest;
-import dk.dtu.grp08.dtupay.models.Token;
 import dk.dtu.grp08.reporting.domain.events.EventType;
 import dk.dtu.grp08.reporting.domain.events.PaymentTransferEvent;
+import dk.dtu.grp08.reporting.domain.models.PaymentRequest;
+import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccount;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,8 +19,6 @@ public class StepDefinitions {
 
 
     private final List<Token> customerTokens = new ArrayList<>();
-    private final IBankAdapter bankAdapter = new BankAdapter();
-    private final IMerchantFacade merchantFacade = new MerchantFacade();
     private final ICustomerFacade customerFacade = new CustomerFacade();
     private UserAccount customer;
     private UserAccount merchant;
@@ -42,7 +34,7 @@ public class StepDefinitions {
     public void aPaymentTransferredEvent(double amount) {
 
         PaymentTransferEvent paymentTransferEvent = new PaymentTransferEvent();
-        paymentTransferEvent.setMerchantID(merchant.getUserId()
+        paymentTransferEvent.setMerchantID(merchant.getId().getId());
         paymentTransferEvent.setToken(customerTokens.get(0));
         paymentTransferEvent.setAmount(BigDecimal.valueOf(amount));
 
