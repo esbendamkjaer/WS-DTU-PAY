@@ -34,7 +34,7 @@ popd
 # --build is to build images before starting containers
 # --wait makes the command return/exit only after all containers have been started and are in healthy state
 #
-docker-compose up -d --build --wait
+docker-compose up -d --build --wait --no-cache
 
 #run test for all microservices
 #mvn test
