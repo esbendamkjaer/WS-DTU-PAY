@@ -2,7 +2,7 @@ package dk.dtu.grp08.domain;
 
 import dk.dtu.grp08.token.data.repository.TokenRepository;
 import dk.dtu.grp08.token.domain.events.EventType;
-import dk.dtu.grp08.token.domain.events.PaymentRequestedEvent;
+import dk.dtu.grp08.token.domain.events.PaymentInitiatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenValidatedEvent;
 import dk.dtu.grp08.token.domain.models.CorrelationId;
@@ -52,15 +52,15 @@ public class TokenSteps {
         );
     }
 
-    @When("a PaymentRequestedEvent is received")
-    public void thePaymentRequestedEventIsReceived() {
+    @When("a PaymentInitiatedEvent is received")
+    public void thePaymentInitiatedEventIsReceived() {
         this.correlationId = CorrelationId.randomId();
 
-        this.tokenService.handlePaymentRequestedEvent(
+        this.tokenService.handlePaymentInitiatedEvent(
             new messaging.Event(
-                EventType.PAYMENT_REQUESTED.getEventName(),
+                EventType.PAYMENT_INITIATED.getEventName(),
                 new Object[] {
-                    new PaymentRequestedEvent(
+                    new PaymentInitiatedEvent(
                         UUID.randomUUID(),
                         this.token,
                         BigDecimal.valueOf(100),

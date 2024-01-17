@@ -1,7 +1,7 @@
 package dk.dtu.grp08.token.domain.services;
 
 import dk.dtu.grp08.token.domain.events.EventType;
-import dk.dtu.grp08.token.domain.events.PaymentRequestedEvent;
+import dk.dtu.grp08.token.domain.events.PaymentInitiatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenValidatedEvent;
 import dk.dtu.grp08.token.domain.exceptions.InvalidTokenException;
@@ -35,8 +35,8 @@ public class TokenService implements ITokenService {
         this.messageQueue = messageQueue;
         
         this.messageQueue.addHandler(
-            EventType.PAYMENT_REQUESTED.getEventName(),
-            this::handlePaymentRequestedEvent
+            EventType.PAYMENT_INITIATED.getEventName(),
+            this::handlePaymentInitiatedEvent
         );
     }
 
@@ -87,22 +87,22 @@ public class TokenService implements ITokenService {
         );
     }
 
-    public void handlePaymentRequestedEvent(Event event) {
-        PaymentRequestedEvent paymentRequestedEvent = event.getArgument(0, PaymentRequestedEvent.class);
+    public void handlePaymentInitiatedEvent(Event event) {
+        PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
 
         UserId userId;
 
         try {
             userId = this.validateToken(
-                    paymentRequestedEvent.getToken()
+                    paymentInitiatedEvent.getToken()
             );
         } catch (InvalidTokenException e) {
             Event invalidTokenEvent = new Event(
                     EventType.TOKEN_INVALIDATED.getEventName(),
                     new Object[] {
                             new TokenInvalidatedEvent(
-                                    paymentRequestedEvent.getCorrelationId(),
-                                    paymentRequestedEvent.getToken()
+                                    paymentInitiatedEvent.getCorrelationId(),
+                                    paymentInitiatedEvent.getToken()
                             )
                     }
             );
@@ -116,8 +116,8 @@ public class TokenService implements ITokenService {
                 EventType.TOKEN_VALIDATED.getEventName(),
                 new Object[] {
                         new TokenValidatedEvent(
-                                paymentRequestedEvent.getCorrelationId(),
-                                paymentRequestedEvent.getToken(),
+                                paymentInitiatedEvent.getCorrelationId(),
+                                paymentInitiatedEvent.getToken(),
                                 userId
                         )
                 }

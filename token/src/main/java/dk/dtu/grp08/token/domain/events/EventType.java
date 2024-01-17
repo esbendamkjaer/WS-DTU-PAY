@@ -2,7 +2,7 @@ package dk.dtu.grp08.token.domain.events;
 
 public enum EventType {
 
-    PAYMENT_REQUESTED("PaymentRequested"),
+    PAYMENT_INITIATED("PaymentInitiated"),
     TOKEN_VALIDATED("TokenValidated"),
     TOKEN_INVALIDATED("TokenInvalidated");
 

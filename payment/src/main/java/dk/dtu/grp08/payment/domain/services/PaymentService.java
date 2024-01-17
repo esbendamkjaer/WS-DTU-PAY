@@ -98,9 +98,9 @@ public class PaymentService implements IPaymentService {
 
         messageQueue.publish(
             new Event(
-                EventType.PAYMENT_REQUESTED.getEventName(),
+                EventType.PAYMENT_INITIATED.getEventName(),
                 new Object[] {
-                    new PaymentRequestedEvent(
+                    new PaymentInitiatedEvent(
                         merchantID,
                         token,
                         amount,

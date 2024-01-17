@@ -35,8 +35,8 @@ public class AccountService implements IAccountService {
         );
 
         this.messageQueue.addHandler(
-            EventType.PAYMENT_REQUESTED.getEventName(),
-            this::handlePaymentRequestedEvent
+            EventType.PAYMENT_INITIATED.getEventName(),
+            this::handlePaymentInitiatedEvent
         );
 
         this.messageQueue.addHandler(
@@ -97,13 +97,13 @@ public class AccountService implements IAccountService {
         return this.accountRepository.findAll();
     }
 
-    public void handlePaymentRequestedEvent(Event event) {
-        PaymentRequestedEvent paymentRequestedEvent = event.getArgument(0, PaymentRequestedEvent.class);
+    public void handlePaymentInitiatedEvent(Event event) {
+        PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
 
-        System.out.println("payment requested event received");
+        System.out.println("Payment initiated event received");
 
         UserAccount merchant = this.getUserAccountById(
-            new UserAccountId(paymentRequestedEvent.getMerchantID())
+            new UserAccountId(paymentInitiatedEvent.getMerchantID())
         ).get();
 
         BankAccountNo creditorBankAccountNo = merchant.getBankAccountNo();
@@ -113,7 +113,7 @@ public class AccountService implements IAccountService {
                 new Object[]{
                         new BankAccountNoAssignedEvent(
                                 creditorBankAccountNo,
-                                paymentRequestedEvent.getCorrelationId()
+                                paymentInitiatedEvent.getCorrelationId()
                         )
                 }
         );

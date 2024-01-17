@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequestedEvent {
+public class PaymentInitiatedEvent {
     UUID merchantID;
     Token token;
     BigDecimal amount;

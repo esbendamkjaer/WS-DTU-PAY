@@ -1,7 +1,7 @@
 package dk.dtu.grp08.token.presentation.resources;
 
 import dk.dtu.grp08.token.domain.events.EventType;
-import dk.dtu.grp08.token.domain.events.PaymentRequestedEvent;
+import dk.dtu.grp08.token.domain.events.PaymentInitiatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenInvalidatedEvent;
 import dk.dtu.grp08.token.domain.events.TokenValidatedEvent;
 import dk.dtu.grp08.token.domain.exceptions.InvalidTokenException;

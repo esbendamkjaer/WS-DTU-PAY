@@ -1,11 +1,11 @@
 Feature:
-  Scenario: Payment requested
+  Scenario: Payment initiated
     Given a valid token
-    When a PaymentRequestedEvent is received
+    When a PaymentInitiatedEvent is received
     Then a corresponding TokenValidatedEvent is sent
 
-  Scenario: Payment requested with invalid token
+  Scenario: Payment initiated with invalid token
     Given an invalid token
-    When a PaymentRequestedEvent is received
+    When a PaymentInitiatedEvent is received
     Then a corresponding TokenInvalidatedEvent is sent
     

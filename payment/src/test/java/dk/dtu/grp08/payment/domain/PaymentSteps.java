@@ -28,7 +28,7 @@ public class PaymentSteps {
     private final IBankAdapter bankAdapter = mock(IBankAdapter.class);
 
     private PaymentRequest paymentRequest;
-    private PaymentRequestedEvent paymentRequestedEvent;
+    private PaymentInitiatedEvent paymentInitiatedEvent;
     private CustomerBankAccountAssignedEvent customerBankAccountAssignedEvent;
     private MerchantBankAccountAssignedEvent merchantBankAccountAssignedEvent;
 
@@ -58,7 +58,7 @@ public class PaymentSteps {
     @When("a CustomerBankAccountAssignedEvent is received")
     public void aCustomerBankAccountAssignedEventIsReceived() {
         this.customerBankAccountAssignedEvent = new CustomerBankAccountAssignedEvent(
-            this.paymentRequestedEvent.getCorrelationId(),
+            this.paymentInitiatedEvent.getCorrelationId(),
             new BankAccountNo(
                 UUID.randomUUID().toString()
             )
@@ -79,7 +79,7 @@ public class PaymentSteps {
     @When("a MerchantBankAccountAssignedEvent is received")
     public void aMerchantBankAccountAssignedEventIsReceived() {
         this.merchantBankAccountAssignedEvent = new MerchantBankAccountAssignedEvent(
-            this.paymentRequestedEvent.getCorrelationId(),
+            this.paymentInitiatedEvent.getCorrelationId(),
             new BankAccountNo(
                 UUID.randomUUID().toString()
             )
@@ -103,8 +103,8 @@ public class PaymentSteps {
             EventType.TOKEN_INVALIDATED.getEventName(),
             new Object[] {
                 new TokenInvalidatedEvent(
-                    this.paymentRequestedEvent.getCorrelationId(),
-                    this.paymentRequestedEvent.getToken()
+                    this.paymentInitiatedEvent.getCorrelationId(),
+                    this.paymentInitiatedEvent.getToken()
                 )
             }
         );
@@ -120,7 +120,7 @@ public class PaymentSteps {
             new Payment(
                 this.customerBankAccountAssignedEvent.getBankAccountNo(),
                 this.merchantBankAccountAssignedEvent.getBankAccountNo(),
-                this.paymentRequestedEvent.getAmount()
+                this.paymentInitiatedEvent.getAmount()
             )
         );
     }
@@ -131,9 +131,9 @@ public class PaymentSteps {
             EventType.PAYMENT_TRANSFERRED.getEventName(),
             new Object[] {
                 new PaymentTransferredEvent(
-                    this.paymentRequestedEvent.getMerchantID(),
-                    this.paymentRequestedEvent.getToken(),
-                    this.paymentRequestedEvent.getAmount()
+                    this.paymentInitiatedEvent.getMerchantID(),
+                    this.paymentInitiatedEvent.getToken(),
+                    this.paymentInitiatedEvent.getAmount()
                 )
             }
         );
@@ -141,32 +141,32 @@ public class PaymentSteps {
         verify(messageQueue).publish(event);
     }
 
-    @Then("a PaymentRequestedEvent is sent")
-    public void aPaymentRequestedEventIsSent() {
+    @Then("a PaymentInitiatedEvent is sent")
+    public void aPaymentInitiatedEventIsSent() {
         verify(messageQueue).publish(eventCaptor.capture());
 
         Event event = eventCaptor.getValue();
-        PaymentRequestedEvent paymentRequestedEvent = event.getArgument(0, PaymentRequestedEvent.class);
+        PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
 
-        this.paymentRequestedEvent = paymentRequestedEvent;
+        this.paymentInitiatedEvent = paymentInitiatedEvent;
 
         Assertions.assertEquals(
             paymentRequest.getMerchantId(),
-            paymentRequestedEvent.getMerchantID()
+            paymentInitiatedEvent.getMerchantID()
         );
 
         Assertions.assertEquals(
             paymentRequest.getToken(),
-            paymentRequestedEvent.getToken()
+            paymentInitiatedEvent.getToken()
         );
 
         Assertions.assertEquals(
             paymentRequest.getAmount(),
-            paymentRequestedEvent.getAmount()
+            paymentInitiatedEvent.getAmount()
         );
 
         Assertions.assertNotNull(
-            paymentRequestedEvent
+            paymentInitiatedEvent
                 .getCorrelationId()
                 .getId()
         );
@@ -178,7 +178,7 @@ public class PaymentSteps {
             EventType.PAYMENT_CANCELED.getEventName(),
             new Object[] {
                 new PaymentCanceledEvent(
-                    this.paymentRequestedEvent.getCorrelationId()
+                    this.paymentInitiatedEvent.getCorrelationId()
                 )
             }
         );
