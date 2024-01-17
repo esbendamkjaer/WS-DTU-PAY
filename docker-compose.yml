@@ -4,6 +4,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
   account:
     build:
       context: ./account
@@ -12,6 +13,15 @@ services:
       - "8081:8080"
     depends_on:
       - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
   customer:
     build:
       context: ./customer
@@ -20,6 +30,15 @@ services:
       - "8082:8080"
     depends_on:
       - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
   payment:
     build:
       context: ./payment
@@ -28,6 +47,15 @@ services:
       - "8083:8080"
     depends_on:
       - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
   token:
     build:
       context: ./token
@@ -36,6 +64,15 @@ services:
       - "8084:8080"
     depends_on:
       - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
   reporting:
     build:
       context: ./reporting
@@ -44,3 +81,46 @@ services:
       - "8085:8080"
     depends_on:
       - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
+  merchant:
+    build:
+      context: ./merchant
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8080"
+    depends_on:
+      - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
+  manager:
+    build:
+      context: ./manager
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8080"
+    depends_on:
+      - rabbitmq
+    environment:
+      - ACCOUNT_API=http://localhost:8081
+      - CUSTOMER_API=http://localhost:8082
+      - PAYMENT_API=http://localhost:8083
+      - TOKEN_API=http://localhost:8084
+      - REPORTING_API=http://localhost:8085
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
+
