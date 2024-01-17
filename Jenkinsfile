@@ -2,25 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build and Run') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'chmod +x ./build_and_run.sh'
+                sh './build_and_run.sh'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-
-            }
-        }
-
-        stage ('Deploy') {
-            steps {
-                sh 'docker-compose up -d --build'
-                sleep 2
-            }
-        }
-
-        stage ('Test') {
-            // hvorfor test efter deployment?
-            steps {
-                sh 'mvn test'
             }
         }
     }

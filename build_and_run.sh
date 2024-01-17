@@ -2,6 +2,12 @@
 
 set -e # Stops the execution if an error occurs
 
+# Build MQ wrapper dependency
+pushd messaging-utilities-3.4
+chmod +x build.sh
+./build.sh
+popd
+
 # Build and run each microservice
 pushd account
 chmod +x build.sh
@@ -24,6 +30,22 @@ chmod +x build.sh
 popd
 
 pushd token
+chmod +x build.sh
+./build.sh
+popd
+
+
+pushd customer
+chmod +x build.sh
+./build.sh
+popd
+
+pushd manager
+chmod +x build.sh
+./build.sh
+popd
+
+pushd merchant
 chmod +x build.sh
 ./build.sh
 popd

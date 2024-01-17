@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Path("/accounts")
-@RegisterRestClient(baseUri = "http://localhost:8081")
+@RegisterRestClient(configKey = "ms.account")
 public interface IAccountAPI {
 
     @POST
