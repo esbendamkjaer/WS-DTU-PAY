@@ -15,7 +15,7 @@ public interface ICustomerResource {
     @GET
     @Path("/{userId}/tokens")
     @Produces({MediaType.APPLICATION_JSON})
-    List<Token> getTokens(
+    CompletableFuture<List<Token>> getTokens(
         @PathParam("userId") UUID userId,
         @QueryParam("count") int count
     );

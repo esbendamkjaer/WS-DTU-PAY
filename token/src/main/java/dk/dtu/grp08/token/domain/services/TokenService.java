@@ -1,14 +1,12 @@
 package dk.dtu.grp08.token.domain.services;
 
-import dk.dtu.grp08.token.domain.events.EventType;
-import dk.dtu.grp08.token.domain.events.PaymentInitiatedEvent;
-import dk.dtu.grp08.token.domain.events.TokenInvalidatedEvent;
-import dk.dtu.grp08.token.domain.events.TokenValidatedEvent;
+import dk.dtu.grp08.token.domain.events.*;
 import dk.dtu.grp08.token.domain.exceptions.InvalidTokenException;
 import dk.dtu.grp08.token.domain.exceptions.TokenException;
 import dk.dtu.grp08.token.domain.models.Token;
 import dk.dtu.grp08.token.domain.models.UserId;
 import dk.dtu.grp08.token.domain.repository.ITokenRepository;
+import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import messaging.Event;
@@ -19,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Startup
 @ApplicationScoped
 public class TokenService implements ITokenService {
 
@@ -37,6 +36,11 @@ public class TokenService implements ITokenService {
         this.messageQueue.addHandler(
             EventType.PAYMENT_INITIATED.getEventName(),
             this::handlePaymentInitiatedEvent
+        );
+
+        this.messageQueue.addHandler(
+            EventType.TOKENS_REQUESTED.getEventName(),
+            this::handleTokensRequestedEvent
         );
     }
 
@@ -125,4 +129,41 @@ public class TokenService implements ITokenService {
 
         messageQueue.publish(validTokenEvent);
     }
+
+    public void handleTokensRequestedEvent(Event event) {
+        TokensRequestedEvent tokensRequestedEvent = event.getArgument(0, TokensRequestedEvent.class);
+
+        try {
+            List<Token> tokens = this.getTokens(
+                tokensRequestedEvent.getCount(),
+                tokensRequestedEvent.getUserId()
+            );
+
+            Event tokensReturnedEvent = new Event(
+                EventType.TOKENS_RETURNED.getEventName(),
+                new Object[] {
+                    new TokensReturnedEvent(
+                        tokensRequestedEvent.getCorrelationId(),
+                        tokens
+                    )
+                }
+            );
+
+            messageQueue.publish(tokensReturnedEvent);
+        } catch (TokenException e) {
+            Event tokenRequestFailedEvent = new Event(
+                EventType.TOKEN_REQUEST_FAILED.getEventName(),
+                new Object[] {
+                    new TokenRequestFailed(
+                        tokensRequestedEvent.getCorrelationId(),
+                        e.getMessage()
+                    )
+                }
+            );
+
+            messageQueue.publish(tokenRequestFailedEvent);
+        }
+
+    }
+
 }

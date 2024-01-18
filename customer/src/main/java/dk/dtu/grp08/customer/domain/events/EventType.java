@@ -13,7 +13,10 @@ public enum EventType {
     ACCOUNT_DEREGISTERED("AccountDeregistered"),
     ACCOUNT_REQUESTED("AccountRequested"),
     ACCOUNT_RETURNED("AccountReturned"),
-    USER_NOT_FOUND("UserNotFound")
+    USER_NOT_FOUND("UserNotFound"),
+    TOKENS_REQUESTED("TokensRequested"),
+    TOKENS_RETURNED("TokensReturned"),
+    TOKEN_REQUEST_FAILED("TokenRequestFailed"),
     ;
 
     private final String eventName;
