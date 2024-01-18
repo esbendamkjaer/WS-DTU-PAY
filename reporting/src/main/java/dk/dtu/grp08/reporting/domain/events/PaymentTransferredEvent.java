@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentTransferEvent {
+public class PaymentTransferredEvent {
     UserAccountId merchantId;
     UserAccountId customerId;
     Payment payment;

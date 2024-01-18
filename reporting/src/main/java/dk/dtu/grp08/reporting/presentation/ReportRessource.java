@@ -50,7 +50,7 @@ public class ReportRessource implements IReportResource {
 
 
     public void handlePaymentTransferredEvent(Event event) {
-        PaymentTransferEvent paymentTransferEvent = event.getArgument(0, PaymentTransferEvent.class);
+        PaymentTransferredEvent paymentTransferEvent = event.getArgument(0, PaymentTransferredEvent.class);
         reportService.savePayment(paymentTransferEvent.getMerchantId(), paymentTransferEvent.getCustomerId(), paymentTransferEvent.getPayment().getAmount());
 
     }

@@ -9,7 +9,6 @@ import dk.dtu.grp08.customer.domain.policy.PolicyBuilder;
 import dk.dtu.grp08.customer.domain.policy.PolicyManager;
 import dk.dtu.grp08.customer.domain.services.contracts.IAccountService;
 import dk.dtu.grp08.customer.domain.services.contracts.ITokenService;
-import dk.dtu.grp08.customer.presentation.contracts.IAccountAPI;
 import dk.dtu.grp08.customer.presentation.contracts.ICustomerResource;
 import dk.dtu.grp08.customer.presentation.contracts.ITokenAPI;
 

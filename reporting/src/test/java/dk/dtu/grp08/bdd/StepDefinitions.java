@@ -49,7 +49,7 @@ public class StepDefinitions {
     private UserAccountId merchantID;
 
     private Payment payment;
-    private PaymentTransferEvent paymentTransferredEvent;
+    private PaymentTransferredEvent paymentTransferredEvent;
 
     private CustomerReportRequested customerReportRequestedEvent;
     private MerchantReportRequested merchantReportRequestedEvent;
@@ -95,7 +95,7 @@ public class StepDefinitions {
         this.correlationId = CorrelationId.randomId();
 
 
-        paymentTransferredEvent = new PaymentTransferEvent(
+        paymentTransferredEvent = new PaymentTransferredEvent(
                 merchantID,
                 customerID,
                 payment,
