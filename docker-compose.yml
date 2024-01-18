@@ -9,8 +9,6 @@ services:
     build:
       context: ./account
       dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
     depends_on:
       - rabbitmq
     environment:
@@ -37,8 +35,6 @@ services:
     build:
       context: ./payment
       dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
     depends_on:
       - rabbitmq
     environment:
@@ -51,8 +47,6 @@ services:
     build:
       context: ./token
       dockerfile: Dockerfile
-    ports:
-      - "8084:8084"
     depends_on:
       - rabbitmq
     environment:
