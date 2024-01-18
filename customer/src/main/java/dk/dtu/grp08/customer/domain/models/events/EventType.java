@@ -1,16 +1,15 @@
-package dk.dtu.grp08.reporting.domain.events;
+package dk.dtu.grp08.customer.domain.models.events;
 
 public enum EventType {
 
-    PAYMENT_TRANSFERRED("PaymentTransferred"),
 
+
+    REPORT_GENERATED("ReportGenerated"),
     CUSTOMER_REPORT_REQUESTED("CustomerReportRequested"),
-
     MERCHANT_REPORT_REQUESTED("MerchantReportRequested"),
+    MANAGER_REPORT_REQUESTED("ManagerReportRequested")
 
-    MANAGER_REPORT_REQUESTED("ManagerReportRequested"),
-
-    REPORT_GENERATED("ReportGenerated");
+    ;
 
 
 

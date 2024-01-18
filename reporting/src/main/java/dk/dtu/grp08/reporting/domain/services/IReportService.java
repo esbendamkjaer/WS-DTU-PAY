@@ -3,6 +3,7 @@ package dk.dtu.grp08.reporting.domain.services;
 
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
+import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,15 +13,15 @@ public interface IReportService {
 
 
     void savePayment(
-            final UUID merchantID,
-            final Token customerID,
+            final UserAccountId merchantID,
+            final UserAccountId customerID,
             final BigDecimal amount
     );
 
 
-    List<Payment> getReportCustomer(Token token);
+    List<Payment> getReportCustomer(UserAccountId customerID);
 
-    List<Payment> getReportMerchant(UUID uuid);
+    List<Payment> getReportMerchant(UserAccountId merchantID);
 
     List<Payment> getReportManager();
 

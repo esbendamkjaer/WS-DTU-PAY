@@ -6,6 +6,9 @@ import dk.dtu.grp08.dtupay.models.UserId;
 import dk.dtu.grp08.dtupay.models.Payment;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 public interface IMerchantFacade {
 
     UserAccount register(
@@ -19,5 +22,9 @@ public interface IMerchantFacade {
     Payment pay(
         PaymentRequest paymentRequest
     );
+
+
+    CompletableFuture<List<Payment>> getReport(UserId userId);
+
 
 }

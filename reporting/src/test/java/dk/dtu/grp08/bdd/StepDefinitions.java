@@ -2,15 +2,15 @@ package dk.dtu.grp08.bdd;
 
 
 import dk.dtu.grp08.reporting.data.repositories.ReportRepository;
-import dk.dtu.grp08.reporting.domain.events.CustomerReportRequested;
-import dk.dtu.grp08.reporting.domain.events.EventType;
-import dk.dtu.grp08.reporting.domain.events.PaymentTransferEvent;
+import dk.dtu.grp08.reporting.domain.events.*;
 import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccount;
+import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import dk.dtu.grp08.reporting.domain.services.ReportService;
 import dk.dtu.grp08.reporting.presentation.ReportRessource;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,6 +25,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class StepDefinitions {
 
@@ -32,47 +33,80 @@ public class StepDefinitions {
 
     private ReportRepository reportRepository = new ReportRepository();
 
+    private ReportService reportService = new ReportService(
+            reportRepository
+    );
     public ReportRessource reportRessource = new ReportRessource(
-            new ReportService(reportRepository),
+            reportService,
             messageQueue
     );
 
 
-
     private CorrelationId correlationId;
 
-    private Token token;
 
-    private UserAccount customer;
-    private UserAccount merchant;
+    private UserAccountId customerID;
+    private UserAccountId merchantID;
+
+    private Payment payment;
     private PaymentTransferEvent paymentTransferredEvent;
 
     private CustomerReportRequested customerReportRequestedEvent;
+    private MerchantReportRequested merchantReportRequestedEvent;
+
+
+    private ManagerReportRequested managerReportRequestedEvent;
 
 
     EventType eventType = EventType.PAYMENT_TRANSFERRED;
+
+    List<Payment> report;
+
+
+    @Given("a Customer with id {string}")
+    public void setCustomer(String customerID) {
+        this.customerID = new UserAccountId(UUID.fromString(customerID));
+
+    }
+
+
+    @And("a Merchant with id {string}")
+    public void setMerchant( String merchantID) {
+        this.merchantID = new UserAccountId(UUID.fromString(merchantID));
+
+
+    }
+
+    @And("a Payment with {int} kr")
+    public void setPayment(int amount) {
+        this.payment = new Payment();
+        this.payment.setAmount(BigDecimal.valueOf(amount));
+        this.payment.setCreditor(this.merchantID);
+        this.payment.setDebtor(this.customerID);
+
+    }
+
 
 
 
     @When("a PAYMENT_TRANSFERRED event is received")
     public void aPaymentTransferredEvent() {
-        this.token = new Token(
-                UUID.randomUUID()
-        );
-
-        paymentTransferredEvent = new PaymentTransferEvent(
-                UUID.randomUUID(),
-                this.token,
-                BigDecimal.valueOf(100)
-        );
-
 
         this.correlationId = CorrelationId.randomId();
+
+
+        paymentTransferredEvent = new PaymentTransferEvent(
+                merchantID,
+                customerID,
+                payment,
+                correlationId
+        );
+
 
         this.reportRessource.handlePaymentTransferredEvent(
                 new messaging.Event(
                         EventType.PAYMENT_TRANSFERRED.getEventName(),
-                        new Object[] {
+                        new Object[]{
                                 paymentTransferredEvent
 
                         }
@@ -81,43 +115,149 @@ public class StepDefinitions {
     }
 
 
+
     @Then("the payment should be saved")
     public void thePaymentShouldBeSaved() {
-        System.out.println("reportRepository.getPayments() = " + reportRepository.getPayments());
 
-        Payment recordedPayment = reportRepository.getPayments().get(0);
 
-        Assert.assertTrue(paymentTransferredEvent.getMerchantID().equals(recordedPayment.getCreditor()) &&
-                recordedPayment.getDebtor().getId().equals(paymentTransferredEvent.getToken().getId())  &&
-                Objects.equals(recordedPayment.getAmount(), paymentTransferredEvent.getAmount()));
+        Payment paymentSaved = reportRepository.getPayments().get(0);
+        System.out.println(paymentSaved);
+        System.out.println(payment);
+
+        Assert.assertTrue(paymentSaved.getCreditor().getId().equals(payment.getCreditor().getId()) &&
+                payment.getDebtor().getId().equals(paymentSaved.getDebtor().getId()) &&
+                Objects.equals(payment.getAmount(), paymentSaved.getAmount()));
     }
 
 
     @When("a CUSTOMER_REPORT_REQUESTED event is received")
     public void aCustomerReportRequestedEvent() {
-        this.token = new Token(
-                UUID.randomUUID()
-        );
 
-        customerReportRequestedEvent = new CustomerReportRequested();
+        correlationId = CorrelationId.randomId();
 
-        this.correlationId = CorrelationId.randomId();
 
-        this.reportRessource.handlePaymentTransferredEvent(
+        customerReportRequestedEvent = new CustomerReportRequested(customerID, correlationId);
+
+
+        this.reportRessource.handleCustomerReportRequested(
                 new messaging.Event(
-                        EventType.PAYMENT_TRANSFERRED.getEventName(),
-                        new Object[] {
-                                paymentTransferredEvent
+                        EventType.CUSTOMER_REPORT_REQUESTED.getEventName(),
+                        new Object[]{
+                                customerReportRequestedEvent
 
                         }
                 )
         );
+
+    }
+
+
+    @When("a MERCHANT_REPORT_REQUESTED event is received")
+    public void aMerchantReportRequestedEvent() {
+
+
+        correlationId = CorrelationId.randomId();
+
+
+        merchantReportRequestedEvent = new MerchantReportRequested(merchantID, correlationId);
+
+
+
+
+        this.reportRessource.handleMerchantReportRequested(
+                new messaging.Event(
+                        EventType.MERCHANT_REPORT_REQUESTED.getEventName(),
+                        new Object[]{
+                                merchantReportRequestedEvent
+
+                        }
+                )
+        );
+
+    }
+
+
+
+    @When("a MANAGER_REPORT_REQUESTED event is received")
+    public void aManagerReportRequestedEvent() {
+
+
+        correlationId = CorrelationId.randomId();
+
+
+        managerReportRequestedEvent = new ManagerReportRequested(correlationId);
+
+
+        this.reportRessource.handleManagerReportRequested(
+                new messaging.Event(
+                        EventType.MANAGER_REPORT_REQUESTED.getEventName(),
+                        new Object[]{
+                                managerReportRequestedEvent
+
+                        }
+                )
+        );
+
     }
 
 
 
 
+    @Then("a report should be generated with all payments for the customer")
+    public void aReportGeneratedCustomer() {
 
+
+        report = reportService.getReportCustomer(customerID);
+        boolean isCustomerPayments = report.stream().allMatch(payment -> payment.getDebtor().getId().equals(customerID.getId()));
+
+        Assert.assertTrue(isCustomerPayments);
+
+    }
+
+    @Then("a report should be generated with all payments to the merchant")
+    public void aReportGeneratedMerchant() {
+
+
+        report = reportService.getReportMerchant(merchantID);
+        boolean isMerchantPayments = report.stream().allMatch(payment -> payment.getCreditor().getId().equals(merchantID.getId()));
+
+        Assert.assertTrue(isMerchantPayments);
+
+    }
+
+
+    @Then("a report should be generated with all payments")
+    public void aReportGeneratedManager() {
+
+
+        report = reportService.getReportManager();
+        System.out.println("report: " + report);
+        System.out.println("payment: " + payment);
+        boolean isMerchantPayments = report.contains(payment);
+
+        Assert.assertTrue(isMerchantPayments);
+
+    }
+
+
+    @And("a REPORT_GENERATED event should be published")
+    public void aReportGeneratedEvent() {
+
+
+        Event event = new Event(
+                EventType.REPORT_GENERATED.getEventName(),
+                new Object[]{
+                        new ReportGenerated(
+                                correlationId,
+                                report
+                        )
+
+                }
+        );
+
+        verify(messageQueue).publish(event);
+
+    }
 
 
 }

@@ -43,4 +43,9 @@ public class MerchantResource implements IMerchantResource {
             paymentRequest
         );
     }
+
+    @Override
+    public void getReport(UUID id) {
+
+    }
 }

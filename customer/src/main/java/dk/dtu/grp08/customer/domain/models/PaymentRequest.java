@@ -1,4 +1,4 @@
-package dk.dtu.grp08.customer.presentation.models;
+package dk.dtu.grp08.customer.domain.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

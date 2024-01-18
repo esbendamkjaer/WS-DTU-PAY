@@ -1,7 +1,10 @@
 package dk.dtu.grp08.reporting.domain.events;
 
 
+import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;
+import dk.dtu.grp08.reporting.domain.models.payment.Payment;
+import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,7 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentTransferEvent {
-    UUID merchantID;
-    Token token;
-    BigDecimal amount;
+    UserAccountId merchantId;
+    UserAccountId customerId;
+    Payment payment;
+    CorrelationId correlationId;
 }

@@ -8,7 +8,9 @@ import dk.dtu.grp08.dtupay.models.UserId;
 import dk.dtu.grp08.dtupay.models.Payment;
 import dk.dtu.grp08.dtupay.models.PaymentRequest;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class MerchantFacade implements IMerchantFacade {
 
@@ -47,5 +49,10 @@ public class MerchantFacade implements IMerchantFacade {
         return this.merchantAPI.createPayment(
             paymentRequest
         );
+    }
+
+    @Override
+    public CompletableFuture<List<Payment>> getReport(UserId userId) {
+        return this.merchantAPI.getReport(userId);
     }
 }
