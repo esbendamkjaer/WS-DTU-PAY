@@ -18,7 +18,7 @@ public interface ICustomerFacade {
 
     void deregister(UserId user);
 
-    Optional<UserAccount> getCustomer(UserId userId);
+    UserAccount getCustomer(UserId userId);
 
     CompletableFuture<List<Payment>> getReport(UserId userId);
 }

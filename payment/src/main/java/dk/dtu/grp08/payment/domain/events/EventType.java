@@ -2,12 +2,13 @@ package dk.dtu.grp08.payment.domain.events;
 
 public enum EventType {
 
-    PAYMENT_REQUESTED("PaymentRequested"),
+    PAYMENT_INITIATED("PaymentInitiated"),
     PAYMENT_TRANSFERRED("PaymentTransferred"),
     CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),
     MERCHANT_BANK_ACCOUNT_ASSIGNED("MerchantBankAccountAssigned"),
     TOKEN_INVALIDATED("TokenInvalidated"),
-    PAYMENT_CANCELED("PaymentCanceled")
+    PAYMENT_REQUESTED("PaymentRequested"),
+    PAYMENT_FAILED("PaymentFailed")
     ;
 
     private String eventName;

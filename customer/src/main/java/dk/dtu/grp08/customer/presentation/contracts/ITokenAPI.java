@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path("/tokens")
-@RegisterRestClient(configKey = "ms.token_api")
+@RegisterRestClient(baseUri = "http://localhost:8084")
 public interface ITokenAPI {
 
     @GET

@@ -1,12 +1,15 @@
 package dk.dtu.grp08.manager.presentation;
 
 import dk.dtu.grp08.manager.presentation.contracts.IManagerFacade;
+import jakarta.enterprise.context.ApplicationScoped;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
+@ApplicationScoped
 public class ManagerFacade implements IManagerFacade {
 
+    public ManagerFacade() {
 
+    }
 
     @Override
     public void getReports() {

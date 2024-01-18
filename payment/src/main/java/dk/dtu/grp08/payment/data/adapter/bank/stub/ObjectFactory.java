@@ -27,9 +27,9 @@ public class ObjectFactory {
     private static final QName _CreateAccountWithBalance_QNAME = new QName("http://fastmoney.ws.dtu/", "createAccountWithBalance");
     private static final QName _CreateAccountWithBalanceResponse_QNAME = new QName("http://fastmoney.ws.dtu/", "createAccountWithBalanceResponse");
     private static final QName _GetAccount_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccount");
+    private static final QName _GetAccountByCprNumber_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccountByCprNumber");
+    private static final QName _GetAccountByCprNumberResponse_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccountByCprNumberResponse");
     private static final QName _GetAccountResponse_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccountResponse");
-    private static final QName _GetAccounts_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccounts");
-    private static final QName _GetAccountsResponse_QNAME = new QName("http://fastmoney.ws.dtu/", "getAccountsResponse");
     private static final QName _RetireAccount_QNAME = new QName("http://fastmoney.ws.dtu/", "retireAccount");
     private static final QName _RetireAccountResponse_QNAME = new QName("http://fastmoney.ws.dtu/", "retireAccountResponse");
     private static final QName _TransferMoneyFromTo_QNAME = new QName("http://fastmoney.ws.dtu/", "transferMoneyFromTo");
@@ -74,6 +74,26 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAccountByCprNumber }
+     * 
+     * @return
+     *     the new instance of {@link GetAccountByCprNumber }
+     */
+    public GetAccountByCprNumber createGetAccountByCprNumber() {
+        return new GetAccountByCprNumber();
+    }
+
+    /**
+     * Create an instance of {@link GetAccountByCprNumberResponse }
+     * 
+     * @return
+     *     the new instance of {@link GetAccountByCprNumberResponse }
+     */
+    public GetAccountByCprNumberResponse createGetAccountByCprNumberResponse() {
+        return new GetAccountByCprNumberResponse();
+    }
+
+    /**
      * Create an instance of {@link GetAccountResponse }
      * 
      * @return
@@ -81,26 +101,6 @@ public class ObjectFactory {
      */
     public GetAccountResponse createGetAccountResponse() {
         return new GetAccountResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAccounts }
-     * 
-     * @return
-     *     the new instance of {@link GetAccounts }
-     */
-    public GetAccounts createGetAccounts() {
-        return new GetAccounts();
-    }
-
-    /**
-     * Create an instance of {@link GetAccountsResponse }
-     * 
-     * @return
-     *     the new instance of {@link GetAccountsResponse }
-     */
-    public GetAccountsResponse createGetAccountsResponse() {
-        return new GetAccountsResponse();
     }
 
     /**
@@ -184,16 +184,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AccountInfo }
-     * 
-     * @return
-     *     the new instance of {@link AccountInfo }
-     */
-    public AccountInfo createAccountInfo() {
-        return new AccountInfo();
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CreateAccountWithBalance }{@code >}
      * 
      * @param value
@@ -233,6 +223,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAccountByCprNumber }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAccountByCprNumber }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://fastmoney.ws.dtu/", name = "getAccountByCprNumber")
+    public JAXBElement<GetAccountByCprNumber> createGetAccountByCprNumber(GetAccountByCprNumber value) {
+        return new JAXBElement<>(_GetAccountByCprNumber_QNAME, GetAccountByCprNumber.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAccountByCprNumberResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAccountByCprNumberResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://fastmoney.ws.dtu/", name = "getAccountByCprNumberResponse")
+    public JAXBElement<GetAccountByCprNumberResponse> createGetAccountByCprNumberResponse(GetAccountByCprNumberResponse value) {
+        return new JAXBElement<>(_GetAccountByCprNumberResponse_QNAME, GetAccountByCprNumberResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAccountResponse }{@code >}
      * 
      * @param value
@@ -243,32 +259,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://fastmoney.ws.dtu/", name = "getAccountResponse")
     public JAXBElement<GetAccountResponse> createGetAccountResponse(GetAccountResponse value) {
         return new JAXBElement<>(_GetAccountResponse_QNAME, GetAccountResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAccounts }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetAccounts }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://fastmoney.ws.dtu/", name = "getAccounts")
-    public JAXBElement<GetAccounts> createGetAccounts(GetAccounts value) {
-        return new JAXBElement<>(_GetAccounts_QNAME, GetAccounts.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAccountsResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetAccountsResponse }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://fastmoney.ws.dtu/", name = "getAccountsResponse")
-    public JAXBElement<GetAccountsResponse> createGetAccountsResponse(GetAccountsResponse value) {
-        return new JAXBElement<>(_GetAccountsResponse_QNAME, GetAccountsResponse.class, null, value);
     }
 
     /**

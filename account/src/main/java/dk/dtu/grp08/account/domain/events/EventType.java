@@ -2,11 +2,19 @@ package dk.dtu.grp08.account.domain.events;
 
 public enum EventType {
 
-    TOKEN_VALIDATED("TokenValidated"),
-    TOKEN_INVALIDATED("TokenInvalidated"),
+    PAYMENT_INITIATED("PaymentInitiated"),
+    PAYMENT_TRANSFERRED("PaymentTransferred"),
     CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),
     MERCHANT_BANK_ACCOUNT_ASSIGNED("MerchantBankAccountAssigned"),
-    PAYMENT_REQUESTED("PaymentRequested");
+    TOKEN_INVALIDATED("TokenInvalidated"),
+    ACCOUNT_REGISTRATION_REQUESTED("AccountRegistrationRequested"),
+    ACCOUNT_REGISTERED("AccountRegistered"),
+    ACCOUNT_DEREGISTRATION_REQUESTED("AccountDeregistrationRequested"),
+    ACCOUNT_DEREGISTERED("AccountDeregistered"),
+    TOKEN_VALIDATED("TokenValidated"),
+    ACCOUNT_REQUESTED("AccountRequested"),
+    ACCOUNT_RETURNED("AccountReturned"),
+    USER_NOT_FOUND("UserNotFound");
 
     private final String eventName;
 

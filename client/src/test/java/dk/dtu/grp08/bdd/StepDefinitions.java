@@ -40,6 +40,8 @@ public class StepDefinitions {
     private ClientErrorException exception;
     private PaymentRequest paymentRequest;
 
+    private UserAccount retrievedCustomer;
+
 
     @Given("a merchant named {string}")
     public void aMerchantWithName(String name) {
@@ -251,42 +253,17 @@ public class StepDefinitions {
 
     @Then("the customer is no longer registered with DTU Pay")
     public void theCustomerIsNoLongerRegisteredWithDTUPay() {
-        this.customerFacade.getCustomer(
-           this.customer.getId()
-        ).ifPresent(
-            userAccount -> Assert.fail(
-                "Customer is still registered"
+        ClientErrorException e = Assertions.assertThrows(
+            ClientErrorException.class,
+            () -> this.customerFacade.getCustomer(
+                this.customer.getId()
             )
         );
-    }
 
-    @After
-    public void cleanUp() {
-        if (this.customer != null) {
-            try {
-                this.bankAdapter.retireBankAccount(
-                    this.customer.getBankAccountNo()
-                );
-            } catch (Exception ignored) {
-            }
-
-            this.customerFacade.deregister(
-                this.customer.getId()
-            );
-        }
-
-        if (this.merchant != null) {
-            try {
-                this.bankAdapter.retireBankAccount(
-                    this.merchant.getBankAccountNo()
-                );
-            } catch (Exception ignored) {
-            }
-
-            this.merchantFacade.deregister(
-                this.merchant.getId()
-            );
-        }
+        Assert.assertEquals(
+            404,
+            e.getResponse().getStatus()
+        );
     }
 
     @When("the customer requests a report")
@@ -322,6 +299,56 @@ public class StepDefinitions {
             );
         } catch (ClientErrorException e) {
             this.exception = e;
+        }
+    }
+
+    @When("the customer is retrieved by id")
+    public void theCustomerIsRetrievedById() {
+        this.retrievedCustomer = this.customerFacade.getCustomer(
+            this.customer.getId()
+        );
+    }
+
+    @Then("expect the same customer")
+    public void expectTheSameCustomer() {
+        Assert.assertEquals(
+            this.customer,
+            this.retrievedCustomer
+        );
+    }
+
+    @After
+    public void cleanUp() {
+        if (this.customer != null) {
+            try {
+                this.bankAdapter.retireBankAccount(
+                        this.customer.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
+
+            try {
+                this.customerFacade.deregister(
+                        this.customer.getId()
+                );
+            } catch (Exception ignored) {
+            }
+        }
+
+        if (this.merchant != null) {
+            try {
+                this.bankAdapter.retireBankAccount(
+                        this.merchant.getBankAccountNo()
+                );
+            } catch (Exception ignored) {
+            }
+
+            try {
+                this.merchantFacade.deregister(
+                        this.merchant.getId()
+                );
+            } catch (Exception ignored) {
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     @Override
-    public Optional<UserAccount> getCustomer(UserId userId) {
+    public UserAccount getCustomer(UserId userId) {
         return this.customerAPI.getCustomer(
             userId.getId()
         );

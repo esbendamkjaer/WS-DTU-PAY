@@ -9,17 +9,11 @@ services:
     build:
       context: ./account
       dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
     depends_on:
       - rabbitmq
     environment:
       - MQ_HOSTNAME=rabbitmq
-      - ACCOUNT_API=http://localhost:8081
       - CUSTOMER_API=http://localhost:8082
-      - PAYMENT_API=http://localhost:8083
-      - TOKEN_API=http://localhost:8084
-      - REPORTING_API=http://localhost:8085
       - MERCHANT_API=http://localhost:8086
       - MANAGER_API=http://localhost:8087
 
@@ -33,11 +27,6 @@ services:
       - rabbitmq
     environment:
       - MQ_HOSTNAME=rabbitmq
-      - ACCOUNT_API=http://localhost:8081
-      - CUSTOMER_API=http://localhost:8082
-      - PAYMENT_API=http://localhost:8083
-      - TOKEN_API=http://localhost:8084
-      - REPORTING_API=http://localhost:8085
       - MERCHANT_API=http://localhost:8086
       - MANAGER_API=http://localhost:8087
 
@@ -45,17 +34,11 @@ services:
     build:
       context: ./payment
       dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
     depends_on:
       - rabbitmq
     environment:
       - MQ_HOSTNAME=rabbitmq
-      - ACCOUNT_API=http://localhost:8081
       - CUSTOMER_API=http://localhost:8082
-      - PAYMENT_API=http://localhost:8083
-      - TOKEN_API=http://localhost:8084
-      - REPORTING_API=http://localhost:8085
       - MERCHANT_API=http://localhost:8086
       - MANAGER_API=http://localhost:8087
 
@@ -63,71 +46,49 @@ services:
     build:
       context: ./token
       dockerfile: Dockerfile
-    ports:
-      - "8084:8084"
     depends_on:
       - rabbitmq
     environment:
       - MQ_HOSTNAME=rabbitmq
-      - ACCOUNT_API=http://localhost:8081
       - CUSTOMER_API=http://localhost:8082
-      - PAYMENT_API=http://localhost:8083
-      - TOKEN_API=http://localhost:8084
-      - REPORTING_API=http://localhost:8085
       - MERCHANT_API=http://localhost:8086
       - MANAGER_API=http://localhost:8087
 
-#  reporting:
-#    build:
-#      context: ./reporting
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8085:8085"
-#    depends_on:
-#      - rabbitmq
-#    environment:
-#      - MQ_HOSTNAME=rabbitmq
-#      - ACCOUNT_API=http://localhost:8081
-#      - CUSTOMER_API=http://localhost:8082
-#      - PAYMENT_API=http://localhost:8083
-#      - TOKEN_API=http://localhost:8084
-#      - REPORTING_API=http://localhost:8085
-#      - MERCHANT_API=http://localhost:8086
-#      - MANAGER_API=http://localhost:8087
+  reporting:
+    build:
+      context: ./reporting
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      - MQ_HOSTNAME=rabbitmq
+      - CUSTOMER_API=http://localhost:8082
+      - MERCHANT_API=http://localhost:8086
+      - MANAGER_API=http://localhost:8087
 
-#  merchant:
-#    build:
-#      context: ./merchant
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8086:8086"
-#    depends_on:
-#      - rabbitmq
-#    environment:
-#      - MQ_HOSTNAME=rabbitmq
-#      - ACCOUNT_API=http://localhost:8081
-#      - CUSTOMER_API=http://localhost:8082
-#      - PAYMENT_API=http://localhost:8083
-#      - TOKEN_API=http://localhost:8084
-#      - REPORTING_API=http://localhost:8085
-#      - MERCHANT_API=http://localhost:8086
-#      - MANAGER_API=http://localhost:8087
-#
-#  manager:
-#    build:
-#      context: ./manager
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8087:8087"
-#    depends_on:
-#      - rabbitmq
-#    environment:
-#      - MQ_HOSTNAME=rabbitmq
-#      - ACCOUNT_API=http://localhost:8081
-#      - CUSTOMER_API=http://localhost:8082
-#      - PAYMENT_API=http://localhost:8083
-#      - TOKEN_API=http://localhost:8084
-#      - REPORTING_API=http://localhost:8085
-#      - MERCHANT_API=http://localhost:8086
-#      - MANAGER_API=http://localhost:8087
+  merchant:
+    build:
+      context: ./merchant
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    depends_on:
+      - rabbitmq
+    environment:
+      - MQ_HOSTNAME=rabbitmq
+      - CUSTOMER_API=http://localhost:8082
+      - MANAGER_API=http://localhost:8087
+
+  manager:
+    build:
+      context: ./manager
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    depends_on:
+      - rabbitmq
+    environment:
+      - MQ_HOSTNAME=rabbitmq
+      - CUSTOMER_API=http://localhost:8082
+      - MERCHANT_API=http://localhost:8086
 

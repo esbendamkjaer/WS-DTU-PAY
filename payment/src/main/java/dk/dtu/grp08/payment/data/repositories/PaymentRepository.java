@@ -1,11 +1,13 @@
 package dk.dtu.grp08.payment.data.repositories;
 
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
+import dk.dtu.grp08.payment.domain.models.payment.PaymentId;
 import dk.dtu.grp08.payment.domain.repositories.IPaymentRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class PaymentRepository implements IPaymentRepository {
@@ -16,8 +18,17 @@ public class PaymentRepository implements IPaymentRepository {
         payments = new ArrayList<>();
     }
 
-    public void savePayment(Payment payment) {
-        payments.add(payment) ;
+    public Payment savePayment(Payment payment) {
+        payment = new Payment(
+            new PaymentId(UUID.randomUUID()),
+            payment.getDebtor(),
+            payment.getCreditor(),
+            payment.getAmount()
+        );
+
+        payments.add(payment);
+
+        return payment;
     }
 
     public void deletePayment(Payment payment) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPaymentRepository {
 
-    void savePayment(Payment payment);
+    Payment savePayment(Payment payment);
 
     void deletePayment(Payment payment);
 

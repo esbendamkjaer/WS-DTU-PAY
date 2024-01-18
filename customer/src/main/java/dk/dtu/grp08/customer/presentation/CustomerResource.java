@@ -1,22 +1,24 @@
 package dk.dtu.grp08.customer.presentation;
 
 import dk.dtu.grp08.customer.domain.models.*;
+import dk.dtu.grp08.customer.domain.models.events.CustomerReportRequested;
+import dk.dtu.grp08.customer.domain.models.events.EventType;
 import dk.dtu.grp08.customer.domain.models.events.ReportGenerated;
 import dk.dtu.grp08.customer.domain.policy.Policy;
 import dk.dtu.grp08.customer.domain.policy.PolicyBuilder;
 import dk.dtu.grp08.customer.domain.policy.PolicyManager;
+import dk.dtu.grp08.customer.domain.services.contracts.IAccountService;
+import dk.dtu.grp08.customer.domain.services.contracts.ITokenService;
 import dk.dtu.grp08.customer.presentation.contracts.IAccountAPI;
 import dk.dtu.grp08.customer.presentation.contracts.ICustomerResource;
 import dk.dtu.grp08.customer.presentation.contracts.ITokenAPI;
-import dk.dtu.grp08.customer.domain.models.events.CustomerReportRequested;
-import dk.dtu.grp08.customer.domain.models.events.EventType;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -24,20 +26,25 @@ import java.util.concurrent.CompletableFuture;
 @ApplicationScoped
 public class CustomerResource implements ICustomerResource {
 
-    @RestClient
-    private ITokenAPI tokenResource;
+    private final ITokenService tokenService;
 
-    @RestClient
-    private IAccountAPI accountResource;
+    private final IAccountService accountService;
 
     private final MessageQueue messageQueue;
 
-    private final PolicyManager policyManager = new PolicyManager();
+    private final PolicyManager policyManager;
 
-
-    public CustomerResource(MessageQueue messageQueue) {
+    public CustomerResource(
+            IAccountService accountService,
+            ITokenService tokenService,
+            MessageQueue messageQueue
+    ) {
+        this.accountService = accountService;
+        this.tokenService = tokenService;
 
         this.messageQueue = messageQueue;
+
+        policyManager = new PolicyManager();
 
 
         this.messageQueue.addHandler(
@@ -47,36 +54,37 @@ public class CustomerResource implements ICustomerResource {
     }
 
     @Override
-    public List<Token> getTokens(
+    public CompletableFuture<List<Token>> getTokens(
             UUID userId,
             int count
     ) {
-        return tokenResource.getTokens(
+        return tokenService.getTokens(
                 count,
-                userId
+                new UserAccountId(userId)
         );
     }
 
     @Override
-    public UserAccount createCustomer(
+    public CompletableFuture<UserAccount> createCustomer(
             UserAccount userAccount
     ) {
-        return this.accountResource.createUserAccount(
+        return this.accountService.createUserAccount(
                 userAccount
         );
     }
 
     @Override
-    public void deleteCustomer(UUID userId) {
-        this.accountResource.deleteUserAccount(
-                userId
+    public CompletableFuture<Void> deleteCustomer(UUID userId) {
+        return this.accountService.deleteUserAccount(
+                new UserAccountId(userId)
         );
     }
 
     @Override
-    public UserAccount getCustomer(UUID userId) {
-        return this.accountResource.getUserAccount(userId)
-                .orElse(null);
+    public CompletableFuture<UserAccount> getCustomer(UUID userId) {
+        return this.accountService.getUserAccount(
+                new UserAccountId(userId)
+        );
     }
 
 
@@ -127,6 +135,7 @@ public class CustomerResource implements ICustomerResource {
 
         future.complete(event.getReport());
     }
+
 
 
 }

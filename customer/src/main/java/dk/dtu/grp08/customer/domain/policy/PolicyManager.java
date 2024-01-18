@@ -2,9 +2,12 @@ package dk.dtu.grp08.customer.domain.policy;
 
 
 import dk.dtu.grp08.customer.domain.models.CorrelationId;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+@ApplicationScoped
 
 public class  PolicyManager {
 
@@ -25,5 +28,9 @@ public class  PolicyManager {
 
     public void removePolicy(CorrelationId correlationID) {
         this.correlations.remove(correlationID);
+    }
+
+    public boolean hasPolicy(CorrelationId correlationId) {
+        return this.correlations.containsKey(correlationId);
     }
 }
