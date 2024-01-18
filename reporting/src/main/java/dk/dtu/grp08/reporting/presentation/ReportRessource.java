@@ -6,11 +6,13 @@ import dk.dtu.grp08.reporting.domain.events.MerchantReportRequested;
 import dk.dtu.grp08.reporting.domain.events.PaymentTransferredEvent;
 import dk.dtu.grp08.reporting.domain.services.IReportService;
 import dk.dtu.grp08.reporting.presentation.contracts.IReportResource;
+import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
 
+@Startup
 @ApplicationScoped
 public class ReportRessource implements IReportResource {
 
