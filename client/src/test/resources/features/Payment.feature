@@ -1,7 +1,7 @@
 Feature:
   Scenario: Perform a successful payment
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
       And the customer has a bank account with balance 1000.0
       And the merchant has a bank account with balance 0.0
       And the customer is registered with DTU Pay
@@ -22,8 +22,8 @@ Feature:
       And the merchant should have received the correct amount of money
 
   Scenario: Insufficient customer balance
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
       And the customer has a bank account with balance 0.0
       And the merchant has a bank account with balance 0.0
       And the customer is registered with DTU Pay
@@ -34,8 +34,8 @@ Feature:
     Then the error with message "Insufficient account balance" is received
 
   Scenario: Customer bank account does not exist
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
       And the customer has a bank account, that does not exist
       And the merchant has a bank account with balance 0.0
       And the customer is registered with DTU Pay
@@ -46,8 +46,8 @@ Feature:
     Then the error with message "No such debtor account" is received
 
   Scenario: Merchant bank account does not exist
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
     And the customer has a bank account with balance 1000.0
       And the merchant has a bank account, that does not exist
       And the customer is registered with DTU Pay
@@ -58,8 +58,8 @@ Feature:
     Then the error with message "No such creditor account" is received
 
   Scenario: Payment granted with invalid token
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
       And the customer has a bank account with balance 1000.0
       And the merchant has a bank account with balance 0.0
       And the customer is registered with DTU Pay
@@ -70,8 +70,8 @@ Feature:
     Then the error with message "Invalid token" is received
 
   Scenario: Payment granted with previously used token
-    Given a customer named "Hubert"
-      And a merchant named "Baumeister"
+    Given a customer named "Alice"
+      And a merchant named "Bob"
       And the customer has a bank account with balance 1000.0
       And the merchant has a bank account with balance 0.0
       And the customer is registered with DTU Pay
