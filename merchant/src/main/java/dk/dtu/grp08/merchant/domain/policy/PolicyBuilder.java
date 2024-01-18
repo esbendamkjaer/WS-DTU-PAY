@@ -1,4 +1,4 @@
-package dk.dtu.grp08.merchant.presentation.policy;
+package dk.dtu.grp08.merchant.domain.policy;
 
 import java.util.Map;
 import java.util.Optional;

@@ -8,9 +8,9 @@ import dk.dtu.grp08.merchant.domain.models.*;
 import dk.dtu.grp08.merchant.domain.services.contracts.IAccountService;
 import dk.dtu.grp08.merchant.domain.services.contracts.IPaymentService;
 import dk.dtu.grp08.merchant.presentation.contracts.IMerchantResource;
-import dk.dtu.grp08.merchant.presentation.policy.Policy;
-import dk.dtu.grp08.merchant.presentation.policy.PolicyBuilder;
-import dk.dtu.grp08.merchant.presentation.policy.PolicyManager;
+import dk.dtu.grp08.merchant.domain.policy.Policy;
+import dk.dtu.grp08.merchant.domain.policy.PolicyBuilder;
+import dk.dtu.grp08.merchant.domain.policy.PolicyManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
@@ -33,14 +33,14 @@ public class MerchantResource implements IMerchantResource {
     public MerchantResource(
         IAccountService accountService,
         IPaymentService paymentService,
-        MessageQueue messageQueue
+        MessageQueue messageQueue,
+        PolicyManager policyManager
     ) {
         this.accountService = accountService;
         this.paymentService = paymentService;
 
         this.messageQueue = messageQueue;
-
-        policyManager = new PolicyManager();
+        this.policyManager = policyManager;
 
 
         this.messageQueue.addHandler(
