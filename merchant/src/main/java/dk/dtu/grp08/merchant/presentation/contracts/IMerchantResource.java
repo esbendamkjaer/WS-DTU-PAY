@@ -29,7 +29,7 @@ public interface IMerchantResource {
     @Path("/payment")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    Payment createPayment(
+    CompletableFuture<Payment> createPayment(
         PaymentRequest paymentRequest
     );
 

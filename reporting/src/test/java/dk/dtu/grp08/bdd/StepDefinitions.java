@@ -4,23 +4,19 @@ package dk.dtu.grp08.bdd;
 import dk.dtu.grp08.reporting.data.repositories.ReportRepository;
 import dk.dtu.grp08.reporting.domain.events.CustomerReportRequested;
 import dk.dtu.grp08.reporting.domain.events.EventType;
-import dk.dtu.grp08.reporting.domain.events.PaymentTransferEvent;
+import dk.dtu.grp08.reporting.domain.events.PaymentTransferredEvent;
 import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccount;
 import dk.dtu.grp08.reporting.domain.services.ReportService;
 import dk.dtu.grp08.reporting.presentation.ReportRessource;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import messaging.Event;
 import messaging.MessageQueue;
 import org.junit.Assert;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,7 +41,7 @@ public class StepDefinitions {
 
     private UserAccount customer;
     private UserAccount merchant;
-    private PaymentTransferEvent paymentTransferredEvent;
+    private PaymentTransferredEvent paymentTransferredEvent;
 
     private CustomerReportRequested customerReportRequestedEvent;
 
@@ -60,7 +56,7 @@ public class StepDefinitions {
                 UUID.randomUUID()
         );
 
-        paymentTransferredEvent = new PaymentTransferEvent(
+        paymentTransferredEvent = new PaymentTransferredEvent(
                 UUID.randomUUID(),
                 this.token,
                 BigDecimal.valueOf(100)

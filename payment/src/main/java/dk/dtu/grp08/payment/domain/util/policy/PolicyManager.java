@@ -1,10 +1,12 @@
 package dk.dtu.grp08.payment.domain.util.policy;
 
 import dk.dtu.grp08.payment.domain.models.CorrelationId;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@ApplicationScoped
 public class  PolicyManager {
 
     Map<CorrelationId, Policy<?>> correlations = new ConcurrentHashMap<>();
@@ -20,6 +22,10 @@ public class  PolicyManager {
         policy.getCombinedFuture().thenAccept((p) -> {
             this.removePolicy(correlationId);
         });
+    }
+
+    public boolean hasPolicy(CorrelationId correlationId) {
+        return this.correlations.containsKey(correlationId);
     }
 
     public void removePolicy(CorrelationId correlationID) {

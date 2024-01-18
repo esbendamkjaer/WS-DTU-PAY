@@ -16,8 +16,10 @@ public class PaymentRepository implements IPaymentRepository {
         payments = new ArrayList<>();
     }
 
-    public void savePayment(Payment payment) {
-        payments.add(payment) ;
+    public Payment savePayment(Payment payment) {
+        payments.add(payment);
+
+        return payment;
     }
 
     public void deletePayment(Payment payment) {

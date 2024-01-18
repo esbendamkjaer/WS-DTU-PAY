@@ -3,12 +3,13 @@ package dk.dtu.grp08.payment.domain;
 import dk.dtu.grp08.payment.data.repositories.PaymentRepository;
 import dk.dtu.grp08.payment.domain.adapters.IBankAdapter;
 import dk.dtu.grp08.payment.domain.events.*;
+import dk.dtu.grp08.payment.domain.models.CorrelationId;
 import dk.dtu.grp08.payment.domain.models.PaymentRequest;
 import dk.dtu.grp08.payment.domain.models.Token;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
 import dk.dtu.grp08.payment.domain.services.PaymentService;
-import io.cucumber.java.en.Given;
+import dk.dtu.grp08.payment.domain.util.policy.PolicyManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import messaging.Event;
@@ -28,6 +29,7 @@ public class PaymentSteps {
     private final IBankAdapter bankAdapter = mock(IBankAdapter.class);
 
     private PaymentRequest paymentRequest;
+    private PaymentRequestedEvent paymentRequestedEvent;
     private PaymentInitiatedEvent paymentInitiatedEvent;
     private CustomerBankAccountAssignedEvent customerBankAccountAssignedEvent;
     private MerchantBankAccountAssignedEvent merchantBankAccountAssignedEvent;
@@ -37,10 +39,11 @@ public class PaymentSteps {
     private PaymentService paymentService = new PaymentService(
         new PaymentRepository(),
         messageQueue,
-        bankAdapter
+        bankAdapter,
+        new PolicyManager()
     );
 
-    @When("a payment has been requested")
+    @When("a PaymentRequest has been received")
     public void aPaymentHasBeenRequested() {
         paymentRequest = new PaymentRequest(
             new Token(UUID.randomUUID()),
@@ -48,10 +51,18 @@ public class PaymentSteps {
             BigDecimal.valueOf(1000)
         );
 
-        this.paymentService.requestPayment(
-            paymentRequest.getMerchantId(),
-            paymentRequest.getToken(),
-            paymentRequest.getAmount()
+        this.paymentRequestedEvent = new PaymentRequestedEvent(
+            CorrelationId.randomId(),
+            paymentRequest
+        );
+
+        this.paymentService.handlePaymentRequestedEvent(
+            new Event(
+                EventType.PAYMENT_REQUESTED.getEventName(),
+                new Object[] {
+                    this.paymentRequestedEvent
+                }
+            )
         );
     }
 
@@ -131,9 +142,12 @@ public class PaymentSteps {
             EventType.PAYMENT_TRANSFERRED.getEventName(),
             new Object[] {
                 new PaymentTransferredEvent(
-                    this.paymentInitiatedEvent.getMerchantID(),
-                    this.paymentInitiatedEvent.getToken(),
-                    this.paymentInitiatedEvent.getAmount()
+                    this.paymentInitiatedEvent.getCorrelationId(),
+                    new Payment(
+                        this.customerBankAccountAssignedEvent.getBankAccountNo(),
+                        this.merchantBankAccountAssignedEvent.getBankAccountNo(),
+                        this.paymentInitiatedEvent.getAmount()
+                    )
                 )
             }
         );
@@ -172,13 +186,14 @@ public class PaymentSteps {
         );
     }
 
-    @Then("a corresponding PaymentCanceledEvent is sent")
-    public void aPaymentCanceledEventIsSent() {
+    @Then("a corresponding PaymentFailedEvent is sent with cause {string}")
+    public void aPaymentFailedEventIsSent(String cause) {
         Event event = new Event(
-            EventType.PAYMENT_CANCELED.getEventName(),
+            EventType.PAYMENT_FAILED.getEventName(),
             new Object[] {
-                new PaymentCanceledEvent(
-                    this.paymentInitiatedEvent.getCorrelationId()
+                new PaymentFailedEvent(
+                    this.paymentInitiatedEvent.getCorrelationId(),
+                    cause
                 )
             }
         );

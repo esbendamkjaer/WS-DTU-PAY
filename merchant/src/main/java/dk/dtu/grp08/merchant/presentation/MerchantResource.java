@@ -2,13 +2,12 @@ package dk.dtu.grp08.merchant.presentation;
 
 import dk.dtu.grp08.merchant.domain.models.UserId;
 import dk.dtu.grp08.merchant.domain.services.contracts.IAccountService;
+import dk.dtu.grp08.merchant.domain.services.contracts.IPaymentService;
 import dk.dtu.grp08.merchant.presentation.contracts.IMerchantResource;
-import dk.dtu.grp08.merchant.presentation.contracts.IPaymentAPI;
 import dk.dtu.grp08.merchant.domain.models.Payment;
 import dk.dtu.grp08.merchant.domain.models.PaymentRequest;
 import dk.dtu.grp08.merchant.domain.models.UserAccount;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -16,13 +15,15 @@ import java.util.concurrent.CompletableFuture;
 @ApplicationScoped
 public class MerchantResource implements IMerchantResource {
 
-    @RestClient
-    private IPaymentAPI paymentResource;
-
     private final IAccountService accountService;
+    private final IPaymentService paymentService;
 
-    public MerchantResource(IAccountService accountService) {
+    public MerchantResource(
+        IAccountService accountService,
+        IPaymentService paymentService
+    ) {
         this.accountService = accountService;
+        this.paymentService = paymentService;
     }
 
     @Override
@@ -40,8 +41,8 @@ public class MerchantResource implements IMerchantResource {
     }
 
     @Override
-    public Payment createPayment(PaymentRequest paymentRequest) {
-        return this.paymentResource.createPayment(
+    public CompletableFuture<Payment> createPayment(PaymentRequest paymentRequest) {
+        return this.paymentService.createPayment(
             paymentRequest
         );
     }

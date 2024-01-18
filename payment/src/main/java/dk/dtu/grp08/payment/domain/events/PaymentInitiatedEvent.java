@@ -7,9 +7,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 public class PaymentInitiatedEvent {
     UUID merchantID;
     Token token;

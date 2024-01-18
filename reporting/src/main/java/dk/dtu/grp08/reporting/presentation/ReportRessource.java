@@ -3,19 +3,13 @@ package dk.dtu.grp08.reporting.presentation;
 import dk.dtu.grp08.reporting.domain.events.CustomerReportRequested;
 import dk.dtu.grp08.reporting.domain.events.EventType;
 import dk.dtu.grp08.reporting.domain.events.MerchantReportRequested;
-import dk.dtu.grp08.reporting.domain.events.PaymentTransferEvent;
-import dk.dtu.grp08.reporting.domain.models.Token;
-import dk.dtu.grp08.reporting.domain.models.payment.Payment;
+import dk.dtu.grp08.reporting.domain.events.PaymentTransferredEvent;
 import dk.dtu.grp08.reporting.domain.services.IReportService;
 import dk.dtu.grp08.reporting.presentation.contracts.IReportResource;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
-import messaging.implementations.RabbitMqQueue;
-
-import java.util.List;
-import java.util.UUID;
 
 @ApplicationScoped
 public class ReportRessource implements IReportResource {
@@ -53,8 +47,8 @@ public class ReportRessource implements IReportResource {
 
 
     public void handlePaymentTransferredEvent(Event event) {
-        PaymentTransferEvent paymentTransferEvent = event.getArgument(0, PaymentTransferEvent.class);
-        reportService.savePayment(paymentTransferEvent.getMerchantID(), paymentTransferEvent.getToken(), paymentTransferEvent.getAmount());
+        PaymentTransferredEvent paymentTransferredEvent = event.getArgument(0, PaymentTransferredEvent.class);
+        reportService.savePayment(paymentTransferredEvent.getMerchantID(), paymentTransferredEvent.getToken(), paymentTransferredEvent.getAmount());
 
 
     }

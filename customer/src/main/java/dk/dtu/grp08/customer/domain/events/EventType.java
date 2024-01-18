@@ -7,7 +7,6 @@ public enum EventType {
     CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),
     MERCHANT_BANK_ACCOUNT_ASSIGNED("MerchantBankAccountAssigned"),
     TOKEN_INVALIDATED("TokenInvalidated"),
-    PAYMENT_CANCELED("PaymentCanceled"),
     ACCOUNT_REGISTRATION_REQUESTED("AccountRegistrationRequested"),
     ACCOUNT_REGISTERED("AccountRegistered"),
     ACCOUNT_DEREGISTRATION_REQUESTED("AccountDeregistrationRequested"),

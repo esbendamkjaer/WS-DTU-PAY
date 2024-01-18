@@ -7,7 +7,8 @@ public enum EventType {
     CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),
     MERCHANT_BANK_ACCOUNT_ASSIGNED("MerchantBankAccountAssigned"),
     TOKEN_INVALIDATED("TokenInvalidated"),
-    PAYMENT_CANCELED("PaymentCanceled")
+    PAYMENT_REQUESTED("PaymentRequested"),
+    PAYMENT_FAILED("PaymentFailed")
     ;
 
     private String eventName;
