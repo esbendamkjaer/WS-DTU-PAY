@@ -11,33 +11,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-@Path("/merchants")
-public interface IMerchantAPI {
+@Path("/manager")
+public interface IManagerAPI {
 
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    UserAccount createMerchant(
-        UserAccount userAccount
-    );
-
-    @DELETE
-    @Path("/{userId}")
-    void deleteMerchant(
-        @PathParam("userId") UUID userId
-    );
-
-    @POST
-    @Path("/payment")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    Payment createPayment(
-        PaymentRequest paymentRequest
-    );
 
     @GET
-    @Path("/{userId}/report")
+    @Path("/report")
     @Produces({MediaType.APPLICATION_JSON})
-    CompletableFuture<List<Payment>> getReport(@PathParam("userId") UserId userId);
+    CompletableFuture<List<Payment>> getReport();
 
 }

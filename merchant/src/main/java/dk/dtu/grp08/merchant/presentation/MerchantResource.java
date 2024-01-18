@@ -110,6 +110,11 @@ public class MerchantResource implements IMerchantResource {
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);
 
+        if (!this.policyManager.hasPolicy(event.getCorrelationId())) {
+            return;
+        }
+
+
 
         CompletableFuture<List<Payment>> future = policyManager.getPolicy(
                 event.getCorrelationId()

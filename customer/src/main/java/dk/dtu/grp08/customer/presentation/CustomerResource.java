@@ -125,6 +125,11 @@ public class CustomerResource implements ICustomerResource {
 
         System.out.println("CustomerBankAccountAssignedEvent");
 
+        if (!this.policyManager.hasPolicy(event.getCorrelationId())) {
+            return;
+        }
+
+
         CompletableFuture<List<Payment>> future = policyManager.getPolicy(
                 event.getCorrelationId()
         ).getDependency(

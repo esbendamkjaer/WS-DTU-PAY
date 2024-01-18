@@ -5,10 +5,11 @@ import dk.dtu.grp08.merchant.domain.exceptions.NoSuchUserAccountException;
 import dk.dtu.grp08.merchant.domain.models.CorrelationId;
 import dk.dtu.grp08.merchant.domain.models.UserAccount;
 import dk.dtu.grp08.merchant.domain.models.UserId;
-import dk.dtu.grp08.merchant.domain.policy.Policy;
-import dk.dtu.grp08.merchant.domain.policy.PolicyBuilder;
-import dk.dtu.grp08.merchant.domain.policy.PolicyManager;
+
 import dk.dtu.grp08.merchant.domain.services.contracts.IAccountService;
+import dk.dtu.grp08.merchant.presentation.policy.Policy;
+import dk.dtu.grp08.merchant.presentation.policy.PolicyBuilder;
+import dk.dtu.grp08.merchant.presentation.policy.PolicyManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import messaging.Event;
 import messaging.MessageQueue;
