@@ -8,7 +8,10 @@ public enum EventType {
 
     MERCHANT_REPORT_REQUESTED("MerchantReportRequested"),
 
-    MANAGER_REPORT_REQUESTED("ManagerReportRequested");
+    MANAGER_REPORT_REQUESTED("ManagerReportRequested"),
+
+    REPORT_GENERATED("ReportGenerated");
+
 
 
     private String eventName;

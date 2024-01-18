@@ -1,14 +1,22 @@
 package dk.dtu.grp08.merchant.presentation;
 
-import dk.dtu.grp08.merchant.domain.models.UserId;
+import dk.dtu.grp08.merchant.domain.events.EventType;
+import dk.dtu.grp08.merchant.domain.events.MerchantReportRequested;
+import dk.dtu.grp08.merchant.domain.events.ReportGenerated;
+import dk.dtu.grp08.merchant.domain.models.*;
+
 import dk.dtu.grp08.merchant.domain.services.contracts.IAccountService;
 import dk.dtu.grp08.merchant.domain.services.contracts.IPaymentService;
 import dk.dtu.grp08.merchant.presentation.contracts.IMerchantResource;
-import dk.dtu.grp08.merchant.domain.models.Payment;
-import dk.dtu.grp08.merchant.domain.models.PaymentRequest;
-import dk.dtu.grp08.merchant.domain.models.UserAccount;
+import dk.dtu.grp08.merchant.presentation.policy.Policy;
+import dk.dtu.grp08.merchant.presentation.policy.PolicyBuilder;
+import dk.dtu.grp08.merchant.presentation.policy.PolicyManager;
 import jakarta.enterprise.context.ApplicationScoped;
+import lombok.val;
+import messaging.Event;
+import messaging.MessageQueue;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -18,12 +26,27 @@ public class MerchantResource implements IMerchantResource {
     private final IAccountService accountService;
     private final IPaymentService paymentService;
 
+    private final MessageQueue messageQueue;
+
+    private final PolicyManager policyManager;
+
     public MerchantResource(
         IAccountService accountService,
-        IPaymentService paymentService
+        IPaymentService paymentService,
+        MessageQueue messageQueue
     ) {
         this.accountService = accountService;
         this.paymentService = paymentService;
+
+        this.messageQueue = messageQueue;
+
+        policyManager = new PolicyManager();
+
+
+        this.messageQueue.addHandler(
+                EventType.REPORT_GENERATED.getEventName(),
+                this::handleReportGenerated
+        );
     }
 
     @Override
@@ -47,8 +70,53 @@ public class MerchantResource implements IMerchantResource {
         );
     }
 
-    @Override
-    public void getReport(UUID id) {
 
+
+
+    @Override
+    public CompletableFuture<List<Payment>> getReport(
+            final UUID userID
+    ) {
+        CorrelationId correlationID = CorrelationId.randomId();
+
+        Policy<List<Payment>> policy = new PolicyBuilder<List<Payment>>()
+                .addPart(ReportGenerated.class)
+                .setPolicyFunction(
+                        (p) -> {
+                            List<Payment> report = p.getDependency(ReportGenerated.class, List.class);
+
+                            return report;
+                        }
+                ).build();
+
+        policyManager.addPolicy(correlationID, policy);
+
+        messageQueue.publish(
+                new Event(
+                        EventType.MERCHANT_REPORT_REQUESTED.getEventName(),
+                        new Object[]{
+                                new MerchantReportRequested(
+                                        new UserId(userID),
+                                        correlationID
+                                )
+                        }
+                )
+        );
+
+        return policy.getCombinedFuture();
+    }
+
+
+    public void handleReportGenerated(Event mqEvent) {
+        val event = mqEvent.getArgument(0, ReportGenerated.class);
+
+
+        CompletableFuture<List<Payment>> future = policyManager.getPolicy(
+                event.getCorrelationId()
+        ).getDependency(
+                ReportGenerated.class
+        );
+
+        future.complete(event.getReport());
     }
 }

@@ -2,11 +2,18 @@ package dk.dtu.grp08.customer.presentation.contracts;
 
 import dk.dtu.grp08.customer.domain.models.Token;
 import dk.dtu.grp08.customer.domain.models.UserAccount;
+import dk.dtu.grp08.customer.domain.models.Payment;
+import dk.dtu.grp08.customer.domain.models.Token;
+import dk.dtu.grp08.customer.domain.models.UserAccount;
+import dk.dtu.grp08.customer.domain.models.Payment;
+import dk.dtu.grp08.customer.domain.models.Token;
+import dk.dtu.grp08.customer.domain.models.UserAccount;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletableFuture;
 
 @Path("/customers")
@@ -37,5 +44,12 @@ public interface ICustomerResource {
     @Path("/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
     CompletableFuture<UserAccount> getCustomer(@PathParam("userId") UUID userId);
+
+
+    @GET
+    @Path("/{userId}/report")
+    @Produces({MediaType.APPLICATION_JSON})
+    CompletableFuture<List<Payment>> getReport(@PathParam("userId") UUID userId);
+
 
 }

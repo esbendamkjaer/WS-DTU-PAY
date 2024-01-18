@@ -14,6 +14,11 @@ public enum EventType {
     USER_NOT_FOUND("UserNotFound"),
     PAYMENT_REQUESTED("PaymentRequested"),
     PAYMENT_FAILED("PaymentFailed"),
+    REPORT_GENERATED("ReportGenerated"),
+    CUSTOMER_REPORT_REQUESTED("CustomerReportRequested"),
+    MERCHANT_REPORT_REQUESTED("MerchantReportRequested"),
+    MANAGER_REPORT_REQUESTED("ManagerReportRequested")
+
     ;
 
     private final String eventName;

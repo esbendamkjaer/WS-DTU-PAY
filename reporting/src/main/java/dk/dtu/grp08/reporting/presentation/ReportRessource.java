@@ -1,18 +1,19 @@
 package dk.dtu.grp08.reporting.presentation;
 
-import dk.dtu.grp08.reporting.domain.events.CustomerReportRequested;
-import dk.dtu.grp08.reporting.domain.events.EventType;
-import dk.dtu.grp08.reporting.domain.events.MerchantReportRequested;
-import dk.dtu.grp08.reporting.domain.events.PaymentTransferredEvent;
+import dk.dtu.grp08.reporting.domain.events.*;
+import dk.dtu.grp08.reporting.domain.models.Token;
+import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.services.IReportService;
 import dk.dtu.grp08.reporting.presentation.contracts.IReportResource;
-import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
+import messaging.implementations.RabbitMqQueue;
 
-@Startup
+import java.util.List;
+import java.util.UUID;
+
 @ApplicationScoped
 public class ReportRessource implements IReportResource {
 
@@ -49,22 +50,27 @@ public class ReportRessource implements IReportResource {
 
 
     public void handlePaymentTransferredEvent(Event event) {
-        PaymentTransferredEvent paymentTransferredEvent = event.getArgument(0, PaymentTransferredEvent.class);
-        reportService.savePayment(paymentTransferredEvent.getMerchantID(), paymentTransferredEvent.getToken(), paymentTransferredEvent.getAmount());
-
+        PaymentTransferredEvent paymentTransferEvent = event.getArgument(0, PaymentTransferredEvent.class);
+        reportService.savePayment(paymentTransferEvent.getMerchantId(), paymentTransferEvent.getCustomerId(), paymentTransferEvent.getPayment().getAmount());
 
     }
 
 
     public void handleCustomerReportRequested(Event e) {
         val event = e.getArgument(0, CustomerReportRequested.class);
-        reportService.getReportCustomer(event.getToken());
+
+        System.out.println("CorrelationID Customer" + event.getCorrelationId());
 
         messageQueue.publish(
                 new Event(
-                        EventType.CUSTOMER_REPORT_REQUESTED.getEventName(),
+                        EventType.REPORT_GENERATED.getEventName(),
                         new Object[]{
-                                reportService.getReportCustomer(event.getToken())
+                                new ReportGenerated(
+                                        event.getCorrelationId(),
+                                        reportService.getReportCustomer(event.getCustomerID())
+                                )
+
+
 
                         }
                 ));
@@ -74,12 +80,18 @@ public class ReportRessource implements IReportResource {
     public void handleMerchantReportRequested(Event e) {
 
         val event = e.getArgument(0, MerchantReportRequested.class);
+        System.out.println("CorrelationID Merchant" + event.getCorrelationId());
 
         messageQueue.publish(
                 new Event(
-                        EventType.MERCHANT_REPORT_REQUESTED.getEventName(),
+                        EventType.REPORT_GENERATED.getEventName(),
                         new Object[]{
-                                reportService.getReportMerchant(event.getId())
+                                new ReportGenerated(
+                                        event.getCorrelationId(),
+                                        reportService.getReportMerchant(event.getMerchantID())
+                                )
+
+
 
                         }
                 ));
@@ -87,11 +99,20 @@ public class ReportRessource implements IReportResource {
     }
 
     public void handleManagerReportRequested(Event e) {
+        val event = e.getArgument(0, ManagerReportRequested.class);
+        System.out.println("CorrelationID Manager" + event.getCorrelationId());
+
         messageQueue.publish(
                 new Event(
-                        EventType.MANAGER_REPORT_REQUESTED.getEventName(),
+                        EventType.REPORT_GENERATED.getEventName(),
                         new Object[]{
-                                reportService.getReportManager()
+                                new ReportGenerated(
+                                        event.getCorrelationId(),
+                                        reportService.getReportManager()
+                                )
+
+
+
                         }
                 ));
 

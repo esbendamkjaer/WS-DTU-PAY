@@ -1,7 +1,9 @@
 package dk.dtu.grp08.reporting.domain.events;
 
 
+import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;
+import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerReportRequested {
-    Token token;
+    UserAccountId customerID;
+    CorrelationId correlationId;
 
 }

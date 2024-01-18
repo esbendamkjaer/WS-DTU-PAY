@@ -8,6 +8,7 @@
 ## Installation
 Use the following commands to install the project:
 ```bash
+chmod +x build_and_run.sh
 ./build_and_run.sh
 ```
 

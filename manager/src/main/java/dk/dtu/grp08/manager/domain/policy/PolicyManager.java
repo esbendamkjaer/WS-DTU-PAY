@@ -1,7 +1,7 @@
-package dk.dtu.grp08.customer.domain.policy;
+package dk.dtu.grp08.manager.domain.policy;
 
 
-import dk.dtu.grp08.customer.domain.models.CorrelationId;
+import dk.dtu.grp08.manager.domain.models.CorrelationId;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Map;

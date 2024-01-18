@@ -3,6 +3,7 @@ package dk.dtu.grp08.reporting.domain.services;
 
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
+import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import dk.dtu.grp08.reporting.domain.repositories.IReportRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -26,8 +27,8 @@ public class ReportService implements IReportService {
 
     @Override
     public void savePayment(
-        final UUID merchantID,
-        final Token token,
+        final UserAccountId merchantID,
+        final UserAccountId token,
         final BigDecimal amount
     ) {
 
@@ -40,13 +41,13 @@ public class ReportService implements IReportService {
     }
 
     @Override
-    public List<Payment> getReportCustomer(Token token) {
+    public List<Payment> getReportCustomer(UserAccountId customerID) {
         //Customer Formatted report
-        return reportRepository.getPaymentsByToken(token);
+        return reportRepository.getPaymentsByCustomer(customerID);
     }
 
     @Override
-    public List<Payment> getReportMerchant(UUID merchantID) {
+    public List<Payment> getReportMerchant(UserAccountId merchantID) {
         //merchant formatted report
         return reportRepository.getPaymentsByMerchant(merchantID);
 
