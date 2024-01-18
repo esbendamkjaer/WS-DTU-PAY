@@ -5,7 +5,6 @@ package dk.dtu.grp08.reporting.domain.repositories;
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
-import io.vertx.ext.auth.User;
 
 import java.util.List;
 import java.util.UUID;

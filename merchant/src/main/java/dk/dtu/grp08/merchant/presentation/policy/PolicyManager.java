@@ -1,6 +1,7 @@
 package dk.dtu.grp08.merchant.presentation.policy;
 
-import dk.dtu.grp08.payment.domain.models.CorrelationId;
+
+import dk.dtu.grp08.merchant.domain.models.CorrelationId;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

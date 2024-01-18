@@ -17,6 +17,8 @@ public enum EventType {
     TOKENS_REQUESTED("TokensRequested"),
     TOKENS_RETURNED("TokensReturned"),
     TOKEN_REQUEST_FAILED("TokenRequestFailed"),
+    REPORT_GENERATED("ReportGenerated"),
+    CUSTOMER_REPORT_REQUESTED("CustomerReportRequested")
     ;
 
     private final String eventName;

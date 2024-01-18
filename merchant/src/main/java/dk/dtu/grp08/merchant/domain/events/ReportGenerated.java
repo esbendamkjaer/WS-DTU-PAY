@@ -1,8 +1,9 @@
-package dk.dtu.grp08.customer.domain.models.events;
+package dk.dtu.grp08.merchant.domain.events;
 
 
-import dk.dtu.grp08.customer.domain.models.CorrelationId;
-import dk.dtu.grp08.customer.domain.models.Payment;
+
+import dk.dtu.grp08.merchant.domain.models.CorrelationId;
+import dk.dtu.grp08.merchant.domain.models.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

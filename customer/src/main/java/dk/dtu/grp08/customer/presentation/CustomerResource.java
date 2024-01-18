@@ -1,22 +1,21 @@
 package dk.dtu.grp08.customer.presentation;
 
+import dk.dtu.grp08.customer.domain.events.CustomerReportRequested;
+import dk.dtu.grp08.customer.domain.events.EventType;
+import dk.dtu.grp08.customer.domain.events.ReportGenerated;
 import dk.dtu.grp08.customer.domain.models.*;
-import dk.dtu.grp08.customer.domain.models.events.CustomerReportRequested;
-import dk.dtu.grp08.customer.domain.models.events.EventType;
-import dk.dtu.grp08.customer.domain.models.events.ReportGenerated;
+
 import dk.dtu.grp08.customer.domain.policy.Policy;
 import dk.dtu.grp08.customer.domain.policy.PolicyBuilder;
 import dk.dtu.grp08.customer.domain.policy.PolicyManager;
 import dk.dtu.grp08.customer.domain.services.contracts.IAccountService;
 import dk.dtu.grp08.customer.domain.services.contracts.ITokenService;
 import dk.dtu.grp08.customer.presentation.contracts.ICustomerResource;
-import dk.dtu.grp08.customer.presentation.contracts.ITokenAPI;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
 import messaging.MessageQueue;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 import java.util.UUID;
