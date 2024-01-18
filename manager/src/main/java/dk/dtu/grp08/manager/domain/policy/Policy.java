@@ -1,4 +1,4 @@
-package dk.dtu.grp08.merchant.domain.policy;
+package dk.dtu.grp08.manager.domain.policy;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

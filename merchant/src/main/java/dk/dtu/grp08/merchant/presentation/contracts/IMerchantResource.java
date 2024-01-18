@@ -6,6 +6,7 @@ import dk.dtu.grp08.merchant.domain.models.UserAccount;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -33,9 +34,12 @@ public interface IMerchantResource {
         PaymentRequest paymentRequest
     );
 
-    @POST
-    @Path("/report")
-    @Consumes({MediaType.APPLICATION_JSON})
-    void getReport(UUID id);
+    @GET
+    @Path("/{userId}/report")
+    @Produces({MediaType.APPLICATION_JSON})
+    CompletableFuture<List<Payment>> getReport(@PathParam("userId") UUID userId);
+
+
+
 
 }

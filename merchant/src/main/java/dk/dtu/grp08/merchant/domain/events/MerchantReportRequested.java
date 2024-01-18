@@ -1,7 +1,8 @@
-package dk.dtu.grp08.customer.domain.models.events;
+package dk.dtu.grp08.merchant.domain.events;
 
 
-import dk.dtu.grp08.customer.domain.models.CorrelationId;
+import dk.dtu.grp08.merchant.domain.models.CorrelationId;
+import dk.dtu.grp08.merchant.domain.models.UserId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MerchantReportRequested {
-    UUID id;
+    UserId id;
     CorrelationId correlationId;
 
 
