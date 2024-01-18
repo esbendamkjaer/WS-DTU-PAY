@@ -144,7 +144,7 @@ public class AccountService implements IAccountService {
             return;
         }
 
-        System.out.println("User not found " + userNotFoundEvent.getCorrelationId());
+
 
         this.policyManager.getPolicy(
                         userNotFoundEvent.getCorrelationId()

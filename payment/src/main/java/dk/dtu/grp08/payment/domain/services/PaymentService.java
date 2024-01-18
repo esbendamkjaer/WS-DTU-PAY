@@ -98,7 +98,7 @@ public class PaymentService implements IPaymentService {
                         merchantBankAccountAssignedEvent.getBankAccountNo()
                     );
 
-                    System.out.println("Making payment " + payment);
+
                     payment = this.makePayment(
                         payment,
                         paymentRequest.getMerchantId(),
@@ -112,7 +112,7 @@ public class PaymentService implements IPaymentService {
                         customerBankAccountAssignedEvent.getUserId()
                     );
 
-                    System.out.println("Payment transferred " + paymentTransferredEvent);
+
 
 
                     messageQueue.publish(
@@ -130,7 +130,7 @@ public class PaymentService implements IPaymentService {
 
         paymentPolicy.getCombinedFuture().exceptionally(
             (e) -> {
-                System.out.println("Payment failed " + e.getMessage());
+
                 Event paymentFailedEvent = new Event(
                     EventType.PAYMENT_FAILED.getEventName(),
                     new Object[] {
@@ -159,8 +159,8 @@ public class PaymentService implements IPaymentService {
             return;
         }
 
-        System.out.println("MerchantBankAccountAssignedEvent");
-        System.out.println(event.getCorrelationId().getId());
+
+
 
         CompletableFuture<MerchantBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
@@ -178,7 +178,7 @@ public class PaymentService implements IPaymentService {
             return;
         }
 
-        System.out.println("CustomerBankAccountAssignedEvent");
+
 
         CompletableFuture<CustomerBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
@@ -192,7 +192,7 @@ public class PaymentService implements IPaymentService {
     public void handleTokenInvalidatedEvent(Event mqEvent) {
         val tokenInvalidatedEvent = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
 
-        System.out.println("TokenInvalidatedEvent");
+
 
         CompletableFuture<?> future = policyManager.getPolicy(
             tokenInvalidatedEvent.getCorrelationId()
@@ -213,7 +213,7 @@ public class PaymentService implements IPaymentService {
     public void handlePaymentRequestedEvent(Event mqEvent) {
         val event = mqEvent.getArgument(0, PaymentRequestedEvent.class);
 
-        System.out.println("PaymentRequestedEvent");
+
         PaymentRequest paymentRequest = event.getPaymentRequest();
 
         Policy<PaymentTransferredEvent> paymentPolicy = this.initiatePayment(
@@ -237,7 +237,7 @@ public class PaymentService implements IPaymentService {
             }
         );
 
-        System.out.println("PaymentInitiatedEvent");
+
         messageQueue.publish(
             paymentInitiatedEvent
         );

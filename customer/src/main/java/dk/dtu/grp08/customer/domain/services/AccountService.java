@@ -73,7 +73,7 @@ public class AccountService implements IAccountService {
             }
         );
 
-        System.out.println("AccountDeregistrationRequestedEvent " + correlationId);
+
 
         this.messageQueue.publish(deregistrationRequestedEvent);
 
@@ -110,7 +110,7 @@ public class AccountService implements IAccountService {
             }
         );
 
-        System.out.println("AccountRegistrationRequestedEvent " + correlationId);
+
         this.messageQueue.publish(registrationRequestedEvent);
 
         return policy.getCombinedFuture();
@@ -157,7 +157,7 @@ public class AccountService implements IAccountService {
             return;
         }
 
-        System.out.println("Account Returned " + accountReturnedEvent.getUserAccount());
+
 
         this.policyManager.getPolicy(
             accountReturnedEvent.getCorrelationId()
@@ -171,7 +171,7 @@ public class AccountService implements IAccountService {
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
 
-        System.out.println("Account Registered " + accountRegisteredEvent.getCorrelationId());
+
 
         if (!this.policyManager.hasPolicy(accountRegisteredEvent.getCorrelationId())) {
             return;
@@ -189,7 +189,7 @@ public class AccountService implements IAccountService {
     public void handleAccountDeregisteredEvent(Event event) {
         AccountDeregisteredEvent accountDeregisteredEvent = event.getArgument(0, AccountDeregisteredEvent.class);
 
-        System.out.println("Account Deregistered " + accountDeregisteredEvent.getCorrelationId());
+
 
         if (!this.policyManager.hasPolicy(accountDeregisteredEvent.getCorrelationId())) {
             return;
@@ -209,7 +209,7 @@ public class AccountService implements IAccountService {
             return;
         }
 
-        System.out.println("User not found " + userNotFoundEvent.getCorrelationId());
+
 
         this.policyManager.getPolicy(
             userNotFoundEvent.getCorrelationId()

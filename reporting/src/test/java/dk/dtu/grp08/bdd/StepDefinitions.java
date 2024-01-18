@@ -79,7 +79,7 @@ public class StepDefinitions {
 
     @Then("the payment should be saved")
     public void thePaymentShouldBeSaved() {
-        System.out.println("reportRepository.getPayments() = " + reportRepository.getPayments());
+
 
         Payment recordedPayment = reportRepository.getPayments().get(0);
 

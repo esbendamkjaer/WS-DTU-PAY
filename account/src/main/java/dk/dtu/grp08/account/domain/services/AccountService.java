@@ -100,7 +100,7 @@ public class AccountService implements IAccountService {
     public void handlePaymentInitiatedEvent(Event event) {
         PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
 
-        System.out.println("Payment initiated event received");
+
 
         UserAccount merchant = this.getUserAccountById(
             new UserAccountId(paymentInitiatedEvent.getMerchantID())
@@ -126,7 +126,7 @@ public class AccountService implements IAccountService {
     public void handleTokenValidatedEvent(Event event) {
         TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
 
-        System.out.println("token validated event received");
+
 
         this.getUserAccountById(
                 tokenValidatedEvent.getUserAccountId()
@@ -195,7 +195,7 @@ public class AccountService implements IAccountService {
 
         UserAccountId userAccountId = accountDeregistrationRequestedEvent.getUserId();
 
-        System.out.println("Account deregistration requested for " + userAccountId.getId());
+
 
         try {
             this.deleteUserAccount(
