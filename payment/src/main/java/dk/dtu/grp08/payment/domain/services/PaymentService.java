@@ -65,37 +65,91 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Policy<Payment> initiatePayment(
-        final UUID merchantID,
-        final Token token,
-        final BigDecimal amount
+    public Policy<PaymentTransferredEvent> initiatePayment(
+        PaymentRequestedEvent paymentRequestedEvent
     ) {
-        val payment = new Payment();
-        payment.setAmount(amount);
+        Policy<PaymentTransferredEvent> paymentPolicy = new PolicyBuilder<PaymentTransferredEvent>()
+            .addPart(CustomerBankAccountAssignedEvent.class)
+            .addPart(MerchantBankAccountAssignedEvent.class)
+            .setPolicyFunction(
+                (p) -> {
+                    PaymentRequest paymentRequest = paymentRequestedEvent.getPaymentRequest();
 
-        Policy<Payment> policy = new PolicyBuilder<Payment>()
-                .addPart(CustomerBankAccountAssignedEvent.class)
-                .addPart(MerchantBankAccountAssignedEvent.class)
-                .setPolicyFunction(
-                    (p) -> {
-                        payment.setDebtor(
-                            p.getDependency(
-                                CustomerBankAccountAssignedEvent.class,
-                                BankAccountNo.class
-                            )
-                        );
-                        payment.setCreditor(
-                            p.getDependency(
-                                MerchantBankAccountAssignedEvent.class,
-                                BankAccountNo.class
-                            )
-                        );
+                    Payment payment = new Payment();
+                    payment.setAmount(
+                        paymentRequest.getAmount()
+                    );
 
-                        return payment;
+                    CustomerBankAccountAssignedEvent customerBankAccountAssignedEvent = p.getDependency(
+                        CustomerBankAccountAssignedEvent.class,
+                        CustomerBankAccountAssignedEvent.class
+                    );
+
+                    MerchantBankAccountAssignedEvent merchantBankAccountAssignedEvent = p.getDependency(
+                        MerchantBankAccountAssignedEvent.class,
+                        MerchantBankAccountAssignedEvent.class
+                    );
+
+                    payment.setDebtor(
+                        customerBankAccountAssignedEvent.getBankAccountNo()
+                    );
+
+                    payment.setCreditor(
+                        merchantBankAccountAssignedEvent.getBankAccountNo()
+                    );
+
+                    System.out.println("Making payment " + payment);
+                    payment = this.makePayment(
+                        payment,
+                        paymentRequest.getMerchantId(),
+                        paymentRequest.getToken()
+                    );
+
+                    PaymentTransferredEvent paymentTransferredEvent = new PaymentTransferredEvent(
+                        paymentRequestedEvent.getCorrelationId(),
+                        payment,
+                        merchantBankAccountAssignedEvent.getUserId(),
+                        customerBankAccountAssignedEvent.getUserId()
+                    );
+
+                    System.out.println("Payment transferred " + paymentTransferredEvent);
+
+
+                    messageQueue.publish(
+                        new Event(
+                            EventType.PAYMENT_TRANSFERRED.getEventName(),
+                            new Object[] {
+                                paymentTransferredEvent
+                            }
+                        )
+                    );
+
+                    return paymentTransferredEvent;
+                }
+            ).build();
+
+        paymentPolicy.getCombinedFuture().exceptionally(
+            (e) -> {
+                System.out.println("Payment failed " + e.getMessage());
+                Event paymentFailedEvent = new Event(
+                    EventType.PAYMENT_FAILED.getEventName(),
+                    new Object[] {
+                        new PaymentFailedEvent(
+                            paymentRequestedEvent.getCorrelationId(),
+                            e.getMessage()
+                        )
                     }
-                ).build();
+                );
 
-        return policy;
+                messageQueue.publish(
+                    paymentFailedEvent
+                );
+
+                return null;
+            }
+        );
+
+        return paymentPolicy;
     }
 
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
@@ -108,13 +162,13 @@ public class PaymentService implements IPaymentService {
         System.out.println("MerchantBankAccountAssignedEvent");
         System.out.println(event.getCorrelationId().getId());
 
-        CompletableFuture<BankAccountNo> future = policyManager.getPolicy(
+        CompletableFuture<MerchantBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
         ).getDependency(
             MerchantBankAccountAssignedEvent.class
         );
 
-        future.complete(event.getBankAccountNo());
+        future.complete(event);
     }
 
     public void handleCustomerBankAccountAssigned(Event mqEvent) {
@@ -126,13 +180,13 @@ public class PaymentService implements IPaymentService {
 
         System.out.println("CustomerBankAccountAssignedEvent");
 
-        CompletableFuture<BankAccountNo> future = policyManager.getPolicy(
+        CompletableFuture<CustomerBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
         ).getDependency(
             CustomerBankAccountAssignedEvent.class
         );
 
-        future.complete(event.getBankAccountNo());
+        future.complete(event);
     }
 
     public void handleTokenInvalidatedEvent(Event mqEvent) {
@@ -162,51 +216,8 @@ public class PaymentService implements IPaymentService {
         System.out.println("PaymentRequestedEvent");
         PaymentRequest paymentRequest = event.getPaymentRequest();
 
-        Policy<Payment> paymentPolicy = this.initiatePayment(
-            paymentRequest.getMerchantId(),
-            paymentRequest.getToken(),
-            paymentRequest.getAmount()
-        );
-
-        paymentPolicy.getCombinedFuture().thenAccept(
-            (payment) -> {
-                payment = this.makePayment(
-                    payment,
-                    paymentRequest.getMerchantId(),
-                    paymentRequest.getToken()
-                );
-
-                messageQueue.publish(
-                    new Event(
-                        EventType.PAYMENT_TRANSFERRED.getEventName(),
-                        new Object[] {
-                            new PaymentTransferredEvent(
-                                event.getCorrelationId(),
-                                payment
-                            )
-                        }
-                    )
-                );
-            }
-        ).exceptionally(
-            (e) -> {
-                System.out.println("Payment failed " + e.getMessage());
-                Event paymentFailedEvent = new Event(
-                    EventType.PAYMENT_FAILED.getEventName(),
-                    new Object[] {
-                        new PaymentFailedEvent(
-                            event.getCorrelationId(),
-                            e.getCause().getMessage()
-                        )
-                    }
-                );
-
-                messageQueue.publish(
-                    paymentFailedEvent
-                );
-
-                return null;
-            }
+        Policy<PaymentTransferredEvent> paymentPolicy = this.initiatePayment(
+            event
         );
 
         this.policyManager.addPolicy(
@@ -226,6 +237,7 @@ public class PaymentService implements IPaymentService {
             }
         );
 
+        System.out.println("PaymentInitiatedEvent");
         messageQueue.publish(
             paymentInitiatedEvent
         );

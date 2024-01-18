@@ -8,6 +8,7 @@ import dk.dtu.grp08.payment.domain.models.PaymentRequest;
 import dk.dtu.grp08.payment.domain.models.Token;
 import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import dk.dtu.grp08.payment.domain.models.payment.Payment;
+import dk.dtu.grp08.payment.domain.models.user.UserAccountId;
 import dk.dtu.grp08.payment.domain.services.PaymentService;
 import dk.dtu.grp08.payment.domain.util.policy.PolicyManager;
 import io.cucumber.java.en.Then;
@@ -20,8 +21,7 @@ import org.mockito.ArgumentCaptor;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class PaymentSteps {
 
@@ -31,6 +31,8 @@ public class PaymentSteps {
     private PaymentRequest paymentRequest;
     private PaymentRequestedEvent paymentRequestedEvent;
     private PaymentInitiatedEvent paymentInitiatedEvent;
+    private UserAccountId merchantId;
+    private UserAccountId customerId;
     private CustomerBankAccountAssignedEvent customerBankAccountAssignedEvent;
     private MerchantBankAccountAssignedEvent merchantBankAccountAssignedEvent;
 
@@ -45,9 +47,11 @@ public class PaymentSteps {
 
     @When("a PaymentRequest has been received")
     public void aPaymentHasBeenRequested() {
+        this.merchantId = UserAccountId.randomId();
+
         paymentRequest = new PaymentRequest(
             new Token(UUID.randomUUID()),
-            UUID.randomUUID(),
+            this.merchantId.getId(),
             BigDecimal.valueOf(1000)
         );
 
@@ -68,11 +72,14 @@ public class PaymentSteps {
 
     @When("a CustomerBankAccountAssignedEvent is received")
     public void aCustomerBankAccountAssignedEventIsReceived() {
+        this.customerId = UserAccountId.randomId();
+
         this.customerBankAccountAssignedEvent = new CustomerBankAccountAssignedEvent(
             this.paymentInitiatedEvent.getCorrelationId(),
             new BankAccountNo(
                 UUID.randomUUID().toString()
-            )
+            ),
+            this.customerId
         );
 
         Event event = new Event(
@@ -93,7 +100,8 @@ public class PaymentSteps {
             this.paymentInitiatedEvent.getCorrelationId(),
             new BankAccountNo(
                 UUID.randomUUID().toString()
-            )
+            ),
+            this.merchantId
         );
 
         Event event = new Event(
@@ -129,6 +137,7 @@ public class PaymentSteps {
     public void theBankIsAskedToTransferTheMoney() {
         verify(bankAdapter).makeBankTransfer(
             new Payment(
+                null,
                 this.customerBankAccountAssignedEvent.getBankAccountNo(),
                 this.merchantBankAccountAssignedEvent.getBankAccountNo(),
                 this.paymentInitiatedEvent.getAmount()
@@ -137,22 +146,39 @@ public class PaymentSteps {
     }
 
     @Then("a corresponding PaymentTransferredEvent is sent")
-    public void aCorrespondingPaymentTransferedEventIsSent() {
-        Event event = new Event(
+    public void aCorrespondingPaymentTransferredEventIsSent() {
+        verify(messageQueue, times(2)).publish(eventCaptor.capture());
+
+        Event event = eventCaptor.getValue();
+        PaymentTransferredEvent paymentTransferredEvent = event.getArgument(0, PaymentTransferredEvent.class);
+
+        Event expected = new Event(
             EventType.PAYMENT_TRANSFERRED.getEventName(),
             new Object[] {
                 new PaymentTransferredEvent(
                     this.paymentInitiatedEvent.getCorrelationId(),
                     new Payment(
+                        paymentTransferredEvent.getPayment().getPaymentId(),
                         this.customerBankAccountAssignedEvent.getBankAccountNo(),
                         this.merchantBankAccountAssignedEvent.getBankAccountNo(),
                         this.paymentInitiatedEvent.getAmount()
-                    )
+                    ),
+                    this.merchantId,
+                    this.customerId
                 )
             }
         );
 
-        verify(messageQueue).publish(event);
+        Assertions.assertEquals(
+            expected,
+            event
+        );
+
+        Assertions.assertNotNull(
+            paymentTransferredEvent
+                    .getPayment()
+                    .getPaymentId()
+        );
     }
 
     @Then("a PaymentInitiatedEvent is sent")
