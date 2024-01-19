@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * @author Clair
+ * @author Clair Norah Mutebi (s184187)
  */
 @Data
 @NoArgsConstructor

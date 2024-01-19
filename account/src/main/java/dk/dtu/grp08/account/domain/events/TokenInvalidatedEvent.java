@@ -5,7 +5,7 @@ import dk.dtu.grp08.account.domain.models.Token;
 import lombok.Value;
 
 /**
- * @author Clair
+ * @author Clair Norah Mutebi (s184187)
  */
 @Value
 public class TokenInvalidatedEvent {

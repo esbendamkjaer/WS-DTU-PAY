@@ -9,7 +9,7 @@ public class AccountReturnedEvent {
 
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     CorrelationId correlationId;
     UserAccount userAccount;

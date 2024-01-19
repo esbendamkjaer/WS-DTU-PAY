@@ -27,8 +27,8 @@ chmod +x build_and_run-legacy.sh
 | payment   | AMQP               |      |
 | token     | AMQP               |      |
 | reporting | AMQP               |      |
-| manager   | RESTful HTTP       | 8086 |
-| merchant  | RESTful HTTP       | 8087 |
+| manager   | RESTful HTTP       | 8087 |
+| merchant  | RESTful HTTP       | 8086 |
 
 ## Jenkins Credentials
 

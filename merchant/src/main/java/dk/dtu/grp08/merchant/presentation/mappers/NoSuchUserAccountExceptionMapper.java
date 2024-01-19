@@ -6,7 +6,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 @Provider
 public class NoSuchUserAccountExceptionMapper implements ExceptionMapper<NoSuchUserAccountException> {

@@ -15,7 +15,7 @@ public class UserAccountId {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
 
     UUID id;

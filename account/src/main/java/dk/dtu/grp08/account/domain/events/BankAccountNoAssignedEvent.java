@@ -6,7 +6,7 @@ import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import lombok.Value;
 
 /**
- * @author Alexander
+ * @author Alexander Matzen (s233475)
  */
 @Value
 public class BankAccountNoAssignedEvent {

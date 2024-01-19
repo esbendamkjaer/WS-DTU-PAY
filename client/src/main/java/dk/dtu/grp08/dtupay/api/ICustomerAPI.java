@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public interface ICustomerAPI {
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @POST
     @Path("/{userId}/tokens")
@@ -27,7 +27,7 @@ public interface ICustomerAPI {
     );
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -37,7 +37,7 @@ public interface ICustomerAPI {
     );
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @DELETE
     @Path("/{userId}")
@@ -46,7 +46,7 @@ public interface ICustomerAPI {
     );
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @GET
     @Path("/{userId}")
@@ -56,7 +56,7 @@ public interface ICustomerAPI {
     );
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @GET
     @Path("/{userId}/report")

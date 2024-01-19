@@ -10,7 +10,7 @@ public class TokenExceptionMapper implements ExceptionMapper<TokenException> {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public Response toResponse(TokenException exception) {

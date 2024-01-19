@@ -8,7 +8,7 @@ public class AccountDeregisteredEvent {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     CorrelationId correlationId;
 }

@@ -1,7 +1,7 @@
 package dk.dtu.grp08.token.domain.events;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 public enum EventType {
 
@@ -16,14 +16,14 @@ public enum EventType {
     private final String eventName;
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     EventType(String eventName) {
         this.eventName = eventName;
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     public String getEventName() {
         return eventName;

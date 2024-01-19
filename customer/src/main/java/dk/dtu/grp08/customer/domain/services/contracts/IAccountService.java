@@ -9,7 +9,7 @@ public interface IAccountService {
 
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     CompletableFuture<Void> deleteUserAccount(UserAccountId userId);
 

@@ -8,7 +8,7 @@ import lombok.Value;
 import java.util.UUID;
 
 /**
- * @author Alexander
+ * @author Alexander Matzen (s233475)
  */
 @Data
 @NoArgsConstructor

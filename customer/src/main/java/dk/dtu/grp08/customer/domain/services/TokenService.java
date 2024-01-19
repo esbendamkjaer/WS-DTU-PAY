@@ -27,7 +27,7 @@ public class TokenService implements ITokenService {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     public TokenService(
         MessageQueue messageQueue,
@@ -49,7 +49,7 @@ public class TokenService implements ITokenService {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public CompletableFuture<List<Token>> getTokens(int count, UserAccountId userId) {
@@ -91,7 +91,7 @@ public class TokenService implements ITokenService {
 
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     public void handleTokensReturnedEvent(Event event) {
         TokensReturnedEvent tokensReturnedEvent = event.getArgument(0, TokensReturnedEvent.class);
@@ -111,7 +111,7 @@ public class TokenService implements ITokenService {
 
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public void handleTokenRequestFailedEvent(Event event) {
         TokenRequestFailed tokenRequestFailed = (TokenRequestFailed) event.getArgument(0, TokenRequestFailed.class);

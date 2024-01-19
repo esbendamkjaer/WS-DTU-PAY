@@ -5,7 +5,7 @@ import dk.dtu.grp08.token.domain.models.Token;
 import lombok.Value;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 @Value
 public class TokenInvalidatedEvent {

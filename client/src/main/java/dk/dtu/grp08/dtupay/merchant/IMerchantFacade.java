@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 public interface IMerchantFacade {
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     UserAccount register(
         String name,
@@ -21,12 +21,12 @@ public interface IMerchantFacade {
     );
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     void deregister(UserId user);
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     Payment pay(
         PaymentRequest paymentRequest
@@ -34,7 +34,7 @@ public interface IMerchantFacade {
 
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     List<Payment> getReport(UserId userId);
 

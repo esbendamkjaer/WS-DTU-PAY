@@ -50,6 +50,9 @@ public class StepDefinitions {
     private UserAccount retrievedCustomer;
 
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @Given("a merchant named {string}")
     public void aMerchantWithName(String name) {
         this.merchant = new UserAccount();
@@ -59,6 +62,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @Given("a customer named {string}")
     public void aCustomerWithNameAndBankAccountDetails(String name) {
         this.customer = new UserAccount();
@@ -68,6 +74,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @And("the customer is registered with DTU Pay")
     public void theCustomerIsRegisteredInDTUPay() {
         this.customer = this.customerFacade.register(
@@ -77,6 +86,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @And("the merchant is registered with DTU Pay")
     public void theMerchantIsRegisteredInDTUPay() {
         this.merchant = this.merchantFacade.register(
@@ -86,6 +98,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @And("the customer has an invalid token")
     public void theCustomerHasAnInvalidToken() {
         Token token = new Token();
@@ -95,6 +110,9 @@ public class StepDefinitions {
         this.customerTokens.add(token);
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @And("the customer has a bank account with balance {double}")
     public void theCustomerHasABankAccount(double balance) {
         BankAccountNo bankAccountNo = this.bankAdapter.createBankAccount(
@@ -107,6 +125,9 @@ public class StepDefinitions {
         this.customer.setBankAccountNo(bankAccountNo);
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @And("the merchant has a bank account with balance {double}")
     public void theMerchantHasABankAccount(double balance) {
         BankAccountNo bankAccountNo = this.bankAdapter.createBankAccount(
@@ -119,6 +140,9 @@ public class StepDefinitions {
         this.merchant.setBankAccountNo(bankAccountNo);
     }
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @And("the merchant has a bank account, that does not exist")
     public void theMerchantHasABankAccountThatDoesNotExist() {
         BankAccountNo bankAccountNo = new BankAccountNo();
@@ -129,6 +153,9 @@ public class StepDefinitions {
         this.merchant.setBankAccountNo(bankAccountNo);
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @And("the customer has a bank account, that does not exist")
     public void theCustomerHasABankAccountThatDoesNotExist() {
         BankAccountNo bankAccountNo = new BankAccountNo();
@@ -139,6 +166,9 @@ public class StepDefinitions {
         this.customer.setBankAccountNo(bankAccountNo);
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @When("the customer gets {int} tokens")
     public void theCustomerHasTokens(int count) {
         try {
@@ -153,6 +183,9 @@ public class StepDefinitions {
         }
     }
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @When(("the merchant requests a payment of {double} kr"))
     public void theMerchantRequestsAPayment(double amount) {
         this.paymentRequest = new PaymentRequest();
@@ -164,6 +197,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @And("the customer grants the payment with a token")
     public void theCustomerGrantsThePaymentWithAToken() {
         this.paymentRequest.setToken(
@@ -182,6 +218,9 @@ public class StepDefinitions {
         }
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @Then("the customer has {int} unused tokens")
     public void theCustomerHasUnusedTokens(int count) {
         Assert.assertEquals(
@@ -190,11 +229,9 @@ public class StepDefinitions {
         );
     }
 
-    @When("the token has to be validated")
-    public  void theTokenHasToBeValidated(){
-        //TODO
-    }
-
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @Then("the error with message {string} is received")
     public void anErrorMessageIsReceived(String message) {
         Assertions.assertEquals(
@@ -205,16 +242,17 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @Then("the token is not validated")
     public void theTokenIsNotValidated(){
         assertTrue(exception.getMessage().contains("Token is not validated"));
     }
 
-    @Given("a token is not in the list")
-    public void aTokenIsNotInTheList(){
-        //TODO
-    }
-
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @Then("the customer is assigned an id")
     public void theCustomerIsAssignedAnId(){
         Assert.assertNotNull(
@@ -222,6 +260,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @Then("the merchant is assigned an id")
     public void theMerchantIsAssignedAnId(){
         Assert.assertNotNull(
@@ -229,6 +270,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Then("the merchant has balance {double}")
     public void theMerchantHasBalance(double balance) {
         BigDecimal merchantBalance = this.bankAdapter.getBalance(
@@ -241,6 +285,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Then("the customer has balance {double}")
     public void theCustomerHasBalance(double balance) {
         BigDecimal customerBalance = this.bankAdapter.getBalance(
@@ -253,7 +300,9 @@ public class StepDefinitions {
         );
     }
 
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @When("the customer deregisters")
     public void theCustomerDeregisters() {
         this.customerFacade.deregister(
@@ -261,6 +310,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @Then("the customer is no longer registered with DTU Pay")
     public void theCustomerIsNoLongerRegisteredWithDTUPay() {
         ClientErrorException e = Assertions.assertThrows(
@@ -276,6 +328,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @When("the customer requests a report")
     public void theCustomerRequestsAReport() {
        report = customerFacade.getReport(
@@ -285,7 +340,9 @@ public class StepDefinitions {
  
     }
 
-
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @Then("the customer should see a report with the following transaction details")
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
 
@@ -300,6 +357,9 @@ public class StepDefinitions {
         
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @When("the merchant requests a report")
     public void theMerchantRequestsAReport() {
 
@@ -309,6 +369,9 @@ public class StepDefinitions {
 
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @Then("the merchant should see a report with the following transaction details")
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
         report.forEach(payment -> {
@@ -321,6 +384,9 @@ public class StepDefinitions {
 
     }
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @And("the customer grants the payment with a token without discarding it")
     public void theCustomerGrantsThePaymentWithATokenWithoutDiscardingIt() {
         this.paymentRequest.setToken(
@@ -338,6 +404,9 @@ public class StepDefinitions {
         }
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @When("the customer is retrieved by id")
     public void theCustomerIsRetrievedById() {
         this.retrievedCustomer = this.customerFacade.getCustomer(
@@ -345,6 +414,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @When("the manager requests a report")
     public void theManagerRequestsAReport() {
 
@@ -352,6 +424,9 @@ public class StepDefinitions {
 
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @Then("the manager should see a report with the following transaction details")
     public void theManagerShouldSeeAReportWithTheFollowingTransactionDetails() {
        boolean result =  paymentRequests.stream()
@@ -363,6 +438,9 @@ public class StepDefinitions {
 
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @Then("expect the same customer")
     public void expectTheSameCustomer() {
         Assert.assertEquals(
@@ -371,6 +449,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @After
     public void cleanUp() {
         if (this.customer != null) {

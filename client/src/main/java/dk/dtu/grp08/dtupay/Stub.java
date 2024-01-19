@@ -8,7 +8,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 public class Stub {
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     public static <T> T get(Class<T> clazz, String baseUrl) {
         Client client = ClientBuilder.newClient();

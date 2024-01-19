@@ -21,7 +21,7 @@ public interface ICustomerResource {
 
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @POST
     @Path("/{userId}/tokens")
@@ -33,7 +33,7 @@ public interface ICustomerResource {
 
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -44,7 +44,7 @@ public interface ICustomerResource {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @DELETE
     @Path("/{userId}")
@@ -54,7 +54,7 @@ public interface ICustomerResource {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @GET
     @Path("/{userId}")
@@ -63,7 +63,7 @@ public interface ICustomerResource {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @GET
     @Path("/{userId}/report")

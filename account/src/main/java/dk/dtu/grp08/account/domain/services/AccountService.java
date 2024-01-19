@@ -23,7 +23,7 @@ public class AccountService implements IAccountService {
     private final MessageQueue messageQueue;
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     public AccountService(
             IAccountRepository accountRepository,
@@ -59,7 +59,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public UserAccount registerAccount(
@@ -81,7 +81,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public Optional<UserAccount> getUserAccountById(UserAccountId id) {
@@ -90,7 +90,7 @@ public class AccountService implements IAccountService {
 
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public void deleteUserAccount(UserAccountId userAccountId) throws NoSuchUserAccountException {
@@ -106,7 +106,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @Override
     public List<UserAccount> getUserAccounts() {
@@ -114,7 +114,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     public void handlePaymentInitiatedEvent(Event event) {
         PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
@@ -142,7 +142,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author @Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     public void handleTokenValidatedEvent(Event event) {
         TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
@@ -185,7 +185,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     public void handleAccountRegistrationRequestedEvent(Event event) {
         AccountRegistrationRequestedEvent accountRegistrationRequestedEvent = event.getArgument(0, AccountRegistrationRequestedEvent.class);
@@ -214,7 +214,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     public void handleAccountDeregistrationRequestedEvent(Event event) {
         AccountDeregistrationRequestedEvent accountDeregistrationRequestedEvent = event.getArgument(0, AccountDeregistrationRequestedEvent.class);
@@ -258,7 +258,7 @@ public class AccountService implements IAccountService {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public void handleAccountRequestedEvent(Event event) {
         AccountRequestedEvent accountRequestedEvent = event.getArgument(0, AccountRequestedEvent.class);

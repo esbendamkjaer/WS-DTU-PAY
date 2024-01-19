@@ -1,6 +1,6 @@
 Feature: Report feature
 
-  # Author: Muhamad
+  # Author: Muhamad Hussein Nadali (s233479)
   Scenario: Generate a report for a customer
     Given a customer named "Alice"
     And a merchant named "Bob"
@@ -13,7 +13,7 @@ Feature: Report feature
     When the customer requests a report
     Then the customer should see a report with the following transaction details
 
-  # Author: Alexander
+  # Author: Alexander Matzen (s233475)
   Scenario: Generate a report for a merchant
     Given a customer named "Alice"
     And a merchant named "Bob"
@@ -26,7 +26,7 @@ Feature: Report feature
     When the merchant requests a report
     Then the merchant should see a report with the following transaction details
 
-    # Author: Dilara
+    # Author: Dilara Eda Celepli (s184262)
     Scenario: Generate a report for a manager
     When the manager requests a report
     Then the manager should see a report with the following transaction details

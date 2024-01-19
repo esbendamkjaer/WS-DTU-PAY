@@ -39,7 +39,7 @@ public class TokenRepository implements ITokenRepository {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public List<Token> getTokensByUserId(UserId userId) {
@@ -47,7 +47,7 @@ public class TokenRepository implements ITokenRepository {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public Optional<Token> deleteToken(Token token) {

@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 public interface IManagerAPI {
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @GET
     @Path("/report")

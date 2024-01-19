@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public interface IBankAdapter {
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     BankAccountNo createBankAccount(
         String firstName,
@@ -17,12 +17,12 @@ public interface IBankAdapter {
     );
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     void retireBankAccount(BankAccountNo bankAccountNo);
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     BigDecimal getBalance(BankAccountNo bankAccountNo);
 

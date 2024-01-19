@@ -6,7 +6,7 @@ import dk.dtu.grp08.payment.domain.models.user.UserAccountId;
 import lombok.Value;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 @Value
 public class CustomerBankAccountAssignedEvent {

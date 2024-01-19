@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class MessageQueueProducer {
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @Produces
     @ApplicationScoped

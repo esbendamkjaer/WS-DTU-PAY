@@ -8,17 +8,17 @@ import java.util.List;
 public interface IPaymentRepository {
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     Payment savePayment(Payment payment);
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     void deletePayment(Payment payment);
 
     /**
-     * @author @Fuad
+     * @author @Fuad Hassan Jama (s233468)
      */
     List<Payment> getPayments();
 

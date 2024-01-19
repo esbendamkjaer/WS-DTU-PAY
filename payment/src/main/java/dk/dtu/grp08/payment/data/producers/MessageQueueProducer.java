@@ -10,7 +10,7 @@ import java.util.Optional;
 public class MessageQueueProducer {
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Produces
     @ApplicationScoped

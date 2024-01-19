@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Token {
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     UUID id;
 }

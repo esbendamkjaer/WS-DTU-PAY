@@ -1,7 +1,7 @@
 package dk.dtu.grp08.payment.domain.exceptions;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 public class InvalidTokenException extends PaymentException {
 

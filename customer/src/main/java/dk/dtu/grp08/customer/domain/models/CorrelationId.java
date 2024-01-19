@@ -13,7 +13,7 @@ public class CorrelationId {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     UUID id;
 

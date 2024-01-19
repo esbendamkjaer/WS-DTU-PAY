@@ -8,7 +8,7 @@ import lombok.Value;
 import java.util.UUID;
 
 /**
- * @author Dilara
+ * @author Dilara Eda Celepli (s184262)
  */
 @Data
 @NoArgsConstructor

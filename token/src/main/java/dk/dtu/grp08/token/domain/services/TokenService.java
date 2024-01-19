@@ -27,7 +27,7 @@ public class TokenService implements ITokenService {
     private final int MAX_TOKENS_PER_USER = 6;
 
     /**
-     * Fuad
+     * Fuad Hassan Jama (s233468)
      */
     public TokenService(
         ITokenRepository tokenRepository,
@@ -48,7 +48,7 @@ public class TokenService implements ITokenService {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public List<Token> getTokens(int count, UserId userId) {
@@ -79,7 +79,7 @@ public class TokenService implements ITokenService {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Override
     public UserId validateToken(Token token) throws InvalidTokenException {
@@ -95,7 +95,7 @@ public class TokenService implements ITokenService {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     private Token generateToken() {
         return new Token(
@@ -104,7 +104,7 @@ public class TokenService implements ITokenService {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     public void handlePaymentInitiatedEvent(Event event) {
         PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
@@ -146,7 +146,7 @@ public class TokenService implements ITokenService {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public void handleTokensRequestedEvent(Event event) {
         TokensRequestedEvent tokensRequestedEvent = event.getArgument(0, TokensRequestedEvent.class);

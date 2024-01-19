@@ -34,7 +34,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public CustomerResource(
             IAccountService accountService,
@@ -57,7 +57,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public CompletableFuture<List<Token>> getTokens(
@@ -72,7 +72,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public CompletableFuture<UserAccount> createCustomer(
@@ -85,7 +85,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Override
     public CompletableFuture<Void> deleteCustomer(UUID userId) {
@@ -96,7 +96,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public CompletableFuture<UserAccount> getCustomer(UUID userId) {
@@ -108,7 +108,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Override
     public CompletableFuture<List<Payment>> getReport(
@@ -145,7 +145,7 @@ public class CustomerResource implements ICustomerResource {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);

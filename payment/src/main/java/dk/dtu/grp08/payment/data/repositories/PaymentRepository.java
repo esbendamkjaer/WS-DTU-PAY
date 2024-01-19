@@ -19,7 +19,7 @@ public class PaymentRepository implements IPaymentRepository {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public Payment savePayment(Payment payment) {
         payment = new Payment(
@@ -35,14 +35,14 @@ public class PaymentRepository implements IPaymentRepository {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public void deletePayment(Payment payment) {
         payments.remove(payment);
     }
 
     /**
-     * Muhamad
+     * Muhamad Hussein Nadali (s233479)
      */
     public List<Payment> getPayments() {
         return payments;

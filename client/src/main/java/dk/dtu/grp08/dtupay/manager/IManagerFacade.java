@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture;
 public interface IManagerFacade {
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     List<Payment> getReport();
 

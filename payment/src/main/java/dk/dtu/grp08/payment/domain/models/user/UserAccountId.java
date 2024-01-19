@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.UUID;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 @Value
 public class UserAccountId {

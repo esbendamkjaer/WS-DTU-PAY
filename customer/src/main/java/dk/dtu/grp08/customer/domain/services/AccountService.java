@@ -23,7 +23,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public AccountService(
         MessageQueue messageQueue,
@@ -55,7 +55,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public CompletableFuture<Void> deleteUserAccount(UserAccountId userId) {
@@ -91,7 +91,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public CompletableFuture<UserAccount> createUserAccount(UserAccount userAccount) {
@@ -131,7 +131,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
 
     @Override
@@ -170,7 +170,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public void handleAccountReturnedEvent(Event event) {
         AccountReturnedEvent accountReturnedEvent = event.getArgument(0, AccountReturnedEvent.class);
@@ -192,7 +192,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
@@ -214,7 +214,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
 
     public void handleAccountDeregisteredEvent(Event event) {
@@ -235,7 +235,7 @@ public class AccountService implements IAccountService {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
 
     private void handleUserNotFoundEvent(Event event) {

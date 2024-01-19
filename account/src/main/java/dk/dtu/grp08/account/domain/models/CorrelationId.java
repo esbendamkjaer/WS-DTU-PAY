@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.UUID;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 @Value
 public class CorrelationId {

@@ -11,7 +11,7 @@ import java.util.List;
 public class TokensReturnedEvent {
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     CorrelationId correlationId;
     List<Token> tokens;

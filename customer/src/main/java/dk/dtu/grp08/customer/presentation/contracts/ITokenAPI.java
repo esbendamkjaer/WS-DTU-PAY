@@ -13,7 +13,7 @@ public interface ITokenAPI {
 
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @GET
     @Path("/{userId}")

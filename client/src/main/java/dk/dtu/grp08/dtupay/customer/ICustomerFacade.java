@@ -9,12 +9,12 @@ import java.util.concurrent.CompletableFuture;
 public interface ICustomerFacade {
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     List<Token> getTokens(UserId userId, int count);
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     UserAccount register(
         String name,
@@ -23,17 +23,17 @@ public interface ICustomerFacade {
     );
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     void deregister(UserId user);
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     UserAccount getCustomer(UserId userId);
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     List<Payment> getReport(UserId userId);
 }

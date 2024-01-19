@@ -6,7 +6,7 @@ import dk.dtu.grp08.account.domain.models.user.UserAccountId;
 import lombok.Value;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 @Value
 public class TokenValidatedEvent {

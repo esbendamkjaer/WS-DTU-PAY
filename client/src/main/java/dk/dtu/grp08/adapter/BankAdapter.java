@@ -17,7 +17,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Override
     public BankAccountNo createBankAccount(
@@ -46,7 +46,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Override
     public void retireBankAccount(BankAccountNo bankAccountNo) {
@@ -61,7 +61,7 @@ public class BankAdapter implements IBankAdapter {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public BigDecimal getBalance(BankAccountNo bankAccountNo) {

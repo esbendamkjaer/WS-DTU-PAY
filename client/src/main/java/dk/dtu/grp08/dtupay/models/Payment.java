@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 @Data
 public class Payment {

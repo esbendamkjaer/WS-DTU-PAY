@@ -5,7 +5,7 @@ import dk.dtu.grp08.account.domain.models.user.UserAccount;
 import lombok.Value;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 @Value
 public class AccountRegisteredEvent {

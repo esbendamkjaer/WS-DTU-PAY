@@ -33,7 +33,7 @@ public class PaymentService implements IPaymentService {
 
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     public PaymentService(
         IPaymentRepository paymentRepository,
@@ -68,7 +68,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public Policy<PaymentTransferredEvent> initiatePayment(
@@ -157,7 +157,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, MerchantBankAccountAssignedEvent.class);
@@ -176,7 +176,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     public void handleCustomerBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
@@ -195,7 +195,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     public void handleTokenInvalidatedEvent(Event mqEvent) {
         val tokenInvalidatedEvent = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
@@ -210,7 +210,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
 
     public Payment makePayment(Payment payment, UUID merchantID, Token token) {
@@ -220,7 +220,7 @@ public class PaymentService implements IPaymentService {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public void handlePaymentRequestedEvent(Event mqEvent) {
         val event = mqEvent.getArgument(0, PaymentRequestedEvent.class);

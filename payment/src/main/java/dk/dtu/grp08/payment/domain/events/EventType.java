@@ -1,7 +1,7 @@
 package dk.dtu.grp08.payment.domain.events;
 
 /**
- * @author Dilara
+ * @author Dilara Eda Celepli (s184262)
  */
 public enum EventType {
 

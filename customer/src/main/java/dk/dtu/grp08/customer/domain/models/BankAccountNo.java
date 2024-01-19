@@ -12,7 +12,7 @@ import lombok.ToString;
 public class BankAccountNo {
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     String bankAccountNo;
 }

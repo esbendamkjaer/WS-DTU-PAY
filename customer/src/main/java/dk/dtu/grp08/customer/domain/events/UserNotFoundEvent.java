@@ -9,7 +9,7 @@ public class UserNotFoundEvent {
 
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     CorrelationId correlationId;
     UserAccountId userId;

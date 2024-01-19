@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UserAccount {
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     UserAccountId id;
     String name;

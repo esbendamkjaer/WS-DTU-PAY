@@ -4,7 +4,7 @@ import dk.dtu.grp08.payment.domain.models.payment.BankAccountNo;
 import lombok.Data;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 @Data
 public class UserAccount {

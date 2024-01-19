@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IAccountService {
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     UserAccount registerAccount(
         String name,
@@ -19,17 +19,17 @@ public interface IAccountService {
     );
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     Optional<UserAccount> getUserAccountById(UserAccountId id);
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     void deleteUserAccount(UserAccountId userAccountId);
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     List<UserAccount> getUserAccounts();
 }

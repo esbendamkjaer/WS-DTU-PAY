@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 public interface ITokenService {
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     CompletableFuture<List<Token>> getTokens(int count, UserAccountId userId);
 }

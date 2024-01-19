@@ -1,7 +1,7 @@
 package dk.dtu.grp08.payment.domain.exceptions;
 
 /**
- * @author Clair
+ * @author Clair Norah Mutebi (s184187)
  */
 public class InsufficientAccountBalanceException extends PaymentException {
     public InsufficientAccountBalanceException() {

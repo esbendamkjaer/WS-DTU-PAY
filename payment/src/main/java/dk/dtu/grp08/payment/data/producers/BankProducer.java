@@ -8,7 +8,7 @@ import jakarta.enterprise.inject.Produces;
 public class BankProducer {
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Produces
     @ApplicationScoped

@@ -9,7 +9,7 @@ public class Payment {
 
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     private BankAccountNo debtor;
     private BankAccountNo creditor;

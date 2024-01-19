@@ -9,22 +9,22 @@ import java.util.Optional;
 public interface IAccountRepository {
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     UserAccount createUserAccount(UserAccount userAccount);
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     Optional<UserAccount> findById(UserAccountId id);
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     List<UserAccount> findAll();
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     void deleteUserAccount(UserAccountId id);
 }

@@ -4,7 +4,7 @@ import dk.dtu.grp08.token.domain.models.CorrelationId;
 import lombok.Value;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 @Value
 public class TokenRequestFailed {

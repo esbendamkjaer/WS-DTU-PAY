@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 @Data
 @NoArgsConstructor

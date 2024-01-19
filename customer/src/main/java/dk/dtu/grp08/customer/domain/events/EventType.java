@@ -4,7 +4,7 @@ public enum EventType {
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     PAYMENT_INITIATED("PaymentInitiated"),
     PAYMENT_TRANSFERRED("PaymentTransferred"),

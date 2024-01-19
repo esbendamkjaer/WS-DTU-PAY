@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * @author Clair
+ * @author Clair Norah Mutebi (s184187)
  */
 @Data
 @ToString

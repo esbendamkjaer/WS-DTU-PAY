@@ -13,7 +13,7 @@ public class CustomerFacade implements ICustomerFacade {
     private final ICustomerAPI customerAPI;
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public CustomerFacade() {
         customerAPI = Stub.get(
@@ -25,7 +25,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public List<Token> getTokens(
@@ -39,7 +39,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public UserAccount register(
@@ -58,7 +58,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public void deregister(
@@ -70,7 +70,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Override
     public UserAccount getCustomer(UserId userId) {
@@ -80,7 +80,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Override
     public List<Payment> getReport(UserId userId) {

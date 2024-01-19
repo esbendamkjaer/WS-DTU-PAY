@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 
 /**
- * @author Fuad
+ * @author Fuad Hassan Jama (s233468)
  */
 @Data
 @NoArgsConstructor

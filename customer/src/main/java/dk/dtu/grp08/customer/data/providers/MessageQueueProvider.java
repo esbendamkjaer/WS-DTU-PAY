@@ -10,7 +10,7 @@ import java.util.Optional;
 public class MessageQueueProvider {
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Produces
     @ApplicationScoped

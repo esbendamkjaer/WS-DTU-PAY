@@ -12,7 +12,7 @@ import dk.dtu.grp08.payment.domain.models.payment.Payment;
 public class BankAdapter implements IBankAdapter {
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Override
     public void makeBankTransfer(Payment payment) {

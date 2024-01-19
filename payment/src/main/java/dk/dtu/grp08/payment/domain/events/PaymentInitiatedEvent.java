@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * @author Alexander
+ * @author Alexander Matzen (s233475)
  */
 @Value
 public class PaymentInitiatedEvent {

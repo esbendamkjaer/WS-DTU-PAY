@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Dilara
+ * @author Dilara Eda Celepli (s184262)
  */
 @Data
 @NoArgsConstructor

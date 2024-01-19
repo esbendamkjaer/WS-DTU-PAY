@@ -12,12 +12,12 @@ import java.util.UUID;
 public interface IPaymentService {
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     Payment makePayment(Payment payment, UUID merchantID, Token token);
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     Policy<PaymentTransferredEvent> initiatePayment(
         PaymentRequestedEvent paymentRequestedEvent

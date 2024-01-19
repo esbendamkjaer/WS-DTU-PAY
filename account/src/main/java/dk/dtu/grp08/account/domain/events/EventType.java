@@ -1,7 +1,7 @@
 package dk.dtu.grp08.account.domain.events;
 
 /**
- * @author Esben
+ * @author Esben Damkjær Sørensen (s233474)
  */
 public enum EventType {
 

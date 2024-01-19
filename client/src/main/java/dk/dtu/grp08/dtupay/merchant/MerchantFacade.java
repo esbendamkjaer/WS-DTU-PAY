@@ -17,7 +17,7 @@ public class MerchantFacade implements IMerchantFacade {
     private final IMerchantAPI merchantAPI;
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     public MerchantFacade() {
         this.merchantAPI = Stub.get(
@@ -29,7 +29,7 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public UserAccount register(String name, String cpr, BankAccountNo bankAccountNo) {
@@ -44,7 +44,7 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @Override
     public void deregister(UserId user) {
@@ -54,7 +54,7 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Override
     public Payment pay(PaymentRequest paymentRequest) {
@@ -64,7 +64,7 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public List<Payment> getReport(UserId userId) {

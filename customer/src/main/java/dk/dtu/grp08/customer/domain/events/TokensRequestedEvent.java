@@ -9,7 +9,7 @@ import lombok.Value;
 public class TokensRequestedEvent {
     /**
      *
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     CorrelationId correlationId;
     UserAccountId userId;

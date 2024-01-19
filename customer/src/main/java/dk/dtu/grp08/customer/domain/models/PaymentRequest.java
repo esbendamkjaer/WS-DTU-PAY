@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PaymentRequest {
     /**
      *
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     Token token;
     UUID merchantId;

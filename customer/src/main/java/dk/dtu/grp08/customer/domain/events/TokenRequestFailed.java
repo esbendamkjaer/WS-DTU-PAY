@@ -7,7 +7,7 @@ import lombok.Value;
 public class TokenRequestFailed {
     /**
      *
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     CorrelationId correlationId;
     String cause;

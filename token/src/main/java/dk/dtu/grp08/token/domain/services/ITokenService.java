@@ -9,12 +9,12 @@ import java.util.List;
 public interface ITokenService {
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     List<Token> getTokens(int count, UserId userId);
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     UserId validateToken(Token token) throws InvalidTokenException;
 

@@ -35,7 +35,7 @@ public class TokenSteps {
 
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Given("a valid token")
     public void aToken() {
@@ -49,7 +49,7 @@ public class TokenSteps {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Given("an invalid token")
     public void anInvalidToken() {
@@ -59,7 +59,7 @@ public class TokenSteps {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @When("a PaymentInitiatedEvent is received")
     public void thePaymentInitiatedEventIsReceived() {
@@ -81,7 +81,7 @@ public class TokenSteps {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Then("a corresponding TokenValidatedEvent is sent")
     public void theTokenValidatedEventIsSent() {
@@ -101,7 +101,7 @@ public class TokenSteps {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @Then("a corresponding TokenInvalidatedEvent is sent")
     public void theTokenInvalidatedEventIsSent() {

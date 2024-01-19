@@ -5,7 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(

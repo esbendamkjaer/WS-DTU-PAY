@@ -46,7 +46,7 @@ public class PaymentSteps {
     );
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @When("a PaymentRequest has been received")
     public void aPaymentHasBeenRequested() {
@@ -74,7 +74,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @When("a CustomerBankAccountAssignedEvent is received")
     public void aCustomerBankAccountAssignedEventIsReceived() {
@@ -101,7 +101,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @When("a MerchantBankAccountAssignedEvent is received")
     public void aMerchantBankAccountAssignedEventIsReceived() {
@@ -126,7 +126,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @When("a TokenInvalidatedEvent is received")
     public void aTokenInvalidatedEventIsReceived() {
@@ -146,7 +146,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Then("the bank is asked to transfer the money")
     public void theBankIsAskedToTransferTheMoney() {
@@ -161,7 +161,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Then("a corresponding PaymentTransferredEvent is sent")
     public void aCorrespondingPaymentTransferredEventIsSent() {
@@ -200,7 +200,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @Then("a PaymentInitiatedEvent is sent")
     public void aPaymentInitiatedEventIsSent() {
@@ -234,7 +234,7 @@ public class PaymentSteps {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Then("a corresponding PaymentFailedEvent is sent with cause {string}")
     public void aPaymentFailedEventIsSent(String cause) {

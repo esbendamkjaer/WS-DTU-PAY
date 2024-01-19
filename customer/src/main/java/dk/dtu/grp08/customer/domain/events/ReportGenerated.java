@@ -15,7 +15,7 @@ import java.util.List;
 public class ReportGenerated {
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     List<Payment> report;
 

@@ -6,7 +6,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 @Provider
 public class PaymentFailedExceptionMapper implements ExceptionMapper<PaymentFailedException> {

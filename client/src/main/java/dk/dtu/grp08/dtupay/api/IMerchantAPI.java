@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 public interface IMerchantAPI {
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -25,7 +25,7 @@ public interface IMerchantAPI {
     );
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @DELETE
     @Path("/{userId}")
@@ -34,7 +34,7 @@ public interface IMerchantAPI {
     );
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @POST
     @Path("/payment")
@@ -45,7 +45,7 @@ public interface IMerchantAPI {
     );
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @GET
     @Path("/{userId}/report")

@@ -10,7 +10,7 @@ public class NoSuchUserAccountExceptionMapper implements ExceptionMapper<NoSuchU
 
     /**
      *
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @Override
     public Response toResponse(NoSuchUserAccountException e) {

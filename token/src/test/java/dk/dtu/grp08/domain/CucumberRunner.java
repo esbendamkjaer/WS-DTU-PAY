@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 /**
- * @author Dilara
+ * @author Dilara Eda Celepli (s184262)
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(

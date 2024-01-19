@@ -37,7 +37,7 @@ public class ConcurrentPaymentStepDefinitions {
     private UserAccount merchant;
 
     /**
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     @Given("{int} registered customers with a balance of {double} kr")
     public void customers(int count, double balance) {
@@ -70,7 +70,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author Clair
+     * @author Clair Norah Mutebi (s184187)
      */
     @Given("a registered merchant with a balance of {double}")
     public void aRegisteredMerchantWithABalanceOf(double balance) {
@@ -99,7 +99,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author Muhamad
+     * @author Muhamad Hussein Nadali (s233479)
      */
     @And("each customer has {int} unused tokens")
     public void eachCustomerHasUnusedTokens(int count) {
@@ -117,7 +117,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author Esben
+     * @author Esben Damkjær Sørensen (s233474)
      */
     @When("the merchant initiates a payment between {double} kr and {double} kr for each customer")
     public void theMerchantInitiatesAPaymentForEachCustomer(double min, double max) {
@@ -168,7 +168,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Then("the payments should have been assigned the correct bank account numbers")
     public void thePaymentsShouldHaveCorrectBankAccountNumbers() {
@@ -189,7 +189,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author Dilara
+     * @author Dilara Eda Celepli (s184262)
      */
     @Then("the customers should have deducted the correct amount of money")
     public void theCustomersShouldHaveDeductedTheCorrectAmountOfMoney() {
@@ -213,7 +213,7 @@ public class ConcurrentPaymentStepDefinitions {
     }
 
     /**
-     * @author 
+     * @author Clair Norah Mutebi (s184187)
      */
     @Then("the merchant should have received the correct amount of money")
     public void theMerchantShouldHaveReceivedTheCorrectAmountOfMoney() {
@@ -233,6 +233,9 @@ public class ConcurrentPaymentStepDefinitions {
         );
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @After
     public void cleanUp() {
         if (merchant != null) {

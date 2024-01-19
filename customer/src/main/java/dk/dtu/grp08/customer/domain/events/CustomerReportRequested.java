@@ -14,7 +14,7 @@ public class CustomerReportRequested {
 
     /**
      *
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     UserAccountId id;
     CorrelationId correlationId;

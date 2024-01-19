@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author Alexander
+ * @author Alexander Matzen (s233475)
  */
 @Data
 @NoArgsConstructor

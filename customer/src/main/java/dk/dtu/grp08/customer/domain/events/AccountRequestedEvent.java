@@ -8,7 +8,7 @@ import lombok.Value;
 public class AccountRequestedEvent {
     /**
      *
-     * @author Alexander
+     * @author Alexander Matzen (s233475)
      */
     CorrelationId correlationId;
     UserAccountId userId;

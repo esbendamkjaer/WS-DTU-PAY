@@ -12,7 +12,7 @@ public class ManagerFacade implements IManagerFacade {
     private final IManagerAPI managerAPI;
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     public ManagerFacade() {
         this.managerAPI = Stub.get(
@@ -25,7 +25,7 @@ public class ManagerFacade implements IManagerFacade {
 
 
     /**
-     * @author Fuad
+     * @author Fuad Hassan Jama (s233468)
      */
     @Override
     public List<Payment> getReport() {

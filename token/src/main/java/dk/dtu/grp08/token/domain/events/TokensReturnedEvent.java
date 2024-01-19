@@ -7,7 +7,7 @@ import lombok.Value;
 import java.util.List;
 
 /**
- * @author Muhamad
+ * @author Muhamad Hussein Nadali (s233479)
  */
 @Value
 public class TokensReturnedEvent {

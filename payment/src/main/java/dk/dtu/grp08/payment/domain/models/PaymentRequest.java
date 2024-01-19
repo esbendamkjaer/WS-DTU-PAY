@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * @author Clair
+ * @author Clair Norah Mutebi (s184187)
  */
 @Data
 @NoArgsConstructor
