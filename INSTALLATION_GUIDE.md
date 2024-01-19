@@ -1,9 +1,9 @@
 # Installation Guide
 ## Prerequisites
 * Docker
-* Docker Compose (2.1.1 or higher required)
-* Maven
-* Java 21
+  * Docker Compose (2.1.1 or higher required)
+  * Maven
+  * Java 21
 
 ## Installation
 Use the following commands to build and run the project and run the tests:
