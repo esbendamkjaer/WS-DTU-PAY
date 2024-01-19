@@ -36,3 +36,6 @@ chmod +x build_and_run-legacy.sh
 **Username:** `huba`  
 **Password:** `hubert`
 
+## Git Repo
+https://github.com/esbendamkjaer/WS-DTU-PAY
+
