@@ -23,3 +23,9 @@ chmod +x build_and_run.sh
 | manager   | RESTful HTTP       | 8086 |
 | merchant  | RESTful HTTP       | 8087 |
 
+## Jenkins Credentials
+
+**URL:** http://fm-08.compute.dtu.dk:8282/  
+**Username:** `huba`  
+**Password:** `hubert`
+
