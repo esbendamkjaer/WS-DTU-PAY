@@ -6,7 +6,7 @@
 * Java 21
 
 ## Installation
-Use the following commands to install the project:
+Use the following commands to build and run the project and run the tests:
 ```bash
 chmod +x build_and_run.sh
 ./build_and_run.sh
