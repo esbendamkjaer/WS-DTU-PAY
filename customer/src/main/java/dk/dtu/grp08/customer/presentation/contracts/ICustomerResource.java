@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 @Path("/customers")
 public interface ICustomerResource {
 
-    @GET
+    @POST
     @Path("/{userId}/tokens")
     @Produces({MediaType.APPLICATION_JSON})
     CompletableFuture<List<Token>> getTokens(

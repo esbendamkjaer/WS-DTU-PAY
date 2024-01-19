@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 @Path("/customers")
 public interface ICustomerAPI {
 
-    @GET
+    @POST
     @Path("/{userId}/tokens")
     @Produces({MediaType.APPLICATION_JSON})
     List<Token> getTokens(
