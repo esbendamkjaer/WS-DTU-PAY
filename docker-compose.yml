@@ -1,5 +1,6 @@
 services:
   rabbitmq:
+    restart: unless-stopped
     image: rabbitmq
     ports:
       - "5672:5672"
@@ -11,6 +12,7 @@ services:
       retries: 3
 
   account:
+    restart: unless-stopped
     build:
       context: ./account
       dockerfile: Dockerfile
@@ -23,6 +25,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   customer:
+    restart: unless-stopped
     build:
       context: ./customer
       dockerfile: Dockerfile
@@ -36,6 +39,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   payment:
+    restart: unless-stopped
     build:
       context: ./payment
       dockerfile: Dockerfile
@@ -48,6 +52,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   token:
+    restart: unless-stopped
     build:
       context: ./token
       dockerfile: Dockerfile
@@ -60,6 +65,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   reporting:
+    restart: unless-stopped
     build:
       context: ./reporting
       dockerfile: Dockerfile
@@ -72,6 +78,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   merchant:
+    restart: unless-stopped
     build:
       context: ./merchant
       dockerfile: Dockerfile
@@ -85,6 +92,7 @@ services:
       - MANAGER_API=http://localhost:8087
 
   manager:
+    restart: unless-stopped
     build:
       context: ./manager
       dockerfile: Dockerfile
