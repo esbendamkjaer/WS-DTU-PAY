@@ -62,4 +62,4 @@ popd
 docker-compose up -d --build --wait
 
 #run test for all microservices
-#mvn test
+mvn test
