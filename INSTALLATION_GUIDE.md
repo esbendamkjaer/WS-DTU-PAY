@@ -1,7 +1,7 @@
 # Installation Guide
 ## Prerequisites
 * Docker
-* Docker Compose
+* Docker Compose (2.1.1 or higher required)
 * Maven
 * Java 21
 
@@ -10,6 +10,13 @@ Use the following commands to install the project:
 ```bash
 chmod +x build_and_run.sh
 ./build_and_run.sh
+```
+
+If `docker-compose version` returns a version lower than 2.1.1, the following commands can be used instead:
+
+```bash
+chmod +x build_and_run-legacy.sh
+./build_and_run-legacy.sh
 ```
 
 ## Services
