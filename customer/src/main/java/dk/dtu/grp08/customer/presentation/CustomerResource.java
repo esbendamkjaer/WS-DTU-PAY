@@ -123,7 +123,7 @@ public class CustomerResource implements ICustomerResource {
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);
 
-        System.out.println("CustomerBankAccountAssignedEvent");
+
 
         if (!this.policyManager.hasPolicy(event.getCorrelationId())) {
             return;

@@ -113,7 +113,8 @@ public class AccountService implements IAccountService {
                 new Object[]{
                         new BankAccountNoAssignedEvent(
                                 creditorBankAccountNo,
-                                paymentInitiatedEvent.getCorrelationId()
+                                paymentInitiatedEvent.getCorrelationId(),
+                                new UserAccountId(paymentInitiatedEvent.getMerchantID())
                         )
                 }
         );
@@ -137,7 +138,8 @@ public class AccountService implements IAccountService {
                             new Object[]{
                                     new BankAccountNoAssignedEvent(
                                             userAccount.getBankAccountNo(),
-                                            tokenValidatedEvent.getCorrelationId()
+                                            tokenValidatedEvent.getCorrelationId(),
+                                            userAccount.getId()
                                     )
                             }
                     );

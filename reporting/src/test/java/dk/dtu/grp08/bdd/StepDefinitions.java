@@ -121,8 +121,8 @@ public class StepDefinitions {
 
 
         Payment paymentSaved = reportRepository.getPayments().get(0);
-        System.out.println(paymentSaved);
-        System.out.println(payment);
+
+
 
         Assert.assertTrue(paymentSaved.getCreditor().getId().equals(payment.getCreditor().getId()) &&
                 payment.getDebtor().getId().equals(paymentSaved.getDebtor().getId()) &&
@@ -231,8 +231,8 @@ public class StepDefinitions {
 
 
         report = reportService.getReportManager();
-        System.out.println("report: " + report);
-        System.out.println("payment: " + payment);
+
+
         boolean isMerchantPayments = report.contains(payment);
 
         Assert.assertTrue(isMerchantPayments);

@@ -290,6 +290,7 @@ public class StepDefinitions {
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
 
         report.forEach(payment -> {
+
             Assert.assertEquals(
                 this.customer.getBankAccountNo(),
                 payment.getDebtor()
@@ -312,7 +313,9 @@ public class StepDefinitions {
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
         report.forEach(payment -> {
             Assert.assertTrue(
-                (this.merchant.getBankAccountNo() == payment.getCreditor()) && payment.getDebtor() == null
+                this.merchant.getBankAccountNo()
+                    .equals(payment.getCreditor())
+                && payment.getDebtor() == null
             );
         });
 

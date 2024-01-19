@@ -61,7 +61,7 @@ public class ReportRessource implements IReportResource {
     public void handleCustomerReportRequested(Event e) {
         val event = e.getArgument(0, CustomerReportRequested.class);
 
-        System.out.println("CorrelationID Customer" + event.getCorrelationId());
+
 
         messageQueue.publish(
                 new Event(
@@ -82,7 +82,7 @@ public class ReportRessource implements IReportResource {
     public void handleMerchantReportRequested(Event e) {
 
         val event = e.getArgument(0, MerchantReportRequested.class);
-        System.out.println("CorrelationID Merchant" + event.getCorrelationId());
+
 
         messageQueue.publish(
                 new Event(
@@ -102,7 +102,7 @@ public class ReportRessource implements IReportResource {
 
     public void handleManagerReportRequested(Event e) {
         val event = e.getArgument(0, ManagerReportRequested.class);
-        System.out.println("CorrelationID Manager" + event.getCorrelationId());
+
 
         messageQueue.publish(
                 new Event(

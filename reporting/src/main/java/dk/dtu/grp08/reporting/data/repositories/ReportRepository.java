@@ -25,17 +25,24 @@ public class ReportRepository implements IReportRepository {
     public List<Payment> getPaymentsByCustomer(UserAccountId customerID) {
         return payments
                 .stream()
-                .filter(entry -> entry.getDebtor() == customerID).toList();
+                .filter(entry -> entry.getDebtor().equals(customerID)).toList();
     }
     public List<Payment> getPaymentsByMerchant(UserAccountId merchantID) {
         return payments
                 .stream()
-                .filter(entry -> entry.getCreditor() == merchantID)
-                .peek(payment -> payment.setDebtor(null)).toList();
+                .filter(entry -> entry.getCreditor().equals(merchantID))
+                .map(payment ->
+                    new Payment(
+                        null,
+                        payment.getCreditor(),
+                        payment.getAmount()
+                    )
+                ).toList();
     }
 
     @Override
     public void savePayment(Payment payment) {
+
         payments.add(payment);
     }
 

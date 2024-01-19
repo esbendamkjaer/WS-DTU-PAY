@@ -113,8 +113,6 @@ public class PaymentService implements IPaymentService {
                     );
 
 
-
-
                     messageQueue.publish(
                         new Event(
                             EventType.PAYMENT_TRANSFERRED.getEventName(),
