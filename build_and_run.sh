@@ -2,9 +2,6 @@
 
 set -e # Stops the execution if an error occurs
 
-# Clean up all target folders
-mvn clean -DskipTests
-
 # Build MQ wrapper dependency
 pushd messaging-utilities-3.4
 chmod +x build.sh
