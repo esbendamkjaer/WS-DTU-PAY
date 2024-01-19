@@ -60,9 +60,10 @@ popd
 #
 # -d is detached mode, allows the service to continue even after the shell process is complete
 # --build is to build images before starting containers
+# --remove-orphans removes containers for services not defined in the Compose file
 # --wait makes the command return/exit only after all containers have been started and are in healthy state
 #
-docker-compose up -d --build --wait
+docker-compose up -d --build --remove-orphans --wait
 
 #run test for all microservices
 mvn test
