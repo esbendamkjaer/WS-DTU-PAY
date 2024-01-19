@@ -35,6 +35,12 @@ chmod +x build.sh
 popd
 
 
+pushd reporting
+chmod +x build.sh
+./build.sh
+popd
+
+
 pushd customer
 chmod +x build.sh
 ./build.sh
