@@ -32,7 +32,7 @@ chmod +x build_and_run-legacy.sh
 
 ## Jenkins Credentials
 
-**URL:** http://fm-08.compute.dtu.dk:8282/  
+**URL:** http://fm-08.compute.dtu.dk:8282/job/SIMPLE-DTU-PAY/  
 **Username:** `huba`  
 **Password:** `hubert`
 
