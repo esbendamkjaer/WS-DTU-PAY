@@ -11,6 +11,9 @@ import dk.dtu.grp08.payment.domain.models.payment.Payment;
 
 public class BankAdapter implements IBankAdapter {
 
+    /**
+     * @author Esben
+     */
     @Override
     public void makeBankTransfer(Payment payment) {
         BankService bank =  new BankServiceService().getBankServicePort();
@@ -22,7 +25,6 @@ public class BankAdapter implements IBankAdapter {
                 getPaymentDescription(payment)
             );
         } catch (BankServiceException_Exception e) {
-            // @TODO map exceptions to domain exceptions
             switch (e.getMessage()) {
                 case "Debtor account does not exist":
                     throw new NoSuchDebtorAccountException();

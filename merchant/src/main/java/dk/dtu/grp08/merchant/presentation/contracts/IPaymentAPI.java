@@ -12,7 +12,9 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @Path("/payments")
 @RegisterRestClient(baseUri = "http://localhost:8083")
 public interface IPaymentAPI {
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})

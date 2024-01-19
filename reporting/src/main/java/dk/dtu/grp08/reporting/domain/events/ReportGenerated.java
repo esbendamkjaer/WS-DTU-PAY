@@ -9,7 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+/**
+ * @author Alexander Matzen (s233475)
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

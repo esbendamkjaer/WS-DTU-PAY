@@ -11,6 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerReportRequested {
+
+    /**
+     *
+     * @author Fuad
+     */
     UserAccountId id;
     CorrelationId correlationId;
 

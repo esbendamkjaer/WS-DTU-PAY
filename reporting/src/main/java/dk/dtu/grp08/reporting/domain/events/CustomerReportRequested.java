@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.UUID;
+/**
+ * @author Alexander Matzen (s233475)
+ */
 
 @Data
 @NoArgsConstructor

@@ -16,6 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AccountRepository implements IAccountRepository {
     private final Map<UserAccountId, UserAccount> userAccounts = new ConcurrentHashMap<>();
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @Override
     public UserAccount createUserAccount(UserAccount userAccount) {
         val id = userAccount.getId();
@@ -23,16 +26,25 @@ public class AccountRepository implements IAccountRepository {
         return userAccount;
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @Override
     public Optional<UserAccount> findById(UserAccountId id) {
         return Optional.ofNullable(this.userAccounts.get(id));
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Override
     public List<UserAccount> findAll() {
         return List.copyOf(userAccounts.values());
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @Override
     public void deleteUserAccount(UserAccountId id) {
         userAccounts.remove(id);

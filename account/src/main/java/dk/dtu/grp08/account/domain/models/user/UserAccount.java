@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * This class represents a User, e.g. a Customer or a Merchant.
+ * @author Clair
  */
 @Data
 @ToString

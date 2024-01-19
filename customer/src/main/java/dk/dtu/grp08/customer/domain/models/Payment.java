@@ -6,6 +6,11 @@ import java.math.BigDecimal;
 
 @Data
 public class Payment {
+
+    /**
+     *
+     * @author Dilara
+     */
     private BankAccountNo debtor;
     private BankAccountNo creditor;
     private BigDecimal amount;

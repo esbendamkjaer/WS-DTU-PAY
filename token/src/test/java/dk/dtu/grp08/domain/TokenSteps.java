@@ -34,6 +34,9 @@ public class TokenSteps {
     private CorrelationId correlationId;
 
 
+    /**
+     * @author Alexander
+     */
     @Given("a valid token")
     public void aToken() {
         this.userId = new UserId(
@@ -45,6 +48,9 @@ public class TokenSteps {
             .removeLast();
     }
 
+    /**
+     * @author Muhamad
+     */
     @Given("an invalid token")
     public void anInvalidToken() {
         this.token = new Token(
@@ -52,6 +58,9 @@ public class TokenSteps {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @When("a PaymentInitiatedEvent is received")
     public void thePaymentInitiatedEventIsReceived() {
         this.correlationId = CorrelationId.randomId();
@@ -71,6 +80,9 @@ public class TokenSteps {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Then("a corresponding TokenValidatedEvent is sent")
     public void theTokenValidatedEventIsSent() {
 
@@ -88,6 +100,9 @@ public class TokenSteps {
         verify(this.messageQueue).publish(event);
     }
 
+    /**
+     * @author Clair
+     */
     @Then("a corresponding TokenInvalidatedEvent is sent")
     public void theTokenInvalidatedEventIsSent() {
         Event event = new Event(

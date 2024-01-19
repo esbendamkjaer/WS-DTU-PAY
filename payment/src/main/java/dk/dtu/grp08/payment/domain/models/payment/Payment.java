@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Clair
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

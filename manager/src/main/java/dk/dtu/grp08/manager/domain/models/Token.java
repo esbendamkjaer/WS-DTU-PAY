@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
-
+/**
+ * @author Fuad Hassan Jama (s233468)
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

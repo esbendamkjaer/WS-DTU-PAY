@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Dilara Eda Celepli (s184262)
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

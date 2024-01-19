@@ -15,6 +15,9 @@ import java.util.concurrent.CompletableFuture;
 @Path("/customers")
 public interface ICustomerAPI {
 
+    /**
+     * @author Dilara
+     */
     @POST
     @Path("/{userId}/tokens")
     @Produces({MediaType.APPLICATION_JSON})
@@ -23,6 +26,9 @@ public interface ICustomerAPI {
         @QueryParam("count") int count
     );
 
+    /**
+     * @author Clair
+     */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -30,12 +36,18 @@ public interface ICustomerAPI {
         UserAccount userAccount
     );
 
+    /**
+     * @author Clair
+     */
     @DELETE
     @Path("/{userId}")
     void deleteCustomer(
         @PathParam("userId") UUID userId
     );
 
+    /**
+     * @author Muhamad
+     */
     @GET
     @Path("/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -43,7 +55,9 @@ public interface ICustomerAPI {
         @PathParam("userId") UUID userId
     );
 
-
+    /**
+     * @author Alexander
+     */
     @GET
     @Path("/{userId}/report")
     @Produces({MediaType.APPLICATION_JSON})

@@ -14,6 +14,9 @@ import java.util.concurrent.CompletableFuture;
 @Path("/merchants")
 public interface IMerchantAPI {
 
+    /**
+     * @author Clair
+     */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -21,12 +24,18 @@ public interface IMerchantAPI {
         UserAccount userAccount
     );
 
+    /**
+     * @author Clair
+     */
     @DELETE
     @Path("/{userId}")
     void deleteMerchant(
         @PathParam("userId") UUID userId
     );
 
+    /**
+     * @author Dilara
+     */
     @POST
     @Path("/payment")
     @Produces({MediaType.APPLICATION_JSON})
@@ -35,6 +44,9 @@ public interface IMerchantAPI {
         PaymentRequest paymentRequest
     );
 
+    /**
+     * @author Alexander
+     */
     @GET
     @Path("/{userId}/report")
     @Produces({MediaType.APPLICATION_JSON})

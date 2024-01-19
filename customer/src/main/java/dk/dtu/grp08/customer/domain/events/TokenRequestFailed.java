@@ -5,6 +5,10 @@ import lombok.Value;
 
 @Value
 public class TokenRequestFailed {
+    /**
+     *
+     * @author Clair
+     */
     CorrelationId correlationId;
     String cause;
 }

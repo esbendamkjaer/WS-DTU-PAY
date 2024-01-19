@@ -10,7 +10,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * @author Alexander Matzen (s233475)
+ */
 @ApplicationScoped
 public class ReportService implements IReportService {
 
@@ -24,7 +26,9 @@ public class ReportService implements IReportService {
         this.reportRepository = reportRepository;
 
     }
-
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @Override
     public void savePayment(
         final UserAccountId merchantID,
@@ -46,6 +50,9 @@ public class ReportService implements IReportService {
         return reportRepository.getPaymentsByCustomer(customerID);
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Override
     public List<Payment> getReportMerchant(UserAccountId merchantID) {
         //merchant formatted report
@@ -54,6 +61,9 @@ public class ReportService implements IReportService {
 
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Override
     public List<Payment> getReportManager() {
         //manager formatted report

@@ -8,6 +8,9 @@ import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+/**
+ * @author Esben Damkjær Sørensen (s233474)
+ */
 
 public interface IReportService {
 

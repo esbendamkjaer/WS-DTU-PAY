@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * @author Muhamad
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

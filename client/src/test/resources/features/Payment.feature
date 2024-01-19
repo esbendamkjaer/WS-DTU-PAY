@@ -1,4 +1,5 @@
 Feature:
+  # Author: Fuad
   Scenario: Perform a successful payment
     Given a customer named "Alice"
       And a merchant named "Bob"
@@ -12,6 +13,7 @@ Feature:
     Then the customer has balance 990.0
       And the merchant has balance 10.0
 
+  # Author: Muhamad
   Scenario: Perform concurrent payments
     Given a registered merchant with a balance of 0.0
       And 10 registered customers with a balance of 1000.0 kr
@@ -21,6 +23,7 @@ Feature:
       And the customers should have deducted the correct amount of money
       And the merchant should have received the correct amount of money
 
+  # Author: Clair
   Scenario: Insufficient customer balance
     Given a customer named "Alice"
       And a merchant named "Bob"
@@ -33,6 +36,7 @@ Feature:
       And the customer grants the payment with a token
     Then the error with message "Insufficient account balance" is received
 
+  # Author: Alexander
   Scenario: Customer bank account does not exist
     Given a customer named "Alice"
       And a merchant named "Bob"
@@ -45,6 +49,7 @@ Feature:
       And the customer grants the payment with a token
     Then the error with message "No such debtor account" is received
 
+  # Author: Alexander
   Scenario: Merchant bank account does not exist
     Given a customer named "Alice"
       And a merchant named "Bob"
@@ -57,6 +62,7 @@ Feature:
       And the customer grants the payment with a token
     Then the error with message "No such creditor account" is received
 
+  # Author: Dilara
   Scenario: Payment granted with invalid token
     Given a customer named "Alice"
       And a merchant named "Bob"
@@ -69,6 +75,7 @@ Feature:
       And the customer grants the payment with a token
     Then the error with message "Invalid token" is received
 
+  # Author: Esben
   Scenario: Payment granted with previously used token
     Given a customer named "Alice"
       And a merchant named "Bob"

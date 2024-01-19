@@ -1,6 +1,8 @@
 package dk.dtu.grp08.reporting.domain.events;
 
-
+/**
+ * @author Dilara Eda Celepli (s184262)
+ */
 import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;

@@ -62,21 +62,27 @@ public class StepDefinitions {
 
     List<Payment> report;
 
-
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @Given("a Customer with id {string}")
     public void setCustomer(String customerID) {
         this.customerID = new UserAccountId(UUID.fromString(customerID));
 
     }
 
-
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @And("a Merchant with id {string}")
     public void setMerchant( String merchantID) {
         this.merchantID = new UserAccountId(UUID.fromString(merchantID));
 
 
     }
-
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @And("a Payment with {int} kr")
     public void setPayment(int amount) {
         this.payment = new Payment();
@@ -87,7 +93,9 @@ public class StepDefinitions {
     }
 
 
-
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
 
     @When("a PAYMENT_TRANSFERRED event is received")
     public void aPaymentTransferredEvent() {
@@ -114,6 +122,9 @@ public class StepDefinitions {
         );
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
 
 
     @Then("the payment should be saved")
@@ -129,6 +140,9 @@ public class StepDefinitions {
                 Objects.equals(payment.getAmount(), paymentSaved.getAmount()));
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
 
     @When("a CUSTOMER_REPORT_REQUESTED event is received")
     public void aCustomerReportRequestedEvent() {
@@ -151,7 +165,9 @@ public class StepDefinitions {
 
     }
 
-
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @When("a MERCHANT_REPORT_REQUESTED event is received")
     public void aMerchantReportRequestedEvent() {
 
@@ -177,7 +193,9 @@ public class StepDefinitions {
     }
 
 
-
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @When("a MANAGER_REPORT_REQUESTED event is received")
     public void aManagerReportRequestedEvent() {
 
@@ -201,7 +219,9 @@ public class StepDefinitions {
     }
 
 
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
 
     @Then("a report should be generated with all payments for the customer")
     public void aReportGeneratedCustomer() {
@@ -213,7 +233,9 @@ public class StepDefinitions {
         Assert.assertTrue(isCustomerPayments);
 
     }
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     @Then("a report should be generated with all payments to the merchant")
     public void aReportGeneratedMerchant() {
 
@@ -225,7 +247,9 @@ public class StepDefinitions {
 
     }
 
-
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Then("a report should be generated with all payments")
     public void aReportGeneratedManager() {
 
@@ -239,7 +263,9 @@ public class StepDefinitions {
 
     }
 
-
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @And("a REPORT_GENERATED event should be published")
     public void aReportGeneratedEvent() {
 

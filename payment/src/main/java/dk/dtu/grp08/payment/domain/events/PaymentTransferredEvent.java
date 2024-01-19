@@ -9,6 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
+/**
+ * @author Fuad
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

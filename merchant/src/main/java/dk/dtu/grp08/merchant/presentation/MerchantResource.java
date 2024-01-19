@@ -22,7 +22,9 @@ import java.util.concurrent.CompletableFuture;
 
 @ApplicationScoped
 public class MerchantResource implements IMerchantResource {
-
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     private final IAccountService accountService;
     private final IPaymentService paymentService;
 
@@ -49,12 +51,19 @@ public class MerchantResource implements IMerchantResource {
         );
     }
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @Override
     public CompletableFuture<UserAccount> createMerchant(UserAccount userAccount) {
         return this.accountService.createUserAccount(
             userAccount
         );
     }
+
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
 
     @Override
     public CompletableFuture<Void> deleteMerchant(UUID userId) {
@@ -63,6 +72,9 @@ public class MerchantResource implements IMerchantResource {
         );
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @Override
     public CompletableFuture<Payment> createPayment(PaymentRequest paymentRequest) {
         return this.paymentService.createPayment(
@@ -70,9 +82,9 @@ public class MerchantResource implements IMerchantResource {
         );
     }
 
-
-
-
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @Override
     public CompletableFuture<List<Payment>> getReport(
             final UUID userID
@@ -106,7 +118,9 @@ public class MerchantResource implements IMerchantResource {
         return policy.getCombinedFuture();
     }
 
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);
 

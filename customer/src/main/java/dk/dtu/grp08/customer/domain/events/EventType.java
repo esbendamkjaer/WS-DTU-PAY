@@ -2,6 +2,10 @@ package dk.dtu.grp08.customer.domain.events;
 
 public enum EventType {
 
+    /**
+     *
+     * @author Muhamad
+     */
     PAYMENT_INITIATED("PaymentInitiated"),
     PAYMENT_TRANSFERRED("PaymentTransferred"),
     CUSTOMER_BANK_ACCOUNT_ASSIGNED("CustomerBankAccountAssigned"),

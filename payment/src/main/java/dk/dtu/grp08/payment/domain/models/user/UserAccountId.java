@@ -4,6 +4,9 @@ import lombok.Value;
 
 import java.util.UUID;
 
+/**
+ * @author Fuad
+ */
 @Value
 public class UserAccountId {
     UUID id;

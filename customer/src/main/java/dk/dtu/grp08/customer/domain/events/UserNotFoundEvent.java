@@ -6,6 +6,11 @@ import lombok.Value;
 
 @Value
 public class UserNotFoundEvent {
+
+    /**
+     *
+     * @author Clair
+     */
     CorrelationId correlationId;
     UserAccountId userId;
 }

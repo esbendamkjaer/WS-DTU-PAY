@@ -1,5 +1,9 @@
 package dk.dtu.grp08.manager.domain.events;
 
+/**
+ * @author Fuad Hassan Jama (s233468)
+ */
+
 
 import dk.dtu.grp08.manager.domain.models.CorrelationId;
 import dk.dtu.grp08.manager.domain.models.Payment;

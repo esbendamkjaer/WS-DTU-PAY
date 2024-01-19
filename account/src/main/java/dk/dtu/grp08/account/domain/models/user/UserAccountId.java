@@ -4,6 +4,9 @@ import lombok.*;
 
 import java.util.UUID;
 
+/**
+ * @author Muhamad
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -36,6 +36,9 @@ public class ConcurrentPaymentStepDefinitions {
 
     private UserAccount merchant;
 
+    /**
+     * @author Alexander
+     */
     @Given("{int} registered customers with a balance of {double} kr")
     public void customers(int count, double balance) {
         this.initialCustomerBalance = BigDecimal.valueOf(balance);
@@ -66,6 +69,9 @@ public class ConcurrentPaymentStepDefinitions {
         }
     }
 
+    /**
+     * @author Clair
+     */
     @Given("a registered merchant with a balance of {double}")
     public void aRegisteredMerchantWithABalanceOf(double balance) {
         this.initialMerchantBalance = BigDecimal.valueOf(balance);
@@ -92,6 +98,9 @@ public class ConcurrentPaymentStepDefinitions {
         this.merchant = merchant;
     }
 
+    /**
+     * @author Muhamad
+     */
     @And("each customer has {int} unused tokens")
     public void eachCustomerHasUnusedTokens(int count) {
         for (UserAccount customer : this.customers) {
@@ -107,6 +116,9 @@ public class ConcurrentPaymentStepDefinitions {
         }
     }
 
+    /**
+     * @author Esben
+     */
     @When("the merchant initiates a payment between {double} kr and {double} kr for each customer")
     public void theMerchantInitiatesAPaymentForEachCustomer(double min, double max) {
         BigDecimal amount = BigDecimal.valueOf(
@@ -155,6 +167,9 @@ public class ConcurrentPaymentStepDefinitions {
         }
     }
 
+    /**
+     * @author Fuad
+     */
     @Then("the payments should have been assigned the correct bank account numbers")
     public void thePaymentsShouldHaveCorrectBankAccountNumbers() {
 
@@ -173,6 +188,9 @@ public class ConcurrentPaymentStepDefinitions {
         }
     }
 
+    /**
+     * @author Dilara
+     */
     @Then("the customers should have deducted the correct amount of money")
     public void theCustomersShouldHaveDeductedTheCorrectAmountOfMoney() {
         for (int i = 0; i < this.paymentRequests.size(); i++) {
@@ -194,6 +212,9 @@ public class ConcurrentPaymentStepDefinitions {
         }
     }
 
+    /**
+     * @author 
+     */
     @Then("the merchant should have received the correct amount of money")
     public void theMerchantShouldHaveReceivedTheCorrectAmountOfMoney() {
         BigDecimal expectedBalance = this.initialMerchantBalance.add(

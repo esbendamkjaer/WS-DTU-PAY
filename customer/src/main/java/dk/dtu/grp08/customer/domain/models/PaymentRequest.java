@@ -11,6 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentRequest {
+    /**
+     *
+     * @author Dilara
+     */
     Token token;
     UUID merchantId;
     BigDecimal amount;

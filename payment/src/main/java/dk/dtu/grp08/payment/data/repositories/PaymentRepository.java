@@ -18,6 +18,9 @@ public class PaymentRepository implements IPaymentRepository {
         payments = new ArrayList<>();
     }
 
+    /**
+     * @author Dilara
+     */
     public Payment savePayment(Payment payment) {
         payment = new Payment(
             new PaymentId(UUID.randomUUID()),
@@ -31,10 +34,16 @@ public class PaymentRepository implements IPaymentRepository {
         return payment;
     }
 
+    /**
+     * @author Clair
+     */
     public void deletePayment(Payment payment) {
         payments.remove(payment);
     }
 
+    /**
+     * Muhamad
+     */
     public List<Payment> getPayments() {
         return payments;
     }

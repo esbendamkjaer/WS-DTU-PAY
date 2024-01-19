@@ -11,19 +11,31 @@ import java.util.concurrent.CompletableFuture;
 
 public interface IMerchantFacade {
 
+    /**
+     * @author Fuad
+     */
     UserAccount register(
         String name,
         String cpr,
         BankAccountNo bankAccountNo
     );
 
+    /**
+     * @author Clair
+     */
     void deregister(UserId user);
 
+    /**
+     * @author Dilara
+     */
     Payment pay(
         PaymentRequest paymentRequest
     );
 
 
+    /**
+     * @author Fuad
+     */
     List<Payment> getReport(UserId userId);
 
 

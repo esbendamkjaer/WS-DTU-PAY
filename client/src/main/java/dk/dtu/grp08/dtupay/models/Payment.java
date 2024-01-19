@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Muhamad
+ */
 @Data
 public class Payment {
     private BankAccountNo debtor;

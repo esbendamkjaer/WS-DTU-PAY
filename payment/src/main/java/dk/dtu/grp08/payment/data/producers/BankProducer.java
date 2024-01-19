@@ -7,6 +7,9 @@ import jakarta.enterprise.inject.Produces;
 
 public class BankProducer {
 
+    /**
+     * @author Fuad
+     */
     @Produces
     @ApplicationScoped
     public IBankAdapter bankAdapter() {

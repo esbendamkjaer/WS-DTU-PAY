@@ -10,5 +10,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BankAccountNo {
+    /**
+     *
+     * @author Fuad
+     */
     String bankAccountNo;
 }

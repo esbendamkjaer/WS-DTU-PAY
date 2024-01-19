@@ -15,6 +15,7 @@ import messaging.implementations.RabbitMqQueue;
 import java.util.List;
 import java.util.UUID;
 
+
 @Startup
 @ApplicationScoped
 public class ReportRessource implements IReportResource {
@@ -22,7 +23,9 @@ public class ReportRessource implements IReportResource {
     IReportService reportService;
 
     private final MessageQueue messageQueue;
-
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     public ReportRessource(
             IReportService reportService,
             MessageQueue messageQueue
@@ -50,6 +53,9 @@ public class ReportRessource implements IReportResource {
 
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
 
     public void handlePaymentTransferredEvent(Event event) {
         PaymentTransferredEvent paymentTransferEvent = event.getArgument(0, PaymentTransferredEvent.class);
@@ -57,6 +63,9 @@ public class ReportRessource implements IReportResource {
 
     }
 
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
 
     public void handleCustomerReportRequested(Event e) {
         val event = e.getArgument(0, CustomerReportRequested.class);
@@ -78,7 +87,9 @@ public class ReportRessource implements IReportResource {
                 ));
     }
 
-
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     public void handleMerchantReportRequested(Event e) {
 
         val event = e.getArgument(0, MerchantReportRequested.class);
@@ -99,7 +110,9 @@ public class ReportRessource implements IReportResource {
                 ));
 
     }
-
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     public void handleManagerReportRequested(Event e) {
         val event = e.getArgument(0, ManagerReportRequested.class);
 

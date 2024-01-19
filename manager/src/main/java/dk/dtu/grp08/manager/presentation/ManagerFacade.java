@@ -27,7 +27,9 @@ public class ManagerFacade implements IManagerFacade {
 
     private final PolicyManager policyManager;
 
-
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     public ManagerFacade(
                             MessageQueue messageQueue) {
         this.messageQueue = messageQueue;
@@ -42,6 +44,10 @@ public class ManagerFacade implements IManagerFacade {
 
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     * @author Clair Norah Mutebi (s184187)
+     */
 
 
     @Override
@@ -74,7 +80,10 @@ public class ManagerFacade implements IManagerFacade {
         return policy.getCombinedFuture();
     }
 
-
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     * @author Clair Norah Mutebi (s184187)
+     */
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);
 

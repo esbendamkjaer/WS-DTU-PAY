@@ -6,6 +6,10 @@ import lombok.Value;
 
 @Value
 public class AccountRequestedEvent {
+    /**
+     *
+     * @author Alexander
+     */
     CorrelationId correlationId;
     UserAccountId userId;
 }

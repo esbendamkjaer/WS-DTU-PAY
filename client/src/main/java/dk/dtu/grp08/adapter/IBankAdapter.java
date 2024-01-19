@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 
 public interface IBankAdapter {
 
+    /**
+     * @author Muhamad
+     */
     BankAccountNo createBankAccount(
         String firstName,
         String lastName,
@@ -13,8 +16,14 @@ public interface IBankAdapter {
         BigDecimal balance
     );
 
+    /**
+     * @author Alexander
+     */
     void retireBankAccount(BankAccountNo bankAccountNo);
 
+    /**
+     * @author Fuad
+     */
     BigDecimal getBalance(BankAccountNo bankAccountNo);
 
 }

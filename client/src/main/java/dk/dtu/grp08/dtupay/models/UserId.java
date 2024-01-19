@@ -7,6 +7,9 @@ import lombok.Value;
 
 import java.util.UUID;
 
+/**
+ * @author Alexander
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

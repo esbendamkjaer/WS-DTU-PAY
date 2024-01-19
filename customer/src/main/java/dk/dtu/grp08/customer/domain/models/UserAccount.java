@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccount {
+    /**
+     *
+     * @author Muhamad
+     */
     UserAccountId id;
     String name;
     String cpr;

@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
-
+/**
+ * @author Clair Norah Mutebi (s184187)
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

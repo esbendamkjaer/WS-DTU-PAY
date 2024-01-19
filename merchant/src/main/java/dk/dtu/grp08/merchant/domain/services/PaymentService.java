@@ -25,6 +25,9 @@ public class PaymentService implements IPaymentService {
     private final MessageQueue messageQueue;
     private final PolicyManager policyManager;
 
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     public PaymentService(
         MessageQueue messageQueue,
         PolicyManager policyManager
@@ -43,6 +46,9 @@ public class PaymentService implements IPaymentService {
         );
     }
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @Override
     public CompletableFuture<Payment> createPayment(PaymentRequest paymentRequest) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -78,7 +84,9 @@ public class PaymentService implements IPaymentService {
 
         return paymentPolicy.getCombinedFuture();
     }
-
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     public void handlePaymentTransferredEvent(Event event) {
         PaymentTransferredEvent paymentTransferredEvent = event.getArgument(0, PaymentTransferredEvent.class);
 
@@ -97,6 +105,9 @@ public class PaymentService implements IPaymentService {
         );
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     public void handlePaymentFailedEvent(Event event) {
         PaymentFailedEvent paymentFailedEvent = event.getArgument(0, PaymentFailedEvent.class);
 

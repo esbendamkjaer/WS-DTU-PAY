@@ -16,6 +16,9 @@ public class BankAdapter implements IBankAdapter {
         this.bankService = new BankServiceService().getBankServicePort();
     }
 
+    /**
+     * @author Muhamad
+     */
     @Override
     public BankAccountNo createBankAccount(
             String firstName,
@@ -42,6 +45,9 @@ public class BankAdapter implements IBankAdapter {
         return new BankAccountNo(bankAccountNo);
     }
 
+    /**
+     * @author Alexander
+     */
     @Override
     public void retireBankAccount(BankAccountNo bankAccountNo) {
         try {
@@ -54,6 +60,9 @@ public class BankAdapter implements IBankAdapter {
         }
     }
 
+    /**
+     * @author Fuad
+     */
     @Override
     public BigDecimal getBalance(BankAccountNo bankAccountNo) {
         try {

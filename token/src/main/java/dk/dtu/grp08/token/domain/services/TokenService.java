@@ -26,6 +26,9 @@ public class TokenService implements ITokenService {
 
     private final int MAX_TOKENS_PER_USER = 6;
 
+    /**
+     * Fuad
+     */
     public TokenService(
         ITokenRepository tokenRepository,
         MessageQueue messageQueue
@@ -44,6 +47,9 @@ public class TokenService implements ITokenService {
         );
     }
 
+    /**
+     * @author Dilara
+     */
     @Override
     public List<Token> getTokens(int count, UserId userId) {
         List<Token> currentTokens = tokenRepository.getTokensByUserId(userId);
@@ -72,6 +78,9 @@ public class TokenService implements ITokenService {
         return tokens;
     }
 
+    /**
+     * @author Alexander
+     */
     @Override
     public UserId validateToken(Token token) throws InvalidTokenException {
         UserId userId = this.tokenRepository.getUserIdByToken(token)
@@ -85,12 +94,18 @@ public class TokenService implements ITokenService {
         return userId;
     }
 
+    /**
+     * @author Muhamad
+     */
     private Token generateToken() {
         return new Token(
             UUID.randomUUID()
         );
     }
 
+    /**
+     * @author Esben
+     */
     public void handlePaymentInitiatedEvent(Event event) {
         PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
 
@@ -130,6 +145,9 @@ public class TokenService implements ITokenService {
         messageQueue.publish(validTokenEvent);
     }
 
+    /**
+     * @author Clair
+     */
     public void handleTokensRequestedEvent(Event event) {
         TokensRequestedEvent tokensRequestedEvent = event.getArgument(0, TokensRequestedEvent.class);
 

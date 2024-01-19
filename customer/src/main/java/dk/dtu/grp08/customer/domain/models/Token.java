@@ -10,5 +10,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Token {
+    /**
+     *
+     * @author Esben
+     */
     UUID id;
 }

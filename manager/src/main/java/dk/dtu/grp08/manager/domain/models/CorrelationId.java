@@ -9,6 +9,9 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * @author Muhamad Hussein Nadali (s233479)
+ */
 public class CorrelationId {
 
     UUID id;
@@ -22,6 +25,10 @@ public class CorrelationId {
             return true;
         return this.getId().equals(((CorrelationId) obj).getId());
     }
+
+    /**
+     * @author Alexander Matzen (s233475)
+     */
 
     @Override
     public int hashCode() {

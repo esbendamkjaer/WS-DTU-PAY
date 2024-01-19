@@ -8,11 +8,23 @@ import java.util.Optional;
 
 public interface IAccountRepository {
 
+    /**
+     * @author Esben
+     */
     UserAccount createUserAccount(UserAccount userAccount);
 
+    /**
+     * @author Fuad
+     */
     Optional<UserAccount> findById(UserAccountId id);
 
+    /**
+     * @author Dilara
+     */
     List<UserAccount> findAll();
 
+    /**
+     * @author Clair
+     */
     void deleteUserAccount(UserAccountId id);
 }

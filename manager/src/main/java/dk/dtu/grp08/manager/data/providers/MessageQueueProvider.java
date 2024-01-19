@@ -7,6 +7,12 @@ import messaging.implementations.RabbitMqQueue;
 
 import java.util.Optional;
 
+
+/**
+ * @author Muhamad Hussein Nadali (s233479)
+ */
+
+
 public class MessageQueueProvider {
 
     @Produces

@@ -1,5 +1,8 @@
 package dk.dtu.grp08.reporting.domain.events;
 
+/**
+ * @author Clair Norah Mutebi (s184187)
+ */
 
 import dk.dtu.grp08.reporting.domain.models.CorrelationId;
 import dk.dtu.grp08.reporting.domain.models.Token;

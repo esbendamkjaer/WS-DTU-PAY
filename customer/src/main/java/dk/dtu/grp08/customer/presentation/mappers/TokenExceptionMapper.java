@@ -7,6 +7,11 @@ import jakarta.ws.rs.ext.Provider;
 
 @Provider
 public class TokenExceptionMapper implements ExceptionMapper<TokenException> {
+
+    /**
+     *
+     * @author Fuad
+     */
     @Override
     public Response toResponse(TokenException exception) {
         return Response.status(

@@ -11,6 +11,10 @@ import java.util.UUID;
 @RegisterRestClient(baseUri = "http://localhost:8084")
 public interface ITokenAPI {
 
+    /**
+     *
+     * @author Dilara
+     */
     @GET
     @Path("/{userId}")
     List<Token> getTokens(

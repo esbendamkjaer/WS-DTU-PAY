@@ -1,4 +1,5 @@
 Feature:
+  # Author: Esben
   Scenario: Successful payment
     When a PaymentRequest has been received
     Then a PaymentInitiatedEvent is sent
@@ -7,6 +8,7 @@ Feature:
     Then the bank is asked to transfer the money
       And a corresponding PaymentTransferredEvent is sent
 
+  # Author: Muhamad
   Scenario: Invalid token triggers payment cancellation
     When a PaymentRequest has been received
     Then a PaymentInitiatedEvent is sent

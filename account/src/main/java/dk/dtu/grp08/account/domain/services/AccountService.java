@@ -22,6 +22,9 @@ public class AccountService implements IAccountService {
     private final IAccountRepository accountRepository;
     private final MessageQueue messageQueue;
 
+    /**
+     * @author Alexander
+     */
     public AccountService(
             IAccountRepository accountRepository,
             MessageQueue messageQueue
@@ -55,6 +58,9 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Override
     public UserAccount registerAccount(
         String name,
@@ -74,11 +80,18 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @Override
     public Optional<UserAccount> getUserAccountById(UserAccountId id) {
         return accountRepository.findById(id);
     }
 
+
+    /**
+     * @author Dilara
+     */
     @Override
     public void deleteUserAccount(UserAccountId userAccountId) throws NoSuchUserAccountException {
         val userAccount = accountRepository.findById(userAccountId).orElseThrow(
@@ -92,15 +105,19 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Clair
+     */
     @Override
     public List<UserAccount> getUserAccounts() {
         return this.accountRepository.findAll();
     }
 
+    /**
+     * @author Muhamad
+     */
     public void handlePaymentInitiatedEvent(Event event) {
         PaymentInitiatedEvent paymentInitiatedEvent = event.getArgument(0, PaymentInitiatedEvent.class);
-
-
 
         UserAccount merchant = this.getUserAccountById(
             new UserAccountId(paymentInitiatedEvent.getMerchantID())
@@ -124,10 +141,11 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author @Esben
+     */
     public void handleTokenValidatedEvent(Event event) {
         TokenValidatedEvent tokenValidatedEvent = event.getArgument(0, TokenValidatedEvent.class);
-
-
 
         this.getUserAccountById(
                 tokenValidatedEvent.getUserAccountId()
@@ -166,6 +184,9 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Alexander
+     */
     public void handleAccountRegistrationRequestedEvent(Event event) {
         AccountRegistrationRequestedEvent accountRegistrationRequestedEvent = event.getArgument(0, AccountRegistrationRequestedEvent.class);
 
@@ -192,12 +213,13 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     public void handleAccountDeregistrationRequestedEvent(Event event) {
         AccountDeregistrationRequestedEvent accountDeregistrationRequestedEvent = event.getArgument(0, AccountDeregistrationRequestedEvent.class);
 
         UserAccountId userAccountId = accountDeregistrationRequestedEvent.getUserId();
-
-
 
         try {
             this.deleteUserAccount(
@@ -235,6 +257,9 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Dilara
+     */
     public void handleAccountRequestedEvent(Event event) {
         AccountRequestedEvent accountRequestedEvent = event.getArgument(0, AccountRequestedEvent.class);
 

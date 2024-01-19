@@ -8,6 +8,10 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class NoSuchUserAccountExceptionMapper implements ExceptionMapper<NoSuchUserAccountException> {
 
+    /**
+     *
+     * @author Muhamad
+     */
     @Override
     public Response toResponse(NoSuchUserAccountException e) {
         return Response

@@ -6,6 +6,11 @@ import lombok.Value;
 
 @Value
 public class AccountDeregistrationRequestedEvent {
+
+    /**
+     *
+     * @author Clair
+     */
     CorrelationId correlationId;
     UserAccountId userId;
 }

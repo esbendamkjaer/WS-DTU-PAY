@@ -6,6 +6,9 @@ import lombok.Value;
 
 import java.util.List;
 
+/**
+ * @author Muhamad
+ */
 @Value
 public class TokensReturnedEvent {
     CorrelationId correlationId;

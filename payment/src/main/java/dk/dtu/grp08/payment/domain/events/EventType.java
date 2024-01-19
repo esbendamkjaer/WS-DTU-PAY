@@ -1,5 +1,8 @@
 package dk.dtu.grp08.payment.domain.events;
 
+/**
+ * @author Dilara
+ */
 public enum EventType {
 
     PAYMENT_INITIATED("PaymentInitiated"),

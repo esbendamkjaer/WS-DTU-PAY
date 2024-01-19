@@ -4,6 +4,9 @@ import dk.dtu.grp08.token.domain.models.CorrelationId;
 import dk.dtu.grp08.token.domain.models.UserId;
 import lombok.Value;
 
+/**
+ * @author
+ */
 @Value
 public class TokensRequestedEvent {
     CorrelationId correlationId;

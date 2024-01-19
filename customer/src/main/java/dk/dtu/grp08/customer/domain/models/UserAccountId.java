@@ -12,5 +12,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccountId {
+
+    /**
+     *
+     * @author Muhamad
+     */
+
     UUID id;
 }

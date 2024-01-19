@@ -1,6 +1,9 @@
 package dk.dtu.grp08.merchant.domain.events;
 
 public enum EventType {
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
 
     PAYMENT_INITIATED("PaymentInitiated"),
     PAYMENT_TRANSFERRED("PaymentTransferred"),

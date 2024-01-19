@@ -12,6 +12,9 @@ public class CustomerFacade implements ICustomerFacade {
 
     private final ICustomerAPI customerAPI;
 
+    /**
+     * @author Dilara
+     */
     public CustomerFacade() {
         customerAPI = Stub.get(
             ICustomerAPI.class,
@@ -21,6 +24,9 @@ public class CustomerFacade implements ICustomerFacade {
         );
     }
 
+    /**
+     * @author Dilara
+     */
     @Override
     public List<Token> getTokens(
         UserId userId,
@@ -32,6 +38,9 @@ public class CustomerFacade implements ICustomerFacade {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Override
     public UserAccount register(
         String name,
@@ -48,6 +57,9 @@ public class CustomerFacade implements ICustomerFacade {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Override
     public void deregister(
         UserId userId
@@ -57,6 +69,9 @@ public class CustomerFacade implements ICustomerFacade {
         );
     }
 
+    /**
+     * @author Muhamad
+     */
     @Override
     public UserAccount getCustomer(UserId userId) {
         return this.customerAPI.getCustomer(
@@ -64,6 +79,9 @@ public class CustomerFacade implements ICustomerFacade {
         );
     }
 
+    /**
+     * @author Alexander
+     */
     @Override
     public List<Payment> getReport(UserId userId) {
         return this.customerAPI.getReport(userId.getId());

@@ -1,5 +1,10 @@
 package dk.dtu.grp08.manager.domain.events;
 
+/**
+ * @author Clair Norah Mutebi (s184187)
+ */
+
+
 public enum EventType {
 
     MANAGER_REPORT_REQUESTED("ManagerReportRequested"),

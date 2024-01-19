@@ -7,6 +7,9 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+/**
+ * @author Alexander
+ */
 @Value
 public class PaymentInitiatedEvent {
     UUID merchantID;

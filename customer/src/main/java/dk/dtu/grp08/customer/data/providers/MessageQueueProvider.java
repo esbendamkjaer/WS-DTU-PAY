@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public class MessageQueueProvider {
 
+    /**
+     * @author Dilara
+     */
     @Produces
     @ApplicationScoped
     public MessageQueue getMessageQueue() {

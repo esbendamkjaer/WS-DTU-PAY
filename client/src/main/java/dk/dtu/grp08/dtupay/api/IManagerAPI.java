@@ -14,7 +14,9 @@ import java.util.concurrent.CompletableFuture;
 @Path("/manager")
 public interface IManagerAPI {
 
-
+    /**
+     * @author Alexander
+     */
     @GET
     @Path("/report")
     @Produces({MediaType.APPLICATION_JSON})

@@ -9,6 +9,10 @@ import java.util.List;
 
 @Value
 public class TokensReturnedEvent {
+    /**
+     *
+     * @author Esben
+     */
     CorrelationId correlationId;
     List<Token> tokens;
 }

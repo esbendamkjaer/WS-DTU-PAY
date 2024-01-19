@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-
+/**
+ * @author Dilara Eda Celepli (s184262)
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

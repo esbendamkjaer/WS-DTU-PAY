@@ -8,7 +8,9 @@ import messaging.implementations.RabbitMqQueue;
 import java.util.Optional;
 
 public class MessageQueueProducer {
-
+    /**
+     * @author Clair
+     */
     @Produces
     @ApplicationScoped
     public MessageQueue createMessageQueue() {

@@ -5,5 +5,10 @@ import lombok.Value;
 
 @Value
 public class AccountDeregisteredEvent {
+
+    /**
+     *
+     * @author Clair
+     */
     CorrelationId correlationId;
 }

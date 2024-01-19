@@ -10,7 +10,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * @author Fuad Hassan Jama (s233468)
+ */
 @ApplicationScoped
 public class ReportRepository implements IReportRepository {
 
@@ -39,7 +41,9 @@ public class ReportRepository implements IReportRepository {
                     )
                 ).toList();
     }
-
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @Override
     public void savePayment(Payment payment) {
 

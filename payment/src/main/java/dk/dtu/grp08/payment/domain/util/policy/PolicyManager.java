@@ -6,6 +6,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author Clair Norah Mutebi (s184187)
+ * @author Muhamad Hussein Nadali (s233479)
+ * @author Dilara Eda Celepli (s184262)
+ * @author Fuad Hassan Jama (s233468)
+ * @author Esben Damkjær Sørensen (s233474)
+ * @author Alexander Matzen (s233475)
+ */
 @ApplicationScoped
 public class  PolicyManager {
 

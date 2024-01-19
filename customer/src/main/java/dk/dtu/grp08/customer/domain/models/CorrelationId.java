@@ -11,6 +11,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CorrelationId {
 
+    /**
+     *
+     * @author Clair
+     */
     UUID id;
 
     @Override

@@ -12,7 +12,9 @@ import java.util.concurrent.CompletableFuture;
 
 @Path("/merchants")
 public interface IMerchantResource {
-
+    /**
+     * @author Alexander Matzen (s233475)
+     */
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -20,12 +22,18 @@ public interface IMerchantResource {
         UserAccount userAccount
     );
 
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
     @DELETE
     @Path("/{userId}")
     CompletableFuture<Void> deleteMerchant(
         @PathParam("userId") UUID userId
     );
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     @POST
     @Path("/payment")
     @Produces({MediaType.APPLICATION_JSON})
@@ -34,6 +42,9 @@ public interface IMerchantResource {
         PaymentRequest paymentRequest
     );
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     @GET
     @Path("/{userId}/report")
     @Produces({MediaType.APPLICATION_JSON})

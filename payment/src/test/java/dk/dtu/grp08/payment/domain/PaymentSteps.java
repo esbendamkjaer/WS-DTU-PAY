@@ -45,6 +45,9 @@ public class PaymentSteps {
         new PolicyManager()
     );
 
+    /**
+     * @author Alexander
+     */
     @When("a PaymentRequest has been received")
     public void aPaymentHasBeenRequested() {
         this.merchantId = UserAccountId.randomId();
@@ -70,6 +73,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @When("a CustomerBankAccountAssignedEvent is received")
     public void aCustomerBankAccountAssignedEventIsReceived() {
         this.customerId = UserAccountId.randomId();
@@ -94,6 +100,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Dilara
+     */
     @When("a MerchantBankAccountAssignedEvent is received")
     public void aMerchantBankAccountAssignedEventIsReceived() {
         this.merchantBankAccountAssignedEvent = new MerchantBankAccountAssignedEvent(
@@ -116,6 +125,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Clair
+     */
     @When("a TokenInvalidatedEvent is received")
     public void aTokenInvalidatedEventIsReceived() {
         Event event = new Event(
@@ -133,6 +145,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Muhamad
+     */
     @Then("the bank is asked to transfer the money")
     public void theBankIsAskedToTransferTheMoney() {
         verify(bankAdapter).makeBankTransfer(
@@ -145,6 +160,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @Then("a corresponding PaymentTransferredEvent is sent")
     public void aCorrespondingPaymentTransferredEventIsSent() {
         verify(messageQueue, times(2)).publish(eventCaptor.capture());
@@ -181,6 +199,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Then("a PaymentInitiatedEvent is sent")
     public void aPaymentInitiatedEventIsSent() {
         verify(messageQueue).publish(eventCaptor.capture());
@@ -212,6 +233,9 @@ public class PaymentSteps {
         );
     }
 
+    /**
+     * @author Muhamad
+     */
     @Then("a corresponding PaymentFailedEvent is sent with cause {string}")
     public void aPaymentFailedEventIsSent(String cause) {
         Event event = new Event(
@@ -226,8 +250,5 @@ public class PaymentSteps {
 
         verify(messageQueue).publish(event);
     }
-
-
-
 
 }

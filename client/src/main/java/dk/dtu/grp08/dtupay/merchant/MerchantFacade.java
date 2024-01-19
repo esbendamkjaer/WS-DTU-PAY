@@ -16,6 +16,9 @@ public class MerchantFacade implements IMerchantFacade {
 
     private final IMerchantAPI merchantAPI;
 
+    /**
+     * @author Dilara
+     */
     public MerchantFacade() {
         this.merchantAPI = Stub.get(
             IMerchantAPI.class,
@@ -25,6 +28,9 @@ public class MerchantFacade implements IMerchantFacade {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @Override
     public UserAccount register(String name, String cpr, BankAccountNo bankAccountNo) {
         UserAccount userAccount = new UserAccount();
@@ -37,6 +43,9 @@ public class MerchantFacade implements IMerchantFacade {
         );
     }
 
+    /**
+     * @author Clair
+     */
     @Override
     public void deregister(UserId user) {
         merchantAPI.deleteMerchant(
@@ -44,6 +53,9 @@ public class MerchantFacade implements IMerchantFacade {
         );
     }
 
+    /**
+     * @author Dilara
+     */
     @Override
     public Payment pay(PaymentRequest paymentRequest) {
         return this.merchantAPI.createPayment(
@@ -51,6 +63,9 @@ public class MerchantFacade implements IMerchantFacade {
         );
     }
 
+    /**
+     * @author Fuad
+     */
     @Override
     public List<Payment> getReport(UserId userId) {
         return this.merchantAPI.getReport(userId.getId());

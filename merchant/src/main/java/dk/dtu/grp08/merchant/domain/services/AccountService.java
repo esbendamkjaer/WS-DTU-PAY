@@ -18,7 +18,9 @@ import java.util.concurrent.CompletableFuture;
 
 @ApplicationScoped
 public class AccountService implements IAccountService {
-
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
     private final MessageQueue messageQueue;
     private final PolicyManager policyManager;
 
@@ -45,6 +47,9 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Muhamad Hussein Nadali (s233479)
+     */
     @Override
     public CompletableFuture<Void> deleteUserAccount(UserId userId) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -72,6 +77,10 @@ public class AccountService implements IAccountService {
 
         return policy.getCombinedFuture();
     }
+
+    /**
+     * @author Esben Damkjær Sørensen (s233474)
+     */
 
     @Override
     public CompletableFuture<UserAccount> createUserAccount(UserAccount userAccount) {
@@ -107,6 +116,9 @@ public class AccountService implements IAccountService {
         return policy.getCombinedFuture();
     }
 
+    /**
+     * @author Dilara Eda Celepli (s184262)
+     */
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
 
@@ -123,6 +135,9 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     * @author Fuad Hassan Jama (s233468)
+     */
     public void handleAccountDeregisteredEvent(Event event) {
         AccountDeregisteredEvent accountDeregisteredEvent = event.getArgument(0, AccountDeregisteredEvent.class);
 
@@ -136,6 +151,10 @@ public class AccountService implements IAccountService {
             AccountDeregisteredEvent.class
         ).complete(null);
     }
+
+    /**
+     * @author Clair Norah Mutebi (s184187)
+     */
 
     private void handleUserNotFoundEvent(Event event) {
         UserNotFoundEvent userNotFoundEvent = event.getArgument(0, UserNotFoundEvent.class);

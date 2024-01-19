@@ -7,6 +7,10 @@ import lombok.Value;
 
 @Value
 public class TokensRequestedEvent {
+    /**
+     *
+     * @author Esben
+     */
     CorrelationId correlationId;
     UserAccountId userId;
     int count;

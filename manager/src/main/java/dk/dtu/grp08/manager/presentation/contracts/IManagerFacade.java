@@ -10,6 +10,9 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+/**
+ * @author Esben Damkjær Sørensen (s233474)
+ */
 
 @Path("/manager")
 public interface IManagerFacade {

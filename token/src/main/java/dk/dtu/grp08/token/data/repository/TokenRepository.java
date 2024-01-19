@@ -15,6 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TokenRepository implements ITokenRepository {
     Map<UserId, List<Token>> userTokens = new ConcurrentHashMap<>();
 
+    /**
+     * @author Mohamad
+     */
     @Override
     public Optional<UserId> getUserIdByToken(Token token) {
         return userTokens
@@ -25,6 +28,9 @@ public class TokenRepository implements ITokenRepository {
             .findFirst();
     }
 
+    /**
+     * @author Mohamad
+     */
     @Override
     public void saveToken(Token token, UserId userId) {
         userTokens
@@ -32,11 +38,17 @@ public class TokenRepository implements ITokenRepository {
             .add(token);
     }
 
+    /**
+     * @author Dilara
+     */
     @Override
     public List<Token> getTokensByUserId(UserId userId) {
         return userTokens.getOrDefault(userId, new ArrayList<>());
     }
 
+    /**
+     * @author Dilara
+     */
     @Override
     public Optional<Token> deleteToken(Token token) {
         Optional<UserId> userId = this.getUserIdByToken(token);

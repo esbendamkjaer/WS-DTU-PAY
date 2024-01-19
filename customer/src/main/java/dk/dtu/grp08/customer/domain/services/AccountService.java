@@ -21,6 +21,10 @@ public class AccountService implements IAccountService {
     private final MessageQueue messageQueue;
     private final PolicyManager policyManager;
 
+    /**
+     *
+     * @author Dilara
+     */
     public AccountService(
         MessageQueue messageQueue,
         PolicyManager policyManager
@@ -49,6 +53,10 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     *
+     * @author Esben
+     */
     @Override
     public CompletableFuture<Void> deleteUserAccount(UserAccountId userId) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -80,6 +88,11 @@ public class AccountService implements IAccountService {
         return policy.getCombinedFuture();
     }
 
+
+    /**
+     *
+     * @author Fuad
+     */
     @Override
     public CompletableFuture<UserAccount> createUserAccount(UserAccount userAccount) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -116,6 +129,11 @@ public class AccountService implements IAccountService {
         return policy.getCombinedFuture();
     }
 
+    /**
+     *
+     * @author Muhamad
+     */
+
     @Override
     public CompletableFuture<UserAccount> getUserAccount(UserAccountId userAccountId) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -150,6 +168,10 @@ public class AccountService implements IAccountService {
         return policy.getCombinedFuture();
     }
 
+    /**
+     *
+     * @author Clair
+     */
     public void handleAccountReturnedEvent(Event event) {
         AccountReturnedEvent accountReturnedEvent = event.getArgument(0, AccountReturnedEvent.class);
 
@@ -168,6 +190,10 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     *
+     * @author Alexander
+     */
     public void handleAccountRegisteredEvent(Event event) {
         AccountRegisteredEvent accountRegisteredEvent = event.getArgument(0, AccountRegisteredEvent.class);
 
@@ -186,6 +212,11 @@ public class AccountService implements IAccountService {
         );
     }
 
+    /**
+     *
+     * @author Muhamad
+     */
+
     public void handleAccountDeregisteredEvent(Event event) {
         AccountDeregisteredEvent accountDeregisteredEvent = event.getArgument(0, AccountDeregisteredEvent.class);
 
@@ -201,6 +232,11 @@ public class AccountService implements IAccountService {
             AccountDeregisteredEvent.class
         ).complete(null);
     }
+
+    /**
+     *
+     * @author Fuad
+     */
 
     private void handleUserNotFoundEvent(Event event) {
         UserNotFoundEvent userNotFoundEvent = event.getArgument(0, UserNotFoundEvent.class);

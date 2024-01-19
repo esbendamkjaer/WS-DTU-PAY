@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public class MessageQueueProducer {
 
+    /**
+     * @author Alexander
+     */
     @Produces
     @ApplicationScoped
     public MessageQueue createMessageQueue() {

@@ -1,5 +1,7 @@
 package dk.dtu.grp08.reporting.domain.events;
-
+/**
+ * @author Fuad Hassan Jama (s233468)
+ */
 public enum EventType {
 
     PAYMENT_TRANSFERRED("PaymentTransferred"),

@@ -13,6 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportGenerated {
+    /**
+     *
+     * @author Fuad
+     */
     List<Payment> report;
 
     CorrelationId correlationId;

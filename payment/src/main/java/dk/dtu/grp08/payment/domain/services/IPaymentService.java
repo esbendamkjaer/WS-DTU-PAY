@@ -11,8 +11,14 @@ import java.util.UUID;
 
 public interface IPaymentService {
 
+    /**
+     * @author Esben
+     */
     Payment makePayment(Payment payment, UUID merchantID, Token token);
 
+    /**
+     * @author Dilara
+     */
     Policy<PaymentTransferredEvent> initiatePayment(
         PaymentRequestedEvent paymentRequestedEvent
     );

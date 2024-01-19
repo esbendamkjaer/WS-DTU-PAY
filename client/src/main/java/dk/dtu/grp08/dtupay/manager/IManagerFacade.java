@@ -7,8 +7,9 @@ import java.util.concurrent.CompletableFuture;
 
 public interface IManagerFacade {
 
-
-
+    /**
+     * @author Fuad
+     */
     List<Payment> getReport();
 
 

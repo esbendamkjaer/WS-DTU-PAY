@@ -6,6 +6,9 @@ import dk.dtu.grp08.reporting.domain.models.user.UserAccountId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+/**
+ * @author Muhamad Hussein Nadali (s233479)
+ */
 
 @Data
 @NoArgsConstructor

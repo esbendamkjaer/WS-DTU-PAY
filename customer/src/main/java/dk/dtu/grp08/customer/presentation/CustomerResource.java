@@ -32,6 +32,10 @@ public class CustomerResource implements ICustomerResource {
 
     private final PolicyManager policyManager;
 
+    /**
+     *
+     * @author Clair
+     */
     public CustomerResource(
             IAccountService accountService,
             ITokenService tokenService,
@@ -51,6 +55,10 @@ public class CustomerResource implements ICustomerResource {
         );
     }
 
+    /**
+     *
+     * @author Esben
+     */
     @Override
     public CompletableFuture<List<Token>> getTokens(
             UUID userId,
@@ -62,6 +70,10 @@ public class CustomerResource implements ICustomerResource {
         );
     }
 
+    /**
+     *
+     * @author Dilara
+     */
     @Override
     public CompletableFuture<UserAccount> createCustomer(
             UserAccount userAccount
@@ -71,6 +83,10 @@ public class CustomerResource implements ICustomerResource {
         );
     }
 
+    /**
+     *
+     * @author Alexander
+     */
     @Override
     public CompletableFuture<Void> deleteCustomer(UUID userId) {
         return this.accountService.deleteUserAccount(
@@ -78,6 +94,10 @@ public class CustomerResource implements ICustomerResource {
         );
     }
 
+    /**
+     *
+     * @author Fuad
+     */
     @Override
     public CompletableFuture<UserAccount> getCustomer(UUID userId) {
         return this.accountService.getUserAccount(
@@ -86,6 +106,10 @@ public class CustomerResource implements ICustomerResource {
     }
 
 
+    /**
+     *
+     * @author Muhamad
+     */
     @Override
     public CompletableFuture<List<Payment>> getReport(
             final UUID userID
@@ -119,7 +143,10 @@ public class CustomerResource implements ICustomerResource {
         return policy.getCombinedFuture();
     }
 
-
+    /**
+     *
+     * @author Clair
+     */
     public void handleReportGenerated(Event mqEvent) {
         val event = mqEvent.getArgument(0, ReportGenerated.class);
 

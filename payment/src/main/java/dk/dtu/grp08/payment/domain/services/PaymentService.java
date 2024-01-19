@@ -32,6 +32,9 @@ public class PaymentService implements IPaymentService {
     private final PolicyManager policyManager;
 
 
+    /**
+     * @author Esben
+     */
     public PaymentService(
         IPaymentRepository paymentRepository,
         MessageQueue messageQueue,
@@ -64,6 +67,9 @@ public class PaymentService implements IPaymentService {
         );
     }
 
+    /**
+     * @author Esben
+     */
     @Override
     public Policy<PaymentTransferredEvent> initiatePayment(
         PaymentRequestedEvent paymentRequestedEvent
@@ -150,15 +156,15 @@ public class PaymentService implements IPaymentService {
         return paymentPolicy;
     }
 
+    /**
+     * @author Clair
+     */
     public void handleMerchantBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, MerchantBankAccountAssignedEvent.class);
 
         if (!policyManager.hasPolicy(event.getCorrelationId())) {
             return;
         }
-
-
-
 
         CompletableFuture<MerchantBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
@@ -169,14 +175,15 @@ public class PaymentService implements IPaymentService {
         future.complete(event);
     }
 
+    /**
+     * @author Alexander
+     */
     public void handleCustomerBankAccountAssigned(Event mqEvent) {
         val event = mqEvent.getArgument(0, CustomerBankAccountAssignedEvent.class);
 
         if (!policyManager.hasPolicy(event.getCorrelationId())) {
             return;
         }
-
-
 
         CompletableFuture<CustomerBankAccountAssignedEvent> future = policyManager.getPolicy(
             event.getCorrelationId()
@@ -187,10 +194,11 @@ public class PaymentService implements IPaymentService {
         future.complete(event);
     }
 
+    /**
+     * @author Fuad
+     */
     public void handleTokenInvalidatedEvent(Event mqEvent) {
         val tokenInvalidatedEvent = mqEvent.getArgument(0, TokenInvalidatedEvent.class);
-
-
 
         CompletableFuture<?> future = policyManager.getPolicy(
             tokenInvalidatedEvent.getCorrelationId()
@@ -201,6 +209,9 @@ public class PaymentService implements IPaymentService {
         );
     }
 
+    /**
+     * @author Alexander
+     */
 
     public Payment makePayment(Payment payment, UUID merchantID, Token token) {
         bankAdapter.makeBankTransfer(payment);
@@ -208,6 +219,9 @@ public class PaymentService implements IPaymentService {
         return paymentRepository.savePayment(payment);
     }
 
+    /**
+     * @author Dilara
+     */
     public void handlePaymentRequestedEvent(Event mqEvent) {
         val event = mqEvent.getArgument(0, PaymentRequestedEvent.class);
 

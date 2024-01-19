@@ -7,6 +7,9 @@ import messaging.implementations.RabbitMqQueue;
 
 import java.util.Optional;
 
+/**
+ * @author Dilara Eda Celepli (s184262)
+ */
 public class MessageQueueProducer {
 
     @Produces

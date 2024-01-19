@@ -25,6 +25,10 @@ public class TokenService implements ITokenService {
     private final MessageQueue messageQueue;
     private final PolicyManager policyManager;
 
+    /**
+     *
+     * @author Muhamad
+     */
     public TokenService(
         MessageQueue messageQueue,
         PolicyManager policyManager
@@ -43,6 +47,10 @@ public class TokenService implements ITokenService {
         );
     }
 
+    /**
+     *
+     * @author Fuad
+     */
     @Override
     public CompletableFuture<List<Token>> getTokens(int count, UserAccountId userId) {
         CorrelationId correlationId = CorrelationId.randomId();
@@ -81,6 +89,10 @@ public class TokenService implements ITokenService {
         return tokenPolicy.getCombinedFuture();
     }
 
+    /**
+     *
+     * @author Esben
+     */
     public void handleTokensReturnedEvent(Event event) {
         TokensReturnedEvent tokensReturnedEvent = event.getArgument(0, TokensReturnedEvent.class);
 
@@ -97,6 +109,10 @@ public class TokenService implements ITokenService {
         );
     }
 
+    /**
+     *
+     * @author Dilara
+     */
     public void handleTokenRequestFailedEvent(Event event) {
         TokenRequestFailed tokenRequestFailed = (TokenRequestFailed) event.getArgument(0, TokenRequestFailed.class);
 

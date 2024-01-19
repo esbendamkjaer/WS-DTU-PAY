@@ -8,8 +8,14 @@ import java.util.List;
 
 public interface ITokenService {
 
+    /**
+     * @author Alexander
+     */
     List<Token> getTokens(int count, UserId userId);
 
+    /**
+     * @author Esben
+     */
     UserId validateToken(Token token) throws InvalidTokenException;
 
 }
