@@ -20,5 +20,5 @@ public interface ICustomerFacade {
 
     UserAccount getCustomer(UserId userId);
 
-    CompletableFuture<List<Payment>> getReport(UserId userId);
+    List<Payment> getReport(UserId userId);
 }

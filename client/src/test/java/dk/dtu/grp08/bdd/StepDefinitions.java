@@ -280,7 +280,7 @@ public class StepDefinitions {
     public void theCustomerRequestsAReport() {
        report = customerFacade.getReport(
             this.customer.getId()
-        ).join();
+        );
 
  
     }
@@ -304,7 +304,7 @@ public class StepDefinitions {
 
         report = merchantFacade.getReport(
             this.merchant.getId()
-        ).join();
+        );
         
     }
 
@@ -345,7 +345,7 @@ public class StepDefinitions {
     @When("the manager requests a report")
     public void theManagerRequestsAReport() {
 
-        report = managerFacade.getReport().join();
+        report = managerFacade.getReport();
 
     }
 

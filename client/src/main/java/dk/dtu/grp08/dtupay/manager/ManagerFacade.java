@@ -2,12 +2,10 @@ package dk.dtu.grp08.dtupay.manager;
 
 import dk.dtu.grp08.dtupay.Stub;
 import dk.dtu.grp08.dtupay.api.IManagerAPI;
-import dk.dtu.grp08.dtupay.api.IMerchantAPI;
-import dk.dtu.grp08.dtupay.models.*;
+import dk.dtu.grp08.dtupay.models.Payment;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 public class ManagerFacade implements IManagerFacade {
 
@@ -24,7 +22,7 @@ public class ManagerFacade implements IManagerFacade {
 
 
     @Override
-    public CompletableFuture<List<Payment>> getReport() {
+    public List<Payment> getReport() {
         return this.managerAPI.getReport();
     }
 }

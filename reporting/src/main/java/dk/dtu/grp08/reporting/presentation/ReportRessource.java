@@ -5,6 +5,7 @@ import dk.dtu.grp08.reporting.domain.models.Token;
 import dk.dtu.grp08.reporting.domain.models.payment.Payment;
 import dk.dtu.grp08.reporting.domain.services.IReportService;
 import dk.dtu.grp08.reporting.presentation.contracts.IReportResource;
+import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.val;
 import messaging.Event;
@@ -14,6 +15,7 @@ import messaging.implementations.RabbitMqQueue;
 import java.util.List;
 import java.util.UUID;
 
+@Startup
 @ApplicationScoped
 public class ReportRessource implements IReportResource {
 

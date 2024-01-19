@@ -9,7 +9,7 @@ public interface IManagerFacade {
 
 
 
-    CompletableFuture<List<Payment>> getReport();
+    List<Payment> getReport();
 
 
 }

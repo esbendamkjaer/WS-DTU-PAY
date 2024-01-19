@@ -18,6 +18,6 @@ public interface IManagerAPI {
     @GET
     @Path("/report")
     @Produces({MediaType.APPLICATION_JSON})
-    CompletableFuture<List<Payment>> getReport();
+    List<Payment> getReport();
 
 }

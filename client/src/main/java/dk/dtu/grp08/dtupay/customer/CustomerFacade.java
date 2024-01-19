@@ -65,7 +65,7 @@ public class CustomerFacade implements ICustomerFacade {
     }
 
     @Override
-    public CompletableFuture<List<Payment>> getReport(UserId userId) {
+    public List<Payment> getReport(UserId userId) {
         return this.customerAPI.getReport(userId);
     }
 

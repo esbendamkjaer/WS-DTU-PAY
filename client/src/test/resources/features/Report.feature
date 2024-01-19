@@ -16,6 +16,8 @@ Feature: Report feature
     And a merchant named "Bob"
     And the customer has a bank account with balance 500.0
     And the merchant has a bank account with balance 0.0
+    And the customer is registered with DTU Pay
+    And the merchant is registered with DTU Pay
     When the customer gets 1 tokens
     And the merchant requests a payment of 100 kr
     When the merchant requests a report

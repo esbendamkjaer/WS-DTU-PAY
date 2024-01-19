@@ -24,7 +24,7 @@ public interface IMerchantFacade {
     );
 
 
-    CompletableFuture<List<Payment>> getReport(UserId userId);
+    List<Payment> getReport(UserId userId);
 
 
 }

@@ -52,7 +52,7 @@ public class MerchantFacade implements IMerchantFacade {
     }
 
     @Override
-    public CompletableFuture<List<Payment>> getReport(UserId userId) {
+    public List<Payment> getReport(UserId userId) {
         return this.merchantAPI.getReport(userId);
     }
 }

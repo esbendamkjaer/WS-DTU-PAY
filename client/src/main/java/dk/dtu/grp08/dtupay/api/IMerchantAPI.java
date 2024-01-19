@@ -38,6 +38,6 @@ public interface IMerchantAPI {
     @GET
     @Path("/{userId}/report")
     @Produces({MediaType.APPLICATION_JSON})
-    CompletableFuture<List<Payment>> getReport(@PathParam("userId") UserId userId);
+    List<Payment> getReport(@PathParam("userId") UserId userId);
 
 }
