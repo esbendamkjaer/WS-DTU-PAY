@@ -53,6 +53,6 @@ public class MerchantFacade implements IMerchantFacade {
 
     @Override
     public List<Payment> getReport(UserId userId) {
-        return this.merchantAPI.getReport(userId);
+        return this.merchantAPI.getReport(userId.getId());
     }
 }

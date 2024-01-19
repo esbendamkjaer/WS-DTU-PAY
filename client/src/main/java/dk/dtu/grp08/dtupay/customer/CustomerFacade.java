@@ -66,7 +66,7 @@ public class CustomerFacade implements ICustomerFacade {
 
     @Override
     public List<Payment> getReport(UserId userId) {
-        return this.customerAPI.getReport(userId);
+        return this.customerAPI.getReport(userId.getId());
     }
 
 
