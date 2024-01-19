@@ -5,12 +5,11 @@ import dk.dtu.grp08.adapter.IBankAdapter;
 import dk.dtu.grp08.bank.BankServiceException_Exception;
 import dk.dtu.grp08.dtupay.customer.CustomerFacade;
 import dk.dtu.grp08.dtupay.customer.ICustomerFacade;
+import dk.dtu.grp08.dtupay.manager.IManagerFacade;
+import dk.dtu.grp08.dtupay.manager.ManagerFacade;
 import dk.dtu.grp08.dtupay.merchant.IMerchantFacade;
 import dk.dtu.grp08.dtupay.merchant.MerchantFacade;
-import dk.dtu.grp08.dtupay.models.BankAccountNo;
-import dk.dtu.grp08.dtupay.models.UserAccount;
-import dk.dtu.grp08.dtupay.models.PaymentRequest;
-import dk.dtu.grp08.dtupay.models.Token;
+import dk.dtu.grp08.dtupay.models.*;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -23,6 +22,7 @@ import org.junit.jupiter.api.Assertions;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import static org.junit.Assert.assertTrue;
@@ -33,8 +33,15 @@ public class StepDefinitions {
     private final IMerchantFacade merchantFacade = new MerchantFacade();
     private final ICustomerFacade customerFacade = new CustomerFacade();
 
+    private final IManagerFacade managerFacade = new ManagerFacade();
+
+
 
     private final List<Token> customerTokens = new ArrayList<>();
+
+    private List<Payment> report;
+
+    private List<PaymentRequest> paymentRequests = new ArrayList<>();
     private UserAccount customer;
     private UserAccount merchant;
     private ClientErrorException exception;
@@ -167,6 +174,9 @@ public class StepDefinitions {
             this.merchantFacade.pay(
                 this.paymentRequest
             );
+
+
+
         } catch (ClientErrorException e) {
             this.exception = e;
         }
@@ -268,6 +278,9 @@ public class StepDefinitions {
 
     @When("the customer requests a report")
     public void theCustomerRequestsAReport() {
+       report = customerFacade.getReport(
+            this.customer.getId()
+        ).join();
 
  
     }
@@ -275,16 +288,34 @@ public class StepDefinitions {
 
     @Then("the customer should see a report with the following transaction details")
     public void theCustomerShouldSeeAReportWithTheFollowingTransactionDetails() {
+
+        report.forEach(payment -> {
+            Assert.assertEquals(
+                this.customer.getBankAccountNo(),
+                payment.getDebtor()
+            );
+        });
+
         
     }
 
     @When("the merchant requests a report")
     public void theMerchantRequestsAReport() {
+
+        report = merchantFacade.getReport(
+            this.merchant.getId()
+        ).join();
         
     }
 
     @Then("the merchant should see a report with the following transaction details")
     public void theMerchantShouldSeeAReportWithTheFollowingTransactionDetails() {
+        report.forEach(payment -> {
+            Assert.assertTrue(
+                (this.merchant.getBankAccountNo() == payment.getCreditor()) && payment.getDebtor() == null
+            );
+        });
+
     }
 
     @And("the customer grants the payment with a token without discarding it")
@@ -297,6 +328,8 @@ public class StepDefinitions {
             this.merchantFacade.pay(
                 this.paymentRequest
             );
+
+            this.paymentRequests.add(paymentRequest);
         } catch (ClientErrorException e) {
             this.exception = e;
         }
@@ -307,6 +340,24 @@ public class StepDefinitions {
         this.retrievedCustomer = this.customerFacade.getCustomer(
             this.customer.getId()
         );
+    }
+
+    @When("the manager requests a report")
+    public void theManagerRequestsAReport() {
+
+        report = managerFacade.getReport().join();
+
+    }
+
+    @Then("the manager should see a report with the following transaction details")
+    public void theManagerShouldSeeAReportWithTheFollowingTransactionDetails() {
+       boolean result =  paymentRequests.stream()
+                .allMatch(paymentRequest -> report.stream()
+                        .anyMatch(payment -> Objects.equals(paymentRequest.getAmount(), payment.getAmount())));
+
+         Assert.assertTrue(result);
+
+
     }
 
     @Then("expect the same customer")
@@ -351,5 +402,7 @@ public class StepDefinitions {
             }
         }
     }
+
+
 }
 
