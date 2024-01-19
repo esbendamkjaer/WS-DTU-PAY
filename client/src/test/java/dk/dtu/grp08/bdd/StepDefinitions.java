@@ -305,7 +305,7 @@ public class StepDefinitions {
         report = merchantFacade.getReport(
             this.merchant.getId()
         );
-        
+
     }
 
     @Then("the merchant should see a report with the following transaction details")
